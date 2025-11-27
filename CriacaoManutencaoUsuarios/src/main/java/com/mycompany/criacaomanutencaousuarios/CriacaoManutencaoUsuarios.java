@@ -4,6 +4,10 @@
 
 package com.mycompany.criacaomanutencaousuarios;
 
+import repository.UsuarioRepository;
+import presenter.PrimeiroCadastroPresenter;
+import presenter.MenuInicialPresenter;
+
 /**
  *
  * @author Rafael
@@ -11,6 +15,13 @@ package com.mycompany.criacaomanutencaousuarios;
 public class CriacaoManutencaoUsuarios {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        UsuarioRepository repository = new UsuarioRepository();
+        
+        if (repository.getTamanho() == 0){
+            PrimeiroCadastroPresenter presenter = new PrimeiroCadastroPresenter(repository);
+        } else {
+            MenuInicialPresenter presenter = new MenuInicialPresenter(repository);
+        }
+                
     }
 }

@@ -4,18 +4,20 @@
  */
 package view;
 
+import javax.swing.JButton;
+
 /**
  *
  * @author Luis1
  */
-public class TelaInicialView extends javax.swing.JFrame {
+public class MenuInicialView extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaInicialView.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MenuInicialView.class.getName());
 
     /**
      * Creates new form TelaInicialView
      */
-    public TelaInicialView() {
+    public MenuInicialView() {
         initComponents();
     }
 
@@ -28,21 +30,48 @@ public class TelaInicialView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnCadastrarUsuario = new javax.swing.JButton();
+        btnAutenticarUsuario = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela Inicial");
+
+        btnCadastrarUsuario.setText("Cadastrar Usuário");
+        btnCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarUsuarioActionPerformed(evt);
+            }
+        });
+
+        btnAutenticarUsuario.setText("Autenticar Usuário");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(btnCadastrarUsuario)
+                .addGap(67, 67, 67)
+                .addComponent(btnAutenticarUsuario)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(138, 138, 138)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadastrarUsuario)
+                    .addComponent(btnAutenticarUsuario))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarUsuarioActionPerformed
+        // TODO addyour handling code here:
+    }//GEN-LAST:event_btnCadastrarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -66,9 +95,19 @@ public class TelaInicialView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaInicialView().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new MenuInicialView().setVisible(true));
+    }
+
+    public JButton getBtnAutenticarUsuario() {
+        return btnAutenticarUsuario;
+    }
+
+    public JButton getBtnCadastrarUsuario() {
+        return btnCadastrarUsuario;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAutenticarUsuario;
+    private javax.swing.JButton btnCadastrarUsuario;
     // End of variables declaration//GEN-END:variables
 }
