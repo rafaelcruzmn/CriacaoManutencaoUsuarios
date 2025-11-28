@@ -41,10 +41,15 @@ public class UsuarioRepository {
     }
     
     public boolean autenticarUsuario(String nomeDeUsuario, String senha){
-        String sql = "SELECT COUNT(*) FROM usuarios WHERE nomeDeUsuario=? AND senha=?";
+        String sql = "SELECT COUNT(*) FROM usuarios WHERE nomeDeUsuario=? AND senha=? AND autorizado=?";
         
-        return ConexaoBanco.autenticarUsuario(sql, nomeDeUsuario, senha);
+        return ConexaoBanco.autenticarUsuario(sql, nomeDeUsuario, senha); 
+    }
+    
+    public int getTipo(String nomeDeUsuario){
+        String sql = "SELECT tipo FROM usuarios WHERE nomeDeUsuario=?";
         
+        return ConexaoBanco.getTipo(sql, nomeDeUsuario);
     }
         
     public int getTamanho(){
