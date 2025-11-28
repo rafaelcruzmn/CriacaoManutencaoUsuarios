@@ -10,14 +10,14 @@ import javax.swing.JButton;
  *
  * @author Luis1
  */
-public class MenuInicialView extends javax.swing.JFrame {
+public class PainelUsuarioComumView extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MenuInicialView.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PainelUsuarioComumView.class.getName());
 
     /**
-     * Creates new form TelaInicialView
+     * Creates new form PainelUsuarioComumView
      */
-    public MenuInicialView() {
+    public PainelUsuarioComumView() {
         initComponents();
     }
 
@@ -30,48 +30,50 @@ public class MenuInicialView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnCadastrarUsuario = new javax.swing.JButton();
-        btnAutenticarUsuario = new javax.swing.JButton();
+        btnVisualizarNotificacoes = new javax.swing.JButton();
+        btAlterarSenha = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Tela Inicial");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Painel de Usuário");
 
-        btnCadastrarUsuario.setText("Cadastrar Usuário");
-        btnCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+        btnVisualizarNotificacoes.setText("Visualizar Notificações");
+        btnVisualizarNotificacoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarUsuarioActionPerformed(evt);
+                btnVisualizarNotificacoesActionPerformed(evt);
             }
         });
 
-        btnAutenticarUsuario.setText("Autenticar Usuário");
+        btAlterarSenha.setText("Alterar Senha");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(btnCadastrarUsuario)
-                .addGap(67, 67, 67)
-                .addComponent(btnAutenticarUsuario)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGap(149, 149, 149)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVisualizarNotificacoes)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btAlterarSenha)
+                        .addGap(27, 27, 27)))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastrarUsuario)
-                    .addComponent(btnAutenticarUsuario))
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addGap(83, 83, 83)
+                .addComponent(btnVisualizarNotificacoes)
+                .addGap(40, 40, 40)
+                .addComponent(btAlterarSenha)
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarUsuarioActionPerformed
-        // TODO addyour handling code here:
-    }//GEN-LAST:event_btnCadastrarUsuarioActionPerformed
+    private void btnVisualizarNotificacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarNotificacoesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVisualizarNotificacoesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -95,19 +97,20 @@ public class MenuInicialView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MenuInicialView().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new PainelUsuarioComumView().setVisible(true));
     }
 
-    public JButton getBtnAutenticarUsuario() {
-        return btnAutenticarUsuario;
+    public JButton getBtAlterarSenha() {
+        return btAlterarSenha;
     }
 
-    public JButton getBtnCadastrarUsuario() {
-        return btnCadastrarUsuario;
+    public JButton getBtnVisualizarNotificacoes() {
+        return btnVisualizarNotificacoes;
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAutenticarUsuario;
-    private javax.swing.JButton btnCadastrarUsuario;
+    private javax.swing.JButton btAlterarSenha;
+    private javax.swing.JButton btnVisualizarNotificacoes;
     // End of variables declaration//GEN-END:variables
 }

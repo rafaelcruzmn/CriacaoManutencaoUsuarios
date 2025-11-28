@@ -11,29 +11,31 @@ import javax.swing.JOptionPane;
 import enumerator.TipoUsuario;
 import model.Usuario;
 import repository.UsuarioRepository;
+import view.AutoCadastroView;
 import view.PrimeiroCadastroView;
 
 /**
  *
  * @author Luis1
  */
-public class PrimeiroCadastroPresenter {
-    private PrimeiroCadastroView view;
+public class AutoCadastroPresenter {
+    private AutoCadastroView view;
     private Usuario usuario;
     private UsuarioRepository repository;
     
-    public PrimeiroCadastroPresenter(UsuarioRepository repository){
+    public AutoCadastroPresenter(UsuarioRepository repository){
         if (repository == null){
             throw new RuntimeException("Repository inválida!");
         }
         
         this.repository = repository;
-        this.view = new PrimeiroCadastroView();
+        this.view = new AutoCadastroView();
         configuraView();
     }
     
     private void configuraView(){
         view.setVisible(false);
+        
         view.getBtnCadastrar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
@@ -44,6 +46,18 @@ public class PrimeiroCadastroPresenter {
                 }
             }
         });
+        
+        view.getBtnVoltar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    voltar();
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
+                }
+            }
+        });
+        
         view.setVisible(true);
     }
     
@@ -51,8 +65,8 @@ public class PrimeiroCadastroPresenter {
         String nome = view.getTxtNome().getText();
         String nomeDeUsuario = view.getTxtNomeDeUsuario().getText();
         String senha = view.getTxtSenha().getText();
-        TipoUsuario tipo = TipoUsuario.ADMININI;
-        boolean autorizado = true;
+        TipoUsuario tipo = TipoUsuario.USUARIOCOMUM;
+        boolean autorizado = false;
         LocalDate dataCadastro = LocalDate.now();
         
         // Chamar o validador de senha aqui?
@@ -60,8 +74,11 @@ public class PrimeiroCadastroPresenter {
         this.usuario = new Usuario(nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
         
         repository.inserirUsuario(usuario);
+        limparTela();
+    }
+    
+    private void voltar() {
         view.dispose();
-        new AutenticacaoUsuarioPresenter(repository);
     }
     
     private void limparTela(){

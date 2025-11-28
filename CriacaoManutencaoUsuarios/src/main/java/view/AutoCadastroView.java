@@ -11,14 +11,14 @@ import javax.swing.JTextField;
  *
  * @author Luis1
  */
-public class PrimeiroCadastroView extends javax.swing.JFrame {
+public class AutoCadastroView extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PrimeiroCadastroView.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AutoCadastroView.class.getName());
 
     /**
-     * Creates new form TelaCadastroView
+     * Creates new form AutoCadastroView
      */
-    public PrimeiroCadastroView() {
+    public AutoCadastroView() {
         initComponents();
     }
 
@@ -31,16 +31,23 @@ public class PrimeiroCadastroView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtNome = new javax.swing.JTextField();
+        txtNomeDeUsuario = new javax.swing.JTextField();
+        txtSenha = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
         lblNomeDeUsuario = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
         btnCadastrar = new javax.swing.JButton();
-        txtNome = new javax.swing.JTextField();
-        txtNomeDeUsuario = new javax.swing.JTextField();
-        txtSenha = new javax.swing.JTextField();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Primeiro Cadastro");
+        setTitle("Auto Cadastro");
+
+        txtNomeDeUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeDeUsuarioActionPerformed(evt);
+            }
+        });
 
         lblNome.setText("Nome:");
 
@@ -50,9 +57,10 @@ public class PrimeiroCadastroView extends javax.swing.JFrame {
 
         btnCadastrar.setText("Cadastrar");
 
-        txtNomeDeUsuario.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeDeUsuarioActionPerformed(evt);
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -65,14 +73,14 @@ public class PrimeiroCadastroView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNome)
                     .addComponent(lblNomeDeUsuario)
-                    .addComponent(lblSenha))
+                    .addComponent(lblSenha)
+                    .addComponent(btnVoltar))
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCadastrar)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                        .addComponent(txtNomeDeUsuario)
-                        .addComponent(txtSenha)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(txtNomeDeUsuario)
+                    .addComponent(txtSenha)
+                    .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -90,9 +98,11 @@ public class PrimeiroCadastroView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSenha)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnCadastrar)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadastrar)
+                    .addComponent(btnVoltar))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         pack();
@@ -101,6 +111,10 @@ public class PrimeiroCadastroView extends javax.swing.JFrame {
     private void txtNomeDeUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeDeUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeDeUsuarioActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,11 +138,15 @@ public class PrimeiroCadastroView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new PrimeiroCadastroView().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new AutoCadastroView().setVisible(true));
     }
 
     public JButton getBtnCadastrar() {
         return btnCadastrar;
+    }
+    
+    public JButton getBtnVoltar(){
+        return btnVoltar;
     }
 
     public JTextField getTxtNome() {
@@ -145,6 +163,7 @@ public class PrimeiroCadastroView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNomeDeUsuario;
     private javax.swing.JLabel lblSenha;

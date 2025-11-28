@@ -4,6 +4,7 @@
  */
 package model;
 
+import enumerator.TipoUsuario;
 import java.time.LocalDate;
 
 /**
@@ -17,12 +18,14 @@ public class Usuario {
     private String senha;
     private TipoUsuario tipo;
     private LocalDate dataCadastro;
+    private boolean autorizado;
     
-    public Usuario(String nome, String nomeDeUsuario, String senha, TipoUsuario tipo, LocalDate dataCadastro){
+    public Usuario(String nome, String nomeDeUsuario, String senha, TipoUsuario tipo, boolean autorizado, LocalDate dataCadastro){
         this.nome = nome;
         this.nomeDeUsuario = nomeDeUsuario;
         this.senha = senha;
         this.tipo = tipo;
+        this.autorizado = autorizado;
         this.dataCadastro = dataCadastro;
     }
 
@@ -38,13 +41,19 @@ public class Usuario {
         return nomeDeUsuario;
     }
 
+    public String getSenha(){
+        return senha;
+    }
+    
     public TipoUsuario getTipo() {
         return tipo;
+    }
+    
+    public boolean getAutorizado(){
+        return autorizado;
     }
 
     public LocalDate getDataCadastro() {
         return dataCadastro;
     }
-    
-    
 }

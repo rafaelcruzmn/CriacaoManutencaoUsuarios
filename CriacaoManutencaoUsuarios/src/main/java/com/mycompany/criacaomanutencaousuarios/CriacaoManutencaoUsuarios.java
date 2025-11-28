@@ -4,9 +4,9 @@
 
 package com.mycompany.criacaomanutencaousuarios;
 
+import presenter.AutenticacaoUsuarioPresenter;
 import repository.UsuarioRepository;
 import presenter.PrimeiroCadastroPresenter;
-import presenter.MenuInicialPresenter;
 
 /**
  *
@@ -15,13 +15,14 @@ import presenter.MenuInicialPresenter;
 public class CriacaoManutencaoUsuarios {
 
     public static void main(String[] args) {
+        //IConexaoService conexao = new ConexaoService();
+        //UsuarioRepository repository = new UsuarioRepository(conexao);
         UsuarioRepository repository = new UsuarioRepository();
         
         if (repository.getTamanho() == 0){
-            PrimeiroCadastroPresenter presenter = new PrimeiroCadastroPresenter(repository);
+            new PrimeiroCadastroPresenter(repository);
         } else {
-            MenuInicialPresenter presenter = new MenuInicialPresenter(repository);
-        }
-                
+            new AutenticacaoUsuarioPresenter(repository);
+        }         
     }
 }
