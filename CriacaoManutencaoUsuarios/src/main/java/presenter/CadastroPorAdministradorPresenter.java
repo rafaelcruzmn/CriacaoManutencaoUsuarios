@@ -4,32 +4,33 @@
  */
 package presenter;
 
+import enumerator.TipoUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
-import enumerator.TipoUsuario;
 import model.Usuario;
 import repository.UsuarioRepository;
-import view.AutoCadastroView;
-import view.PrimeiroCadastroView;
+import view.CadastroPorAdministradorView;
 
 /**
  *
  * @author Luis1
  */
-public class AutoCadastroPresenter {
-    private AutoCadastroView view;
-    private Usuario usuario;
-    private UsuarioRepository repository;
+public class CadastroPorAdministradorPresenter {
+    String nomeDeUsuario;
+    Usuario usuario;
+    UsuarioRepository repository;
+    CadastroPorAdministradorView view;
     
-    public AutoCadastroPresenter(UsuarioRepository repository){
+    public CadastroPorAdministradorPresenter(String nomeDeUsuario, UsuarioRepository repository){
         if (repository == null){
             throw new RuntimeException("Repository inválida!");
         }
         
+        this.nomeDeUsuario = nomeDeUsuario;
         this.repository = repository;
-        this.view = new AutoCadastroView();
+        this.view = new CadastroPorAdministradorView();
         configurarView();
     }
     
@@ -46,6 +47,8 @@ public class AutoCadastroPresenter {
                 }
             }
         });
+        
+        
         
         view.getBtnVoltar().addActionListener(new ActionListener() {
             @Override
@@ -65,11 +68,19 @@ public class AutoCadastroPresenter {
         String nome = view.getTxtNome().getText();
         String nomeDeUsuario = view.getTxtNomeDeUsuario().getText();
         String senha = view.getTxtSenha().getText();
-        TipoUsuario tipo = TipoUsuario.USUARIOCOMUM;
-        boolean autorizado = false;
+        TipoUsuario tipo = null;
+        //System.out.println(view.getBgTipo().getSelection().getActionCommand());
+        
+        if("USUARIO".equals(view.getBgTipo().getSelection().getActionCommand())){
+            tipo = TipoUsuario.USUARIOCOMUM;
+        } else{
+            tipo = TipoUsuario.ADMINSEC;
+        }
+        
+        boolean autorizado = true;
         LocalDate dataCadastro = LocalDate.now();
         
-        // Chamar o validador de senha aqui?
+        // Chamar o validador de senha aqui?    
         
         this.usuario = new Usuario(nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
         
@@ -77,13 +88,14 @@ public class AutoCadastroPresenter {
         limparTela();
     }
     
-    private void voltar() {
-        view.dispose();
-    }
-    
     private void limparTela(){
         view.getTxtNome().setText("");
         view.getTxtNomeDeUsuario().setText("");
         view.getTxtSenha().setText("");
+        view.getBgTipo().clearSelection();
+    }
+    
+    private void voltar() {
+        view.dispose();
     }
 }

@@ -70,6 +70,7 @@ public class ConexaoBanco {
             
             pstmt.setString(1, nomeDeUsuario);
             pstmt.setString(2, senha);
+            pstmt.setInt(3, 1);
             encontrados = pstmt.executeQuery().getInt(1);
             
             conn.close();
@@ -78,5 +79,22 @@ public class ConexaoBanco {
         }
         
         return encontrados > 0;
+    }
+    
+    public static int getTipo(String sql, String nomeDeUsuario){
+        int tipo = -1;
+        
+        try (var conn = DriverManager.getConnection(urlBD)){
+           PreparedStatement pstmt = conn.prepareStatement(sql);
+           
+           pstmt.setString(1, nomeDeUsuario);
+           tipo = pstmt.executeQuery().getInt(1);
+           
+           conn.close();
+        } catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        
+        return tipo;
     }
 }

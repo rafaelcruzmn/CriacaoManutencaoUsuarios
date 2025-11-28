@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import repository.UsuarioRepository;
 import view.AutenticacaoUsuarioView;
 import presenter.PainelUsuarioComumPresenter;
+import presenter.PainelAdministradorPresenter;
 
 /**
  *
@@ -61,11 +62,21 @@ public class AutenticacaoUsuarioPresenter {
     private void autenticarUsuario(){
         String nomeDeUsuario = view.getTxtNomeDeUsuario().getText();
         String senha = view.getTxtSenha().getText();
+        int tipo = -1;
+        
         
         if (repository.autenticarUsuario(nomeDeUsuario, senha)){
             view.dispose();
+            tipo = repository.getTipo(nomeDeUsuario);
+        }
+        
+        if (tipo == 2){
             new PainelUsuarioComumPresenter(nomeDeUsuario, repository);
         }
+        if (tipo == 0 || tipo == 1){
+            new PainelAdministradorPresenter(nomeDeUsuario, repository);
+        }
+        
     }
     
     private void limparTela(){
