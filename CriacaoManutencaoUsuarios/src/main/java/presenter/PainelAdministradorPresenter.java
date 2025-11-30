@@ -4,6 +4,7 @@
  */
 package presenter;
 
+import enumerator.TipoUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -15,9 +16,11 @@ import view.PainelAdministradorView;
  * @author Luis1
  */
 public class PainelAdministradorPresenter {
-    String nomeDeUsuario;
-    UsuarioRepository repository;
-    PainelAdministradorView view;
+    private String nomeDeUsuario;
+    private int id;
+    private TipoUsuario tipo;
+    private UsuarioRepository repository;
+    private PainelAdministradorView view;
     
     public PainelAdministradorPresenter(String nomeDeUsuario, UsuarioRepository repository){
         if (repository == null){
@@ -30,17 +33,19 @@ public class PainelAdministradorPresenter {
         
         this.nomeDeUsuario = nomeDeUsuario;
         this.repository = repository;
+        this.id = repository.getId(nomeDeUsuario);
+        this.tipo = repository.getTipo(id);
         view = new PainelAdministradorView();
         configuraView();
     }
     
     private void configuraView(){
         view.setVisible(false);
-        view.getBtnCadastrarUsuario().addActionListener(new ActionListener() {
+        view.getBtnManterUsuarios().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    new CadastroPorAdministradorPresenter(nomeDeUsuario, repository);
+                    new ManterUsuariosPresenter(repository);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }

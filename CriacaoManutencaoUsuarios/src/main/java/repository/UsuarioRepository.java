@@ -13,6 +13,7 @@ import model.Usuario;
 import java.util.List;
 import java.util.ArrayList;
 import connection.ConexaoBanco;
+import enumerator.TipoUsuario;
 /**
  *
  * @author Luis1
@@ -46,16 +47,22 @@ public class UsuarioRepository {
         return ConexaoBanco.autenticarUsuario(sql, nomeDeUsuario, senha); 
     }
     
-    public int getTipo(String nomeDeUsuario){
-        String sql = "SELECT tipo FROM usuarios WHERE nomeDeUsuario=?";
+    public int getId(String nomeDeUsuario){
+        String sql = "SELECT id FROM usuarios WHERE nomeDeUsuario=?";
         
-        return ConexaoBanco.getTipo(sql, nomeDeUsuario);
+        return ConexaoBanco.getId(sql, nomeDeUsuario);               
     }
+    
+    public TipoUsuario getTipo(int id){
+        String sql = "SELECT tipo FROM usuarios WHERE id=?";
         
-    public int getTamanho(){
-        String sql = "SELECT COUNT(*) FROM usuarios";
+        return ConexaoBanco.getTipo(sql, id);
+    }
+
+    public LocalDate getDataCadastro(int id){
+        String sql = "SELECT dataCadastro FROM usuarios WHERE id=?";
         
-        return ConexaoBanco.getTamanho(sql);
+        return ConexaoBanco.getDataCadastro(sql, id);
     }
 
    private void criarTabelaUsuario(){
@@ -70,5 +77,17 @@ public class UsuarioRepository {
                         + ");";
         
         ConexaoBanco.criarTabelaUsuario(sql);
+   }
+   
+   public int getTamanho(){
+        String sql = "SELECT COUNT(*) FROM usuarios";
+        
+        return ConexaoBanco.getTamanho(sql);
+    }
+   
+   public List<Usuario> getTodosAutorizados(){
+       String sql = "SELECT * FROM usuarios WHERE autorizado=?";
+       
+       return ConexaoBanco.getTodosAutorizados(sql);
    }
 }

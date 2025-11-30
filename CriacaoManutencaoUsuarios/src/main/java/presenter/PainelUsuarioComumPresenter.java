@@ -4,6 +4,7 @@
  */
 package presenter;
 
+import enumerator.TipoUsuario;
 import model.Usuario;
 import repository.UsuarioRepository;
 import view.PainelUsuarioComumView;
@@ -14,6 +15,8 @@ import view.PainelUsuarioComumView;
  */
 public class PainelUsuarioComumPresenter {
     String nomeDeUsuario;
+    int id;
+    TipoUsuario tipo;
     UsuarioRepository repository;
     PainelUsuarioComumView view;
     
@@ -29,6 +32,8 @@ public class PainelUsuarioComumPresenter {
         this.nomeDeUsuario = nomeDeUsuario;
         this.repository = repository;
         view = new PainelUsuarioComumView();
+        this.id = repository.getId(nomeDeUsuario);
+        this.tipo = repository.getTipo(id);
         configuraView();
     }
     

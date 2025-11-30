@@ -10,14 +10,14 @@ import javax.swing.JButton;
  *
  * @author Luis1
  */
-public class PainelAdministradorView extends javax.swing.JFrame {
+public class ManterUsuariosView extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PainelAdministradorView.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ManterUsuariosView.class.getName());
 
     /**
-     * Creates new form PainelAdministradorView
+     * Creates new form ManterUsuariosView
      */
-    public PainelAdministradorView() {
+    public ManterUsuariosView() {
         initComponents();
     }
 
@@ -30,28 +30,34 @@ public class PainelAdministradorView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnManterUsuarios = new javax.swing.JButton();
+        btnCadastrarUsuario = new javax.swing.JButton();
+        btnListarUsuarios = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Painel de Administrador");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnManterUsuarios.setText("Manter Usuários");
+        btnCadastrarUsuario.setText("Cadastrar Usuário");
+
+        btnListarUsuarios.setText("Listar Usuários");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(btnManterUsuarios)
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(btnCadastrarUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addComponent(btnListarUsuarios)
+                .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(btnManterUsuarios)
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadastrarUsuario)
+                    .addComponent(btnListarUsuarios))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,14 +85,19 @@ public class PainelAdministradorView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new PainelAdministradorView().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ManterUsuariosView().setVisible(true));
     }
 
-    public JButton getBtnManterUsuarios() {
-        return btnManterUsuarios;
+    public JButton getBtnCadastrarUsuario() {
+        return btnCadastrarUsuario;
+    }
+
+    public JButton getBtnListarUsuarios() {
+        return btnListarUsuarios;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnManterUsuarios;
+    private javax.swing.JButton btnCadastrarUsuario;
+    private javax.swing.JButton btnListarUsuarios;
     // End of variables declaration//GEN-END:variables
 }

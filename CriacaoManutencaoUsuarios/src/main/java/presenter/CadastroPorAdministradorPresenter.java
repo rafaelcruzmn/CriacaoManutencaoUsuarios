@@ -18,17 +18,15 @@ import view.CadastroPorAdministradorView;
  * @author Luis1
  */
 public class CadastroPorAdministradorPresenter {
-    String nomeDeUsuario;
     Usuario usuario;
     UsuarioRepository repository;
     CadastroPorAdministradorView view;
     
-    public CadastroPorAdministradorPresenter(String nomeDeUsuario, UsuarioRepository repository){
+    public CadastroPorAdministradorPresenter(UsuarioRepository repository){
         if (repository == null){
             throw new RuntimeException("Repository inválida!");
         }
         
-        this.nomeDeUsuario = nomeDeUsuario;
         this.repository = repository;
         this.view = new CadastroPorAdministradorView();
         configurarView();
@@ -68,7 +66,7 @@ public class CadastroPorAdministradorPresenter {
         String nome = view.getTxtNome().getText();
         String nomeDeUsuario = view.getTxtNomeDeUsuario().getText();
         String senha = view.getTxtSenha().getText();
-        TipoUsuario tipo = null;
+        TipoUsuario tipo;
         //System.out.println(view.getBgTipo().getSelection().getActionCommand());
         
         if("USUARIO".equals(view.getBgTipo().getSelection().getActionCommand())){

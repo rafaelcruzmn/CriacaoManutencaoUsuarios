@@ -12,7 +12,6 @@ import java.time.LocalDate;
  * @author Luis1
  */
 public class Usuario {
-    private int id;
     private String nome;
     private String nomeDeUsuario;
     private String senha;
@@ -28,11 +27,7 @@ public class Usuario {
         this.autorizado = autorizado;
         this.dataCadastro = dataCadastro;
     }
-
-    public int getId() {
-        return id;
-    }
-
+    
     public String getNome() {
         return nome;
     }
@@ -40,7 +35,7 @@ public class Usuario {
     public String getNomeDeUsuario() {
         return nomeDeUsuario;
     }
-
+    
     public String getSenha(){
         return senha;
     }
@@ -55,5 +50,21 @@ public class Usuario {
 
     public LocalDate getDataCadastro() {
         return dataCadastro;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setTipo(TipoUsuario tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setDataCadastro(LocalDate dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public void setAutorizado(boolean autorizado) {
+        this.autorizado = autorizado;
     }
 }
