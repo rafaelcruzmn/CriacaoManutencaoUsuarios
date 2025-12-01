@@ -7,7 +7,7 @@ package com.mycompany.criacaomanutencaousuarios;
 import presenter.AutenticacaoUsuarioPresenter;
 import repository.UsuarioRepository;
 import presenter.PrimeiroCadastroPresenter;
-
+import service.ConexaoBancoService;
 /**
  *
  * @author Rafael
@@ -15,9 +15,8 @@ import presenter.PrimeiroCadastroPresenter;
 public class CriacaoManutencaoUsuarios {
 
     public static void main(String[] args) {
-        //IConexaoService conexao = new ConexaoService();
-        //UsuarioRepository repository = new UsuarioRepository(conexao);
-        UsuarioRepository repository = new UsuarioRepository();
+        ConexaoBancoService conexao = new ConexaoBancoService();
+        UsuarioRepository repository = new UsuarioRepository(conexao);
         
         if (repository.getTamanho() == 0){
             new PrimeiroCadastroPresenter(repository);

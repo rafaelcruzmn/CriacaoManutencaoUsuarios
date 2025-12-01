@@ -33,7 +33,8 @@ public class ManterUsuariosView extends javax.swing.JFrame {
         btnCadastrarUsuario = new javax.swing.JButton();
         btnListarUsuarios = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Manter Usuários");
 
         btnCadastrarUsuario.setText("Cadastrar Usuário");
 

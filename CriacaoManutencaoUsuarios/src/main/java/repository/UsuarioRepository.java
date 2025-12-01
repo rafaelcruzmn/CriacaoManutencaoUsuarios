@@ -4,28 +4,31 @@
  */
 package repository;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import model.Usuario;
 import java.util.List;
-import java.util.ArrayList;
-import connection.ConexaoBanco;
 import enumerator.TipoUsuario;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import service.ConexaoBancoService;
 /**
  *
  * @author Luis1
  */
 public class UsuarioRepository {
-    public UsuarioRepository(){
-        criarTabelaUsuario();
+    private ConexaoBancoService conexao;
+    Connection conn;
+    
+    public UsuarioRepository(ConexaoBancoService conexao){
+        this.conexao = conexao;
     }
- 
+    
     public void inserirUsuario(Usuario usuario){
         if (usuario == null){
-            throw new RuntimeException("Usuário Inválido.\n");
+            throw new RuntimeException("Usuário inválido.\n");
         }
         
         String nome = usuario.getNome();
@@ -38,56 +41,150 @@ public class UsuarioRepository {
         String sql = "INSERT INTO usuarios(nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro) "
                 + "VALUES(?, ?, ?, ?, ?, ?)";
         
-        ConexaoBanco.inserirUsuario(sql, nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
-    }
+        conn = conexao.getConexao();
+        try {
+          PreparedStatement pstmt = conn.prepareStatement(sql);
+          pstmt.setString(1, nome);
+          pstmt.setString(2, nomeDeUsuario);
+          pstmt.setString(3, senha);
+          pstmt.setInt(4, tipo);
+          pstmt.setBoolean(5, autorizado);
+          pstmt.setString(6, dataCadastro.toString());
+          pstmt.executeUpdate();
+          conn.close();
+        } catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+    } 
     
     public boolean autenticarUsuario(String nomeDeUsuario, String senha){
         String sql = "SELECT COUNT(*) FROM usuarios WHERE nomeDeUsuario=? AND senha=? AND autorizado=?";
         
-        return ConexaoBanco.autenticarUsuario(sql, nomeDeUsuario, senha); 
+        int encontrados = 0;
+        conn = conexao.getConexao();
+        
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setString(1, nomeDeUsuario);
+            pstmt.setString(2, senha);
+            pstmt.setInt(3, 1);
+            encontrados = pstmt.executeQuery().getInt(1);
+            
+            conn.close();
+        } catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        
+        return encontrados > 0;
     }
     
     public int getId(String nomeDeUsuario){
         String sql = "SELECT id FROM usuarios WHERE nomeDeUsuario=?";
         
-        return ConexaoBanco.getId(sql, nomeDeUsuario);               
+        int id = -1;
+        conn = conexao.getConexao();
+        
+        try {
+           PreparedStatement pstmt = conn.prepareStatement(sql);
+           
+           pstmt.setString(1, nomeDeUsuario);
+           id = pstmt.executeQuery().getInt(1);
+           
+           conn.close();
+        } catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        
+        return id;               
     }
     
     public TipoUsuario getTipo(int id){
         String sql = "SELECT tipo FROM usuarios WHERE id=?";
         
-        return ConexaoBanco.getTipo(sql, id);
+        int tipo = -1;
+        conn = conexao.getConexao();
+        try {
+           PreparedStatement pstmt = conn.prepareStatement(sql);
+           
+           pstmt.setInt(1, id);
+           tipo = pstmt.executeQuery().getInt(1);
+           
+           conn.close();
+        } catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        
+        return TipoUsuario.values()[tipo];
     }
 
     public LocalDate getDataCadastro(int id){
         String sql = "SELECT dataCadastro FROM usuarios WHERE id=?";
         
-        return ConexaoBanco.getDataCadastro(sql, id);
+        LocalDate dataCadastro = null;
+        conn = conexao.getConexao();
+        
+        try {
+           PreparedStatement pstmt = conn.prepareStatement(sql);
+           
+           pstmt.setInt(1, id);
+           dataCadastro = pstmt.executeQuery().getObject("dataCadastro", LocalDate.class);
+           
+           conn.close();
+        } catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        
+        return dataCadastro;
     }
 
-   private void criarTabelaUsuario(){
-        String sql = "CREATE TABLE IF NOT EXISTS usuarios ("
-                        + "id INTEGER PRIMARY KEY, "
-                        + "nome text NOT NULL, "
-                        + "nomeDeUsuario TEXT NOT NULL, "
-                        + "senha TEXT NOT NULL, "
-                        + "tipo INTEGER, "
-                        + "autorizado BOOLEAN, "
-                        + "dataCadastro TEXT"
-                        + ");";
-        
-        ConexaoBanco.criarTabelaUsuario(sql);
-   }
-   
    public int getTamanho(){
         String sql = "SELECT COUNT(*) FROM usuarios";
         
-        return ConexaoBanco.getTamanho(sql);
+        int tamanho = 0;
+        conn = conexao.getConexao();
+        
+        try {
+            Statement smtm = conn.createStatement();
+            tamanho = smtm.executeQuery(sql).getInt(1);
+            conn.close();     
+        } catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        
+        
+        return tamanho;
     }
    
    public List<Usuario> getTodosAutorizados(){
        String sql = "SELECT * FROM usuarios WHERE autorizado=?";
        
-       return ConexaoBanco.getTodosAutorizados(sql);
+       List<Usuario> usuarios = new ArrayList<>();
+        conn = conexao.getConexao();
+        
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, 1);
+            
+            try (ResultSet rs = pstmt.executeQuery()){
+                while(rs.next()){
+                    String nome = rs.getString("nome");
+                    String nomeDeUsuario = rs.getString("nomeDeUsuario");
+                    String senha = "...";
+                    TipoUsuario tipo = TipoUsuario.values()[rs.getInt("tipo")];
+                    boolean autorizado = true;
+                    LocalDate dataCadastro = rs.getObject("dataCadastro", LocalDate.class);
+                    
+                    Usuario usuario = new Usuario(nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
+                    
+                    usuarios.add(usuario); 
+                }
+            }
+        } catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        
+        return usuarios;
    }
 }

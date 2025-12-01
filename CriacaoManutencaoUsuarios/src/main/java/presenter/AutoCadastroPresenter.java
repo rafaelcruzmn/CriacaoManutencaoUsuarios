@@ -12,7 +12,8 @@ import enumerator.TipoUsuario;
 import model.Usuario;
 import repository.UsuarioRepository;
 import view.AutoCadastroView;
-import view.PrimeiroCadastroView;
+import com.pss.senha.validacao.ValidadorSenha;
+import java.util.List;
 
 /**
  *
@@ -22,6 +23,7 @@ public class AutoCadastroPresenter {
     private AutoCadastroView view;
     private Usuario usuario;
     private UsuarioRepository repository;
+    private ValidadorSenha validadorSenha;
     
     public AutoCadastroPresenter(UsuarioRepository repository){
         if (repository == null){
@@ -30,6 +32,7 @@ public class AutoCadastroPresenter {
         
         this.repository = repository;
         this.view = new AutoCadastroView();
+        this.validadorSenha = new ValidadorSenha();
         configurarView();
     }
     
@@ -69,12 +72,23 @@ public class AutoCadastroPresenter {
         boolean autorizado = false;
         LocalDate dataCadastro = LocalDate.now();
         
+        System.out.println(validadorSenha.validar(senha));
         // Chamar o validador de senha aqui?
         
-        this.usuario = new Usuario(nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
         
-        repository.inserirUsuario(usuario);
-        limparTela();
+        this.usuario = new Usuario(nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
+        List<String> violacoesSenha = validadorSenha.validar(senha);
+        String mensagem = "";
+        
+        if (violacoesSenha.isEmpty()){
+            repository.inserirUsuario(usuario);
+            limparTela();
+        } else{
+            for (String violacao: violacoesSenha){
+                mensagem += violacao+"\n";
+            }
+            JOptionPane.showMessageDialog(view, mensagem);
+        }
     }
     
     private void voltar() {
@@ -86,4 +100,5 @@ public class AutoCadastroPresenter {
         view.getTxtNomeDeUsuario().setText("");
         view.getTxtSenha().setText("");
     }
+    
 }

@@ -15,7 +15,7 @@ public enum TipoUsuario {
 
     private int valor;
 
-    TipoUsuario (int valor){
+    TipoUsuario(int valor){
         this.valor = valor;
     }
 

@@ -64,19 +64,21 @@ public class AutenticacaoUsuarioPresenter {
         String nomeDeUsuario = view.getTxtNomeDeUsuario().getText();
         String senha = view.getTxtSenha().getText();
         TipoUsuario tipo = null;
-        
-        
+
         if (repository.autenticarUsuario(nomeDeUsuario, senha)){
             view.dispose();
             tipo = repository.getTipo(repository.getId(nomeDeUsuario));
         }
         
-        if (tipo.getValor() == 2){
-            new PainelUsuarioComumPresenter(nomeDeUsuario, repository);
+        if (tipo != null){
+            if (tipo.getValor() == 2){
+                new PainelUsuarioComumPresenter(nomeDeUsuario, repository);
+            }
+            if (tipo.getValor() == 0 || tipo.getValor() == 1){
+                new PainelAdministradorPresenter(nomeDeUsuario, repository);
+            }
         }
-        if (tipo.getValor() == 0 || tipo.getValor() == 1){
-            new PainelAdministradorPresenter(nomeDeUsuario, repository);
-        }
+        
         
     }
     

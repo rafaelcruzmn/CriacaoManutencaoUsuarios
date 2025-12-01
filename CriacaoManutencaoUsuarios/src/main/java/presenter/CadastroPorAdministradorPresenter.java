@@ -4,10 +4,12 @@
  */
 package presenter;
 
+import com.pss.senha.validacao.ValidadorSenha;
 import enumerator.TipoUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import repository.UsuarioRepository;
@@ -18,9 +20,10 @@ import view.CadastroPorAdministradorView;
  * @author Luis1
  */
 public class CadastroPorAdministradorPresenter {
-    Usuario usuario;
-    UsuarioRepository repository;
-    CadastroPorAdministradorView view;
+    private Usuario usuario;
+    private UsuarioRepository repository;
+    private CadastroPorAdministradorView view;
+    private ValidadorSenha validadorSenha;
     
     public CadastroPorAdministradorPresenter(UsuarioRepository repository){
         if (repository == null){
@@ -29,6 +32,7 @@ public class CadastroPorAdministradorPresenter {
         
         this.repository = repository;
         this.view = new CadastroPorAdministradorView();
+        this.validadorSenha = new ValidadorSenha();
         configurarView();
     }
     
@@ -45,8 +49,6 @@ public class CadastroPorAdministradorPresenter {
                 }
             }
         });
-        
-        
         
         view.getBtnVoltar().addActionListener(new ActionListener() {
             @Override
@@ -82,8 +84,18 @@ public class CadastroPorAdministradorPresenter {
         
         this.usuario = new Usuario(nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
         
-        repository.inserirUsuario(usuario);
-        limparTela();
+        List<String> violacoesSenha = validadorSenha.validar(senha);
+        String mensagem = "";
+        
+        if (violacoesSenha.isEmpty()){
+            repository.inserirUsuario(usuario);
+            limparTela();
+        } else{
+            for (String violacao: violacoesSenha){
+                mensagem += violacao+"\n";
+            }
+            JOptionPane.showMessageDialog(view, mensagem);
+        }
     }
     
     private void limparTela(){

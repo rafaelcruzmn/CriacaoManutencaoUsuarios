@@ -42,7 +42,7 @@ public class ListagemUsuariosPresenter {
     }
     
     private void popularTabela(){
-        UsuariosCadastradosTableModel model = new UsuariosCadastradosTableModel(usuarios);
+        UsuariosCadastradosTableModel model = new UsuariosCadastradosTableModel(usuarios, repository);
         
         tabelaUsuarios.setModel(model);
     }
