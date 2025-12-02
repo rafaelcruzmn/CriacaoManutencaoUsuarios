@@ -79,6 +79,27 @@ public class UsuarioRepository {
         }
     }
     
+        public void alterarSenha(Usuario usuario, String novaSenha){
+        
+        if (novaSenha == null){
+            throw new RuntimeException("Senha inválida.\n");
+        }
+        
+        String sql = "UPDATE usuarios SET senha=? WHERE id=?";
+        
+        conn = conexao.getConexao();
+        
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, novaSenha);
+            pstmt.setInt(2, usuario.getId());
+            pstmt.executeUpdate();
+            conn.close();
+        } catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+    }
+    
     public void excluir(Usuario usuario){
         String sql = "DELETE FROM usuarios WHERE id=?";
         

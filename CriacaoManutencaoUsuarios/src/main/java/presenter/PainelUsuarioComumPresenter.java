@@ -5,6 +5,9 @@
 package presenter;
 
 import enumerator.TipoUsuario;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import model.Usuario;
 import repository.UsuarioRepository;
 import view.PainelUsuarioComumView;
@@ -36,6 +39,16 @@ public class PainelUsuarioComumPresenter {
     private void configuraView(){
         view.setVisible(false);
         
+        view.getBtAlterarSenha().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    new AlterarSenhaPorUsuarioPresenter(usuarioLogado, repository);
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
+                }
+            }
+        });
         
         
         view.setVisible(true);
