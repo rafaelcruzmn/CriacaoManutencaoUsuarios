@@ -44,8 +44,6 @@ public class PrimeiroCadastroPresenter {
             public void actionPerformed(ActionEvent e){
                 try {
                     cadastrar();
-                    view.dispose();
-                    new AutenticacaoUsuarioPresenter(repository);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: asasa "+ex.getMessage());
                 }
@@ -70,16 +68,19 @@ public class PrimeiroCadastroPresenter {
         
         if (violacoesSenha.isEmpty()){
             repository.inserirUsuario(usuario);
-            limparTela();
+            view.dispose();
+            new AutenticacaoUsuarioPresenter(repository);
+
         } else{
             for (String violacao: violacoesSenha){
                 mensagem += violacao+"\n";
+                limparTela();
             }
             JOptionPane.showMessageDialog(view, mensagem);
         }
     }
     
-    private void limparTela(){
+ private void limparTela(){
         view.getTxtNome().setText("");
         view.getTxtNomeDeUsuario().setText("");
         view.getTxtSenha().setText("");
