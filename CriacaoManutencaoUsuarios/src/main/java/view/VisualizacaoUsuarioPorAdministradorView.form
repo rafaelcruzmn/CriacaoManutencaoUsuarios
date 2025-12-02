@@ -24,32 +24,35 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="lblId" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="lblNome" alignment="0" min="-2" pref="44" max="-2" attributes="0"/>
-                  <Component id="lblNomeDeUsuario" alignment="0" max="32767" attributes="0"/>
-                  <Component id="lblTipo" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="lblDataCadastro" alignment="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtNome" alignment="0" pref="148" max="32767" attributes="0"/>
-                  <Component id="txtId" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtNomeDeUsuario" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtTipo" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtDataCadastro" alignment="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="99" pref="99" max="-2" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-              <Component id="btnVoltar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblId" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="lblNome" alignment="0" min="-2" pref="44" max="-2" attributes="0"/>
+                          <Component id="lblNomeDeUsuario" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lblTipo" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="lblDataCadastro" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtId" max="32767" attributes="0"/>
+                          <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtNomeDeUsuario" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtTipo" max="32767" attributes="0"/>
+                          <Component id="txtDataCadastro" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                      <Component id="btnVoltar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
           </Group>
@@ -151,6 +154,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -79,7 +79,7 @@ public class VisualizacaoUsuarioPorAdministradorPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    repository.excluir(usuarioSelecionado);
+                    new ConfirmacaoExclusaoUsuarioPorAdministradorPresenter(usuarioSelecionado, repository);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }
