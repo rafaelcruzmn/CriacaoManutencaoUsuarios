@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import enumerator.TipoUsuario;
+import java.util.Optional;
 import model.Usuario;
 import repository.UsuarioRepository;
 import view.PrimeiroCadastroView;
@@ -57,7 +58,7 @@ public class PrimeiroCadastroPresenter {
         
         // Chamar o validador de senha aqui?
         
-        this.usuario = new Usuario(nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
+        this.usuario = new Usuario(Optional.empty(), nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
         
         repository.inserirUsuario(usuario);
         view.dispose();

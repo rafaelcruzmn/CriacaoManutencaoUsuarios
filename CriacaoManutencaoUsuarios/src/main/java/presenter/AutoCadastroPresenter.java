@@ -14,6 +14,7 @@ import repository.UsuarioRepository;
 import view.AutoCadastroView;
 import com.pss.senha.validacao.ValidadorSenha;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -76,7 +77,7 @@ public class AutoCadastroPresenter {
         // Chamar o validador de senha aqui?
         
         
-        this.usuario = new Usuario(nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
+        this.usuario = new Usuario(Optional.empty(), nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
         List<String> violacoesSenha = validadorSenha.validar(senha);
         String mensagem = "";
         

@@ -7,6 +7,7 @@ package presenter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import model.Usuario;
 import repository.UsuarioRepository;
 import view.ManterUsuariosView;
 
@@ -15,11 +16,13 @@ import view.ManterUsuariosView;
  * @author Luis1
  */
 public class ManterUsuariosPresenter {
+    private Usuario usuarioLogado;
     private ManterUsuariosView view;
     private UsuarioRepository repository;
     
-    public ManterUsuariosPresenter(UsuarioRepository repository){
+    public ManterUsuariosPresenter(Usuario usuarioLogado, UsuarioRepository repository){
         this.repository = repository;
+        this.usuarioLogado = usuarioLogado;
         this.view = new ManterUsuariosView();
         
         configurarView();
@@ -43,7 +46,7 @@ public class ManterUsuariosPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    new ListagemUsuariosPresenter(repository, repository.getTodosAutorizados());
+                    new ListagemUsuariosPresenter(usuarioLogado, repository.getTodosAutorizados(), repository);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }

@@ -13,6 +13,7 @@ import enumerator.TipoUsuario;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Optional;
 import service.ConexaoBancoService;
 /**
  *
@@ -20,7 +21,7 @@ import service.ConexaoBancoService;
  */
 public class UsuarioRepository {
     private ConexaoBancoService conexao;
-    Connection conn;
+    private Connection conn;
     
     public UsuarioRepository(ConexaoBancoService conexao){
         this.conexao = conexao;
@@ -57,29 +58,28 @@ public class UsuarioRepository {
         }
     } 
     
-    public boolean autenticarUsuario(String nomeDeUsuario, String senha){
-        String sql = "SELECT COUNT(*) FROM usuarios WHERE nomeDeUsuario=? AND senha=? AND autorizado=?";
+    public void alterarTipoUsuario(Usuario usuario, TipoUsuario novoTipo){
         
-        int encontrados = 0;
-        conn = conexao.getConexao();
-        
-        try {
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            
-            pstmt.setString(1, nomeDeUsuario);
-            pstmt.setString(2, senha);
-            pstmt.setInt(3, 1);
-            encontrados = pstmt.executeQuery().getInt(1);
-            
-            conn.close();
-        } catch (SQLException ex){
-            System.err.println(ex.getMessage());
+        if (usuario == null){
+            throw new RuntimeException("Usuário inválido.\n");
         }
         
-        return encontrados > 0;
+        String sql = "UPDATE usuarios SET tipo=? WHERE id=?";
+        
+        conn = conexao.getConexao();
+        
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, novoTipo.getValor());
+            pstmt.setInt(2, usuario.getId());
+            pstmt.executeUpdate();
+            conn.close();
+        } catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
     }
     
-    public int getId(String nomeDeUsuario){
+    /*public int getId(String nomeDeUsuario){
         String sql = "SELECT id FROM usuarios WHERE nomeDeUsuario=?";
         
         int id = -1;
@@ -97,6 +97,26 @@ public class UsuarioRepository {
         }
         
         return id;               
+    }*/
+    
+    public String getSenha(int id){
+        String sql = "SELECT senha FROM usuarios WHERE id=?";
+        
+        String senha = "";
+        conn = conexao.getConexao();
+        
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, id);
+            senha = pstmt.executeQuery().getString(1);
+            
+            conn.close();
+        } catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        
+        return senha;
     }
     
     public TipoUsuario getTipo(int id){
@@ -169,6 +189,7 @@ public class UsuarioRepository {
             
             try (ResultSet rs = pstmt.executeQuery()){
                 while(rs.next()){
+                    int id = rs.getInt("id");
                     String nome = rs.getString("nome");
                     String nomeDeUsuario = rs.getString("nomeDeUsuario");
                     String senha = "...";
@@ -176,7 +197,7 @@ public class UsuarioRepository {
                     boolean autorizado = true;
                     LocalDate dataCadastro = rs.getObject("dataCadastro", LocalDate.class);
                     
-                    Usuario usuario = new Usuario(nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
+                    Usuario usuario = new Usuario(Optional.of(id), nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
                     
                     usuarios.add(usuario); 
                 }
@@ -187,4 +208,37 @@ public class UsuarioRepository {
         
         return usuarios;
    }
+   
+   public Usuario autenticarUsuario(String nomeDeUsuario, String senha){
+        String sql = "SELECT * FROM usuarios WHERE nomeDeUsuario=? AND senha=? AND autorizado=?";
+        
+        Usuario usuario = null;
+        conn = conexao.getConexao();
+        
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setString(1, nomeDeUsuario);
+            pstmt.setString(2, senha);
+            pstmt.setInt(3, 1);
+            
+            try (ResultSet rs = pstmt.executeQuery()){
+                while(rs.next()){
+                    if (rs.getInt(1) > 0){
+                        int id = rs.getInt("id");
+                        String nome = rs.getString("nome");
+                        TipoUsuario tipo = TipoUsuario.values()[rs.getInt("tipo")];
+                        LocalDate dataCadastro = rs.getObject("dataCadastro", LocalDate.class);
+
+                        usuario = new Usuario(Optional.of(id), nome, nomeDeUsuario, senha, tipo, true, dataCadastro);
+                    }
+                } 
+            }
+            conn.close();
+        } catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        
+        return usuario;
+    }
 }

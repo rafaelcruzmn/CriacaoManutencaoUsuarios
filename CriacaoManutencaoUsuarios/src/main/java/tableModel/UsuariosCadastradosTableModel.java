@@ -24,7 +24,6 @@ public class UsuariosCadastradosTableModel extends AbstractTableModel {
         this.repository = repository;
     }
 
-
     @Override
     public int getRowCount() {
         if (usuarios == null) {
@@ -42,6 +41,10 @@ public class UsuariosCadastradosTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         return colunas[column]; 
     }
+    
+    public Usuario getUsuarioAt(int rowIndex) {
+    return usuarios.get(rowIndex);
+}
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -49,19 +52,16 @@ public class UsuariosCadastradosTableModel extends AbstractTableModel {
 
         switch (columnIndex) {
             case 0:
-                return repository.getId(usuario.getNomeDeUsuario());
+                return usuario.getId();
             case 1:
                 return usuario.getNome();
             case 2:
                 return usuario.getNomeDeUsuario();
             case 3:
-                // Retorna a String do Enum, se houver
                 return usuario.getTipo().toString(); 
             case 4:
-                // Retorna o objeto LocalDate
                 return usuario.getDataCadastro();
             default:
-                // Deve retornar null ou lançar exceção para índices inválidos
                 return null;
         }
     }

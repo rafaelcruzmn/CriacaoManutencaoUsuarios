@@ -7,11 +7,11 @@ package presenter;
 import enumerator.TipoUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Optional;
 import javax.swing.JOptionPane;
+import model.Usuario;
 import repository.UsuarioRepository;
 import view.AutenticacaoUsuarioView;
-import presenter.PainelUsuarioComumPresenter;
-import presenter.PainelAdministradorPresenter;
 
 /**
  *
@@ -63,19 +63,23 @@ public class AutenticacaoUsuarioPresenter {
     private void autenticarUsuario(){
         String nomeDeUsuario = view.getTxtNomeDeUsuario().getText();
         String senha = view.getTxtSenha().getText();
+        
+        Usuario usuario = repository.autenticarUsuario(nomeDeUsuario, senha);
         TipoUsuario tipo = null;
+        
 
-        if (repository.autenticarUsuario(nomeDeUsuario, senha)){
+        if (usuario != null){
+            
             view.dispose();
-            tipo = repository.getTipo(repository.getId(nomeDeUsuario));
+            tipo = usuario.getTipo();
         }
         
         if (tipo != null){
             if (tipo.getValor() == 2){
-                new PainelUsuarioComumPresenter(nomeDeUsuario, repository);
+                new PainelUsuarioComumPresenter(usuario, repository);
             }
             if (tipo.getValor() == 0 || tipo.getValor() == 1){
-                new PainelAdministradorPresenter(nomeDeUsuario, repository);
+                new PainelAdministradorPresenter(usuario, repository);
             }
         }
         

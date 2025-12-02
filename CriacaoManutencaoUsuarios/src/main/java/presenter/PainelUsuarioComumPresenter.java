@@ -14,26 +14,22 @@ import view.PainelUsuarioComumView;
  * @author Luis1
  */
 public class PainelUsuarioComumPresenter {
-    String nomeDeUsuario;
-    int id;
-    TipoUsuario tipo;
+    Usuario usuarioLogado;
     UsuarioRepository repository;
     PainelUsuarioComumView view;
     
-    public PainelUsuarioComumPresenter(String nomeDeUsuario, UsuarioRepository repository){
+    public PainelUsuarioComumPresenter(Usuario usuarioLogado, UsuarioRepository repository){
         if (repository == null){
             throw new RuntimeException("Repository inválida!\n");
         }
         
-        if (nomeDeUsuario == null){
+        if (usuarioLogado == null){
             throw new RuntimeException("Usuário inválido!\n");
         }
         
-        this.nomeDeUsuario = nomeDeUsuario;
+        this.usuarioLogado = usuarioLogado;
         this.repository = repository;
         view = new PainelUsuarioComumView();
-        this.id = repository.getId(nomeDeUsuario);
-        this.tipo = repository.getTipo(id);
         configuraView();
     }
     

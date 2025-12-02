@@ -8,6 +8,7 @@ import enumerator.TipoUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import model.Usuario;
 import repository.UsuarioRepository;
 import view.PainelAdministradorView;
 
@@ -16,25 +17,21 @@ import view.PainelAdministradorView;
  * @author Luis1
  */
 public class PainelAdministradorPresenter {
-    private String nomeDeUsuario;
-    private int id;
-    private TipoUsuario tipo;
+    private Usuario usuarioLogado;
     private UsuarioRepository repository;
     private PainelAdministradorView view;
     
-    public PainelAdministradorPresenter(String nomeDeUsuario, UsuarioRepository repository){
+    public PainelAdministradorPresenter(Usuario usuarioLogado, UsuarioRepository repository){
         if (repository == null){
             throw new RuntimeException("Repository inválida!\n");
         }
         
-        if (nomeDeUsuario == null){
+        if (usuarioLogado == null){
             throw new RuntimeException("Usuário inválido!\n");
         }
         
-        this.nomeDeUsuario = nomeDeUsuario;
+        this.usuarioLogado = usuarioLogado;
         this.repository = repository;
-        this.id = repository.getId(nomeDeUsuario);
-        this.tipo = repository.getTipo(id);
         view = new PainelAdministradorView();
         configuraView();
     }
@@ -45,7 +42,7 @@ public class PainelAdministradorPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    new ManterUsuariosPresenter(repository);
+                    new ManterUsuariosPresenter(usuarioLogado, repository);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }

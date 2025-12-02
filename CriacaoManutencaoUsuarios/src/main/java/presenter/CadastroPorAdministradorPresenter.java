@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import repository.UsuarioRepository;
@@ -80,9 +81,7 @@ public class CadastroPorAdministradorPresenter {
         boolean autorizado = true;
         LocalDate dataCadastro = LocalDate.now();
         
-        // Chamar o validador de senha aqui?    
-        
-        this.usuario = new Usuario(nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
+        this.usuario = new Usuario(Optional.empty(), nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
         
         List<String> violacoesSenha = validadorSenha.validar(senha);
         String mensagem = "";
