@@ -13,7 +13,7 @@ import java.util.Optional;
  * @author Luis1
  */
 public class Usuario {
-    private int id;
+    private Integer id;
     private String nome;
     private String nomeDeUsuario;
     private String senha;
@@ -22,7 +22,7 @@ public class Usuario {
     private boolean autorizado;
     
     public Usuario(Optional<Integer> id, String nome, String nomeDeUsuario, String senha, TipoUsuario tipo, boolean autorizado, LocalDate dataCadastro){
-        this.id = id.orElse(null);
+        this.id = id.orElse(-1);
         this.nome = nome;
         this.nomeDeUsuario = nomeDeUsuario;
         this.senha = senha;

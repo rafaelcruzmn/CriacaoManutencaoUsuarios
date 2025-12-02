@@ -79,25 +79,20 @@ public class UsuarioRepository {
         }
     }
     
-    /*public int getId(String nomeDeUsuario){
-        String sql = "SELECT id FROM usuarios WHERE nomeDeUsuario=?";
+    public void excluir(Usuario usuario){
+        String sql = "DELETE FROM usuarios WHERE id=?";
         
-        int id = -1;
         conn = conexao.getConexao();
         
-        try {
-           PreparedStatement pstmt = conn.prepareStatement(sql);
-           
-           pstmt.setString(1, nomeDeUsuario);
-           id = pstmt.executeQuery().getInt(1);
-           
-           conn.close();
-        } catch(SQLException ex){
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, usuario.getId());
+            pstmt.executeUpdate();
+            conn.close();
+        } catch(SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        
-        return id;               
-    }*/
+    }
     
     public String getSenha(int id){
         String sql = "SELECT senha FROM usuarios WHERE id=?";

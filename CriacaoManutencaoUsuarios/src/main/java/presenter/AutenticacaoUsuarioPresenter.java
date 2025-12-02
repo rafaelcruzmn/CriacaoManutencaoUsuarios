@@ -82,8 +82,6 @@ public class AutenticacaoUsuarioPresenter {
                 new PainelAdministradorPresenter(usuario, repository);
             }
         }
-        
-        
     }
     
     private void limparTela(){

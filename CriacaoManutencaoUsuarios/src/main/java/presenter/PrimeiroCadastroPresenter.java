@@ -4,11 +4,13 @@
  */
 package presenter;
 
+import com.pss.senha.validacao.ValidadorSenha;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import enumerator.TipoUsuario;
+import java.util.List;
 import java.util.Optional;
 import model.Usuario;
 import repository.UsuarioRepository;
@@ -22,6 +24,7 @@ public class PrimeiroCadastroPresenter {
     private PrimeiroCadastroView view;
     private Usuario usuario;
     private UsuarioRepository repository;
+    private ValidadorSenha validadorSenha;
     
     public PrimeiroCadastroPresenter(UsuarioRepository repository){
         if (repository == null){
@@ -30,6 +33,7 @@ public class PrimeiroCadastroPresenter {
         
         this.repository = repository;
         this.view = new PrimeiroCadastroView();
+        this.validadorSenha = new ValidadorSenha();
         configuraView();
     }
     
@@ -40,8 +44,10 @@ public class PrimeiroCadastroPresenter {
             public void actionPerformed(ActionEvent e){
                 try {
                     cadastrar();
+                    view.dispose();
+                    new AutenticacaoUsuarioPresenter(repository);
                 } catch (Exception ex){
-                    JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
+                    JOptionPane.showMessageDialog(view, "Falha: asasa "+ex.getMessage());
                 }
             }
         });
@@ -59,10 +65,18 @@ public class PrimeiroCadastroPresenter {
         // Chamar o validador de senha aqui?
         
         this.usuario = new Usuario(Optional.empty(), nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
+        List<String> violacoesSenha = validadorSenha.validar(senha);
+        String mensagem = "";
         
-        repository.inserirUsuario(usuario);
-        view.dispose();
-        new AutenticacaoUsuarioPresenter(repository);
+        if (violacoesSenha.isEmpty()){
+            repository.inserirUsuario(usuario);
+            limparTela();
+        } else{
+            for (String violacao: violacoesSenha){
+                mensagem += violacao+"\n";
+            }
+            JOptionPane.showMessageDialog(view, mensagem);
+        }
     }
     
     private void limparTela(){

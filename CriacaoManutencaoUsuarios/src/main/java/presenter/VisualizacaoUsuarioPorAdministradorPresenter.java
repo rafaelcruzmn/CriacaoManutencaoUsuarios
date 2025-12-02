@@ -57,15 +57,29 @@ public class VisualizacaoUsuarioPorAdministradorPresenter {
         
         if (tipo.getValor() == 0){
             view.getBtnEditar().setEnabled(false);
+            view.getBtnExcluir().setEnabled(false);
         }
         if (tipo.getValor() == 1 && usuarioLogado.getTipo().getValor() == 1){
             view.getBtnEditar().setEnabled(false);
+            view.getBtnExcluir().setEnabled(false);
         }
+        
         view.getBtnEditar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
                     new EdicaoUsuarioPorAdministradorPresenter(usuarioLogado, usuarioSelecionado, repository);
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
+                }
+            }
+        });
+        
+        view.getBtnExcluir().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    repository.excluir(usuarioSelecionado);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }

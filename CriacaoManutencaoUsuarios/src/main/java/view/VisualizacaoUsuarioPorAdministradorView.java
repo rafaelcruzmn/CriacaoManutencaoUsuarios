@@ -43,6 +43,7 @@ public class VisualizacaoUsuarioPorAdministradorView extends javax.swing.JFrame 
         btnEditar = new javax.swing.JButton();
         lblDataCadastro = new javax.swing.JLabel();
         txtDataCadastro = new javax.swing.JTextField();
+        btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Visualização de Usuário");
@@ -60,6 +61,8 @@ public class VisualizacaoUsuarioPorAdministradorView extends javax.swing.JFrame 
         btnEditar.setText("Editar");
 
         lblDataCadastro.setText("Data de Cadastro:");
+
+        btnExcluir.setText("Excluir");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,8 +88,10 @@ public class VisualizacaoUsuarioPorAdministradorView extends javax.swing.JFrame 
                 .addGap(74, 74, 74)
                 .addComponent(btnVoltar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEditar)
-                .addGap(66, 66, 66))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEditar)
+                    .addComponent(btnExcluir))
+                .addGap(67, 67, 67))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,18 +113,20 @@ public class VisualizacaoUsuarioPorAdministradorView extends javax.swing.JFrame 
                     .addComponent(lblTipo)
                     .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVoltar)
+                        .addGap(39, 39, 39))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblDataCadastro)
                             .addComponent(txtDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(59, 100, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnVoltar)
-                            .addComponent(btnEditar))
-                        .addGap(39, 39, 39))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(btnExcluir)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEditar)
+                        .addGap(18, 18, 18))))
         );
 
         pack();
@@ -154,6 +161,10 @@ public class VisualizacaoUsuarioPorAdministradorView extends javax.swing.JFrame 
         return btnEditar;
     }
 
+    public JButton getBtnExcluir(){
+        return btnExcluir;
+    }
+    
     public JButton getBtnVoltar() {
         return btnVoltar;
     }
@@ -180,6 +191,7 @@ public class VisualizacaoUsuarioPorAdministradorView extends javax.swing.JFrame 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel lblDataCadastro;
     private javax.swing.JLabel lblId;
