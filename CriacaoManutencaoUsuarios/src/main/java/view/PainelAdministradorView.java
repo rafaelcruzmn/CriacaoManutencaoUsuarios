@@ -32,6 +32,10 @@ public class PainelAdministradorView extends javax.swing.JFrame {
 
         btnManterUsuarios = new javax.swing.JButton();
         btnAutorizarNovoUsuario = new javax.swing.JButton();
+        btnAlterarSenha = new javax.swing.JButton();
+        btnVisualizarNotificacoes = new javax.swing.JButton();
+        btnLimparSistema = new javax.swing.JButton();
+        btnEnviarNotificacao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Painel de Administrador");
@@ -45,16 +49,31 @@ public class PainelAdministradorView extends javax.swing.JFrame {
             }
         });
 
+        btnAlterarSenha.setText("Alterar Senha");
+
+        btnVisualizarNotificacoes.setText("Visualizar Notificações");
+
+        btnLimparSistema.setText("Limpar Sistema");
+
+        btnEnviarNotificacao.setText("Enviar Notificação");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(btnManterUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(btnAutorizarNovoUsuario)
-                .addGap(33, 33, 33))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnManterUsuarios)
+                    .addComponent(btnAlterarSenha)
+                    .addComponent(btnEnviarNotificacao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAutorizarNovoUsuario)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnLimparSistema)
+                        .addComponent(btnVisualizarNotificacoes)))
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -63,7 +82,15 @@ public class PainelAdministradorView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnManterUsuarios)
                     .addComponent(btnAutorizarNovoUsuario))
-                .addContainerGap(231, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVisualizarNotificacoes)
+                    .addComponent(btnEnviarNotificacao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimparSistema)
+                    .addComponent(btnAlterarSenha))
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -105,8 +132,24 @@ public class PainelAdministradorView extends javax.swing.JFrame {
     public JButton getBtnAutorizarNovoUsuario(){
         return btnAutorizarNovoUsuario;
     }
+
+    public JButton getBtnAlterarSenha() {
+        return btnAlterarSenha;
+    }
+
+    public JButton getBtnLimparSistema() {
+        return btnLimparSistema;
+    }
+
+    public JButton getBtnVisualizarNotificacoes() {
+        return btnVisualizarNotificacoes;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterarSenha;
     private javax.swing.JButton btnAutorizarNovoUsuario;
+    private javax.swing.JButton btnEnviarNotificacao;
+    private javax.swing.JButton btnLimparSistema;
     private javax.swing.JButton btnManterUsuarios;
+    private javax.swing.JButton btnVisualizarNotificacoes;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,11 +25,21 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Component id="btnManterUsuarios" min="-2" pref="153" max="-2" attributes="0"/>
-              <EmptySpace pref="35" max="32767" attributes="0"/>
-              <Component id="btnAutorizarNovoUsuario" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnManterUsuarios" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAlterarSenha" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEnviarNotificacao" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="56" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnAutorizarNovoUsuario" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Component id="btnLimparSistema" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnVisualizarNotificacoes" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -41,7 +51,17 @@
                   <Component id="btnManterUsuarios" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAutorizarNovoUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="231" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnVisualizarNotificacoes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEnviarNotificacao" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnLimparSistema" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAlterarSenha" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -59,6 +79,26 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAutorizarNovoUsuarioActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAlterarSenha">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Alterar Senha"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnVisualizarNotificacoes">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Visualizar Notifica&#xe7;&#xf5;es"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnLimparSistema">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Limpar Sistema"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnEnviarNotificacao">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Enviar Notifica&#xe7;&#xe3;o"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

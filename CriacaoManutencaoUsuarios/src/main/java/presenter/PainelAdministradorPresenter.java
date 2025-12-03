@@ -33,11 +33,16 @@ public class PainelAdministradorPresenter {
         this.usuarioLogado = usuarioLogado;
         this.repository = repository;
         view = new PainelAdministradorView();
-        configuraView();
+        configurarView();
     }
     
-    private void configuraView(){
+    private void configurarView(){
         view.setVisible(false);
+        
+        if (usuarioLogado.getTipo().getValor() != 0){
+            view.getBtnLimparSistema().setEnabled(false);
+        }
+        
         view.getBtnManterUsuarios().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){

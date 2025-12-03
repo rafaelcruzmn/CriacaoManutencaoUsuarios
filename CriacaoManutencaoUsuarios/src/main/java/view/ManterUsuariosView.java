@@ -45,20 +45,23 @@ public class ManterUsuariosView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(btnCadastrarUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addComponent(btnListarUsuarios)
-                .addGap(47, 47, 47))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(btnCadastrarUsuario))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(btnListarUsuarios)))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastrarUsuario)
-                    .addComponent(btnListarUsuarios))
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
+                .addComponent(btnCadastrarUsuario)
+                .addGap(34, 34, 34)
+                .addComponent(btnListarUsuarios)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
