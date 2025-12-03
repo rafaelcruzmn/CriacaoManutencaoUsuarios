@@ -225,6 +225,38 @@ public class UsuarioRepository {
         return usuarios;
    }
    
+public List<Usuario> getTodosNaoAutorizados(){
+       String sql = "SELECT * FROM usuarios WHERE autorizado=?";
+       
+       List<Usuario> usuarios = new ArrayList<>();
+        conn = conexao.getConexao();
+        
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, 0);
+            
+            try (ResultSet rs = pstmt.executeQuery()){
+                while(rs.next()){
+                    int id = rs.getInt("id");
+                    String nome = rs.getString("nome");
+                    String nomeDeUsuario = rs.getString("nomeDeUsuario");
+                    String senha = "...";
+                    TipoUsuario tipo = TipoUsuario.values()[rs.getInt("tipo")];
+                    boolean autorizado = false;
+                    LocalDate dataCadastro = rs.getObject("dataCadastro", LocalDate.class);
+                    Usuario usuario = new Usuario(Optional.of(id), nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
+                    
+                    usuarios.add(usuario); 
+                }
+            }
+        } catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        
+        return usuarios;
+   }
+   
    public Usuario autenticarUsuario(String nomeDeUsuario, String senha){
         String sql = "SELECT * FROM usuarios WHERE nomeDeUsuario=? AND senha=? AND autorizado=?";
         
@@ -253,8 +285,26 @@ public class UsuarioRepository {
             conn.close();
         } catch (SQLException ex){
             System.err.println(ex.getMessage());
-        }
-        
+        } 
         return usuario;
     }
+   
+   public void autorizarUsuario(int usuarioId) throws SQLException {
+    String sql = "UPDATE usuarios SET autorizado = 1 WHERE id = ?";
+    conn = conexao.getConexao();
+    
+    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        pstmt.setInt(1, usuarioId);
+        pstmt.executeUpdate();
+        }
+    }
+   public void recusarUsuario(int usuarioId) throws SQLException {
+    String sql = "DELETE FROM usuarios WHERE id = ?";
+    conn = conexao.getConexao();
+    
+    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        pstmt.setInt(1, usuarioId);
+        pstmt.executeUpdate();
+        }
+    } 
 }

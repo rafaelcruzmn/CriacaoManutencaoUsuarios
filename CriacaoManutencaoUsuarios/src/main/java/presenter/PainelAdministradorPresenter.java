@@ -49,6 +49,17 @@ public class PainelAdministradorPresenter {
             }
         });
         
+        view.getBtnAutorizarNovoUsuario().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    new AutorizarNovoUsuarioPresenter(usuarioLogado, repository);
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
+                }
+            }
+        });
+        
         
         view.setVisible(true);
     }

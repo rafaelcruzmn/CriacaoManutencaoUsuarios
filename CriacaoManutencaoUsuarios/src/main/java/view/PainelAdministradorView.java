@@ -31,31 +31,47 @@ public class PainelAdministradorView extends javax.swing.JFrame {
     private void initComponents() {
 
         btnManterUsuarios = new javax.swing.JButton();
+        btnAutorizarNovoUsuario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Painel de Administrador");
 
         btnManterUsuarios.setText("Manter Usuários");
 
+        btnAutorizarNovoUsuario.setText("Autorizar Novo Usuário");
+        btnAutorizarNovoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAutorizarNovoUsuarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(btnManterUsuarios)
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(btnManterUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(btnAutorizarNovoUsuario)
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(btnManterUsuarios)
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnManterUsuarios)
+                    .addComponent(btnAutorizarNovoUsuario))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAutorizarNovoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorizarNovoUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAutorizarNovoUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -86,7 +102,11 @@ public class PainelAdministradorView extends javax.swing.JFrame {
         return btnManterUsuarios;
     }
 
+    public JButton getBtnAutorizarNovoUsuario(){
+        return btnAutorizarNovoUsuario;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAutorizarNovoUsuario;
     private javax.swing.JButton btnManterUsuarios;
     // End of variables declaration//GEN-END:variables
 }
