@@ -4,20 +4,21 @@
  */
 package view;
 
-import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 /**
  *
  * @author Luis1
  */
-public class PainelUsuarioComumView extends javax.swing.JFrame {
+public class ListagemNotificacoesView extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PainelUsuarioComumView.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ListagemNotificacoesView.class.getName());
 
     /**
-     * Creates new form PainelUsuarioComumView
+     * Creates new form ListagemNotificacoesView
      */
-    public PainelUsuarioComumView() {
+    public ListagemNotificacoesView() {
         initComponents();
     }
 
@@ -30,50 +31,58 @@ public class PainelUsuarioComumView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnVisualizarNotificacoes = new javax.swing.JButton();
-        btnAlterarSenha = new javax.swing.JButton();
+        scrNotificacoes = new javax.swing.JScrollPane();
+        tblNotificacoesDoUsuario = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Painel de Usuário");
+        setTitle("Suas Notificações");
 
-        btnVisualizarNotificacoes.setText("Visualizar Notificações");
-        btnVisualizarNotificacoes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVisualizarNotificacoesActionPerformed(evt);
+        tblNotificacoesDoUsuario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Título", "Remetente", "Data de Envio", "Lida?"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-
-        btnAlterarSenha.setText("Alterar Senha");
+        scrNotificacoes.setViewportView(tblNotificacoesDoUsuario);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVisualizarNotificacoes)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAlterarSenha)
-                        .addGap(27, 27, 27)))
-                .addContainerGap(101, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(scrNotificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(btnVisualizarNotificacoes)
-                .addGap(40, 40, 40)
-                .addComponent(btnAlterarSenha)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(scrNotificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnVisualizarNotificacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarNotificacoesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVisualizarNotificacoesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,20 +106,19 @@ public class PainelUsuarioComumView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new PainelUsuarioComumView().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ListagemNotificacoesView().setVisible(true));
     }
 
-    public JButton getBtnAlterarSenha() {
-        return btnAlterarSenha;
+    public JScrollPane getScrNotificacoes() {
+        return scrNotificacoes;
     }
 
-    public JButton getBtnVisualizarNotificacoes() {
-        return btnVisualizarNotificacoes;
+    public JTable getTblNotificacoesDoUsuario() {
+        return tblNotificacoesDoUsuario;
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAlterarSenha;
-    private javax.swing.JButton btnVisualizarNotificacoes;
+    private javax.swing.JScrollPane scrNotificacoes;
+    private javax.swing.JTable tblNotificacoesDoUsuario;
     // End of variables declaration//GEN-END:variables
 }

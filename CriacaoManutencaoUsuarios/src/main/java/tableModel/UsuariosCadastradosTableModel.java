@@ -17,11 +17,9 @@ public class UsuariosCadastradosTableModel extends AbstractTableModel {
 
     private List<Usuario> usuarios;
     private String[] colunas = {"ID", "Nome", "Usuário", "Tipo", "Data de Cadastro"};
-    private UsuarioRepository repository;
 
-    public UsuariosCadastradosTableModel(List<Usuario> usuarios, UsuarioRepository repository) {
+    public UsuariosCadastradosTableModel(List<Usuario> usuarios) {
         this.usuarios = usuarios;
-        this.repository = repository;
     }
 
     @Override

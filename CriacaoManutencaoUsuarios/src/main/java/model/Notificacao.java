@@ -20,7 +20,7 @@ public class Notificacao {
     private List<Usuario> destinatarios;
     private LocalDate dataEnvio;
     
-    public Notificacao(Optional<Integer> id, String titulo, String mensagem, boolean lida, Usuario remetente, List<Usuario> destinatarios, LocalDate dataEnvio){
+    public Notificacao(Optional<Integer> id, String titulo, String mensagem, Usuario remetente, List<Usuario> destinatarios, LocalDate dataEnvio){
         this.id = id.orElse(-1);
         this.titulo = titulo;
         this.mensagem = mensagem;

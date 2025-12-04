@@ -46,7 +46,7 @@ public class ManterUsuariosPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    new ListagemUsuariosPresenter(usuarioLogado, repository.getTodosAutorizados(), repository);
+                    new ListagemUsuariosCadastradosPresenter(usuarioLogado, repository.getTodosAutorizados(), repository);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }

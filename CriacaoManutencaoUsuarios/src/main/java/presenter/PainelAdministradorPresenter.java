@@ -4,12 +4,13 @@
  */
 package presenter;
 
-import enumerator.TipoUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
+import repository.UsuarioNotificacaoRepository;
 import repository.UsuarioRepository;
+import service.ConexaoBancoService;
 import view.PainelAdministradorView;
 
 /**
@@ -18,11 +19,11 @@ import view.PainelAdministradorView;
  */
 public class PainelAdministradorPresenter {
     private Usuario usuarioLogado;
-    private UsuarioRepository repository;
+    private UsuarioRepository usuarioRepository;
     private PainelAdministradorView view;
     
-    public PainelAdministradorPresenter(Usuario usuarioLogado, UsuarioRepository repository){
-        if (repository == null){
+    public PainelAdministradorPresenter(Usuario usuarioLogado, UsuarioRepository usuarioRepository){
+        if (usuarioRepository == null){
             throw new RuntimeException("Repository inválida!\n");
         }
         
@@ -31,7 +32,7 @@ public class PainelAdministradorPresenter {
         }
         
         this.usuarioLogado = usuarioLogado;
-        this.repository = repository;
+        this.usuarioRepository = usuarioRepository;
         view = new PainelAdministradorView();
         configurarView();
     }
@@ -47,7 +48,7 @@ public class PainelAdministradorPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    new ManterUsuariosPresenter(usuarioLogado, repository);
+                    new ManterUsuariosPresenter(usuarioLogado, usuarioRepository);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }
@@ -58,13 +59,47 @@ public class PainelAdministradorPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    new AutorizarNovoUsuarioPresenter(usuarioLogado, repository);
+                    new AutorizarNovoUsuarioPresenter(usuarioLogado, usuarioRepository);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }
             }
         });
         
+        view.getBtnAlterarSenha().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    new AlterarSenhaPorUsuarioPresenter(usuarioLogado, usuarioRepository);
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
+                }
+            }
+        });
+        
+        view.getBtnEnviarNotificacao().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    new ListagemUsuariosParaEnvioDeNotificacaoPresenter(usuarioLogado, usuarioRepository.getTodosAutorizados(), usuarioRepository);
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
+                }
+            }
+        });
+        
+        view.getBtnVisualizarNotificacoes().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    UsuarioNotificacaoRepository usuarioNotificacaoRepository = new UsuarioNotificacaoRepository(new ConexaoBancoService("jdbc:sqlite:usuarios.db"));
+                    
+                    new ListagemNotificacoesPresenter(usuarioLogado, usuarioNotificacaoRepository.getNotificacoes(usuarioLogado.getId()), usuarioNotificacaoRepository);
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
+                }
+            }
+        });
         
         view.setVisible(true);
     }

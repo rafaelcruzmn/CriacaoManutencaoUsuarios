@@ -29,7 +29,7 @@ public class AutorizarNovoUsuarioView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane3 = new javax.swing.JScrollPane();
+        scrAutorizarUsuarios = new javax.swing.JScrollPane();
         tblAutorizarUsuarios = new javax.swing.JTable();
         btnVoltar = new javax.swing.JButton();
         btnConfirmarAlteracao = new javax.swing.JButton();
@@ -59,7 +59,7 @@ public class AutorizarNovoUsuarioView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(tblAutorizarUsuarios);
+        scrAutorizarUsuarios.setViewportView(tblAutorizarUsuarios);
         if (tblAutorizarUsuarios.getColumnModel().getColumnCount() > 0) {
             tblAutorizarUsuarios.getColumnModel().getColumn(0).setResizable(false);
             tblAutorizarUsuarios.getColumnModel().getColumn(1).setResizable(false);
@@ -80,7 +80,7 @@ public class AutorizarNovoUsuarioView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
+            .addComponent(scrAutorizarUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -91,7 +91,7 @@ public class AutorizarNovoUsuarioView extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrAutorizarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmarAlteracao)
@@ -157,7 +157,7 @@ public class AutorizarNovoUsuarioView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmarAlteracao;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane scrAutorizarUsuarios;
     private javax.swing.JTable tblAutorizarUsuarios;
     // End of variables declaration//GEN-END:variables
 }

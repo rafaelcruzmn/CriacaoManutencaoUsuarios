@@ -9,7 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
+import repository.UsuarioNotificacaoRepository;
 import repository.UsuarioRepository;
+import service.ConexaoBancoService;
 import view.PainelUsuarioComumView;
 
 /**
@@ -39,7 +41,7 @@ public class PainelUsuarioComumPresenter {
     private void configuraView(){
         view.setVisible(false);
         
-        view.getBtAlterarSenha().addActionListener(new ActionListener() {
+        view.getBtnAlterarSenha().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
@@ -50,6 +52,18 @@ public class PainelUsuarioComumPresenter {
             }
         });
         
+        view.getBtnVisualizarNotificacoes().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    UsuarioNotificacaoRepository usuarioNotificacaoRepository = new UsuarioNotificacaoRepository(new ConexaoBancoService("jdbc:sqlite:usuarios.db"));
+                    
+                    new ListagemNotificacoesPresenter(usuarioLogado, usuarioNotificacaoRepository.getNotificacoes(usuarioLogado.getId()), usuarioNotificacaoRepository);
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
+                }
+            }
+        });
         
         view.setVisible(true);
     }

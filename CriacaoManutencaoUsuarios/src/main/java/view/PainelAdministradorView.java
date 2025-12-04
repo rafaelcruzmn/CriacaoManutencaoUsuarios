@@ -129,6 +129,10 @@ public class PainelAdministradorView extends javax.swing.JFrame {
         return btnManterUsuarios;
     }
 
+    public JButton getBtnEnviarNotificacao() {
+        return btnEnviarNotificacao;
+    }
+
     public JButton getBtnAutorizarNovoUsuario(){
         return btnAutorizarNovoUsuario;
     }

@@ -29,7 +29,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnVisualizarNotificacoes" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="btAlterarSenha" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnAlterarSenha" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -43,7 +43,7 @@
               <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
               <Component id="btnVisualizarNotificacoes" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="btAlterarSenha" min="-2" max="-2" attributes="0"/>
+              <Component id="btnAlterarSenha" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="131" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -58,7 +58,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVisualizarNotificacoesActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btAlterarSenha">
+    <Component class="javax.swing.JButton" name="btnAlterarSenha">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alterar Senha"/>
       </Properties>

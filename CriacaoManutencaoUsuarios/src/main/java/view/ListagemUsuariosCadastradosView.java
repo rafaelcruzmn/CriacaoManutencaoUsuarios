@@ -11,14 +11,14 @@ import javax.swing.JTable;
  *
  * @author Luis1
  */
-public class ListagemUsuariosView extends javax.swing.JFrame {
+public class ListagemUsuariosCadastradosView extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ListagemUsuariosView.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ListagemUsuariosCadastradosView.class.getName());
 
     /**
      * Creates new form ListagemUsuariosView
      */
-    public ListagemUsuariosView() {
+    public ListagemUsuariosCadastradosView() {
         initComponents();
     }
 
@@ -103,7 +103,7 @@ public class ListagemUsuariosView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ListagemUsuariosView().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ListagemUsuariosCadastradosView().setVisible(true));
     }
 
     public JScrollPane getScrListagemUsuarios() {

@@ -26,7 +26,6 @@ public class AutorizarNovoUsuarioPresenter{
     UsuarioRepository repository;
     Usuario usuarioLogado;
     List<Usuario> usuarios;
-    ListSelectionModel selectionModel;
     JTable tabelaUsuarios;
     
     AutorizarNovoUsuarioPresenter(Usuario usuarioLogado, UsuarioRepository repository){
@@ -35,7 +34,6 @@ public class AutorizarNovoUsuarioPresenter{
         this.usuarios = repository.getTodosNaoAutorizados();
         view = new AutorizarNovoUsuarioView();
         tabelaUsuarios = view.getTblAutorizarUsuarios();
-        this.selectionModel = tabelaUsuarios.getSelectionModel();
         configurarView();
     }
     private void configurarView(){

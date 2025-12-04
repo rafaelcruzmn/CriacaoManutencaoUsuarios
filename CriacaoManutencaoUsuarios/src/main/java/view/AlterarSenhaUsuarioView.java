@@ -37,7 +37,8 @@ public class AlterarSenhaUsuarioView extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
         btnAlterarSenha = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Alterar Senha");
 
         lblSenhaAtual.setText("Senha Atual:");
 

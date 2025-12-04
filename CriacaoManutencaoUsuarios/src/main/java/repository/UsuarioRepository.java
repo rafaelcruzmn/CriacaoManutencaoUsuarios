@@ -135,6 +135,37 @@ public class UsuarioRepository {
         return senha;
     }
     
+    public Usuario getUsuario(int id){
+        String sql = "SELECT * FROM usuarios WHERE id=?";
+        
+        Usuario usuario = null;
+        conn = conexao.getConexao();
+        
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, 1);
+            
+            try (ResultSet rs = pstmt.executeQuery()){
+                while(rs.next()){
+                    int idUsuario = rs.getInt("id");
+                    String nome = rs.getString("nome");
+                    String nomeDeUsuario = rs.getString("nomeDeUsuario");
+                    String senha = "...";
+                    TipoUsuario tipo = TipoUsuario.values()[rs.getInt("tipo")];
+                    boolean autorizado = true;
+                    LocalDate dataCadastro = rs.getObject("dataCadastro", LocalDate.class);
+                    
+                    usuario = new Usuario(Optional.of(id), nome, nomeDeUsuario, senha, tipo, autorizado, dataCadastro);
+                }
+            }
+        } catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        
+        return usuario;
+    }
+    
     public TipoUsuario getTipo(int id){
         String sql = "SELECT tipo FROM usuarios WHERE id=?";
         
