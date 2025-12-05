@@ -15,7 +15,7 @@ import service.ConexaoBancoService;
 public class CriacaoManutencaoUsuarios {
 
     public static void main(String[] args) {
-        ConexaoBancoService conexao = new ConexaoBancoService("jdbc:sqlite:usuarios.db");
+        ConexaoBancoService conexao = new ConexaoBancoService();
         UsuarioRepository repository = new UsuarioRepository(conexao);
         
         if (repository.getTamanho() == 0){

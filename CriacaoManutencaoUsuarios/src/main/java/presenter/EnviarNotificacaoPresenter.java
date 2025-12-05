@@ -33,8 +33,8 @@ public class EnviarNotificacaoPresenter {
         this.usuarioLogado = usuarioLogado;
         this.usuariosNotificados = usuariosNotificados;
         this.view = new EnviarNotificacaoView();
-        this.notificacaoRepository = new NotificacaoRepository(new ConexaoBancoService("jdbc:sqlite:usuarios.db"));
-        this.usuarioNotificacaoRepository = new UsuarioNotificacaoRepository(new ConexaoBancoService("jdbc:sqlite:usuarios.db"));
+        this.notificacaoRepository = new NotificacaoRepository(new ConexaoBancoService());
+        this.usuarioNotificacaoRepository = new UsuarioNotificacaoRepository(new ConexaoBancoService());
         
         configurarView();
     }

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
+import repository.NotificacaoRepository;
 import repository.UsuarioNotificacaoRepository;
 import repository.UsuarioRepository;
 import service.ConexaoBancoService;
@@ -92,7 +93,7 @@ public class PainelAdministradorPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    UsuarioNotificacaoRepository usuarioNotificacaoRepository = new UsuarioNotificacaoRepository(new ConexaoBancoService("jdbc:sqlite:usuarios.db"));
+                    UsuarioNotificacaoRepository usuarioNotificacaoRepository = new UsuarioNotificacaoRepository(new ConexaoBancoService());
                     
                     new ListagemNotificacoesPresenter(usuarioLogado, usuarioNotificacaoRepository.getNotificacoes(usuarioLogado.getId()), usuarioNotificacaoRepository);
                 } catch (Exception ex){
@@ -105,7 +106,8 @@ public class PainelAdministradorPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    new ConfirmacaoLimpezaSistemaPresenter(usuarioLogado, usuarioRepository);
+                    new ConfirmacaoLimpezaSistemaPresenter(usuarioLogado, usuarioRepository, new NotificacaoRepository(new ConexaoBancoService()), 
+                            new UsuarioNotificacaoRepository(new ConexaoBancoService()));
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }

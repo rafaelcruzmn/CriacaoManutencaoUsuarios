@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
+import repository.NotificacaoRepository;
+import repository.UsuarioNotificacaoRepository;
 import repository.UsuarioRepository;
 import view.ConfirmacaoLimpezaSistemaView;
 
@@ -17,12 +19,17 @@ import view.ConfirmacaoLimpezaSistemaView;
  */
 public class ConfirmacaoLimpezaSistemaPresenter {
     private ConfirmacaoLimpezaSistemaView view;
-    private UsuarioRepository repository;
+    private UsuarioRepository usuarioRepository;
+    private NotificacaoRepository notificacaoRepository;
+    private UsuarioNotificacaoRepository usuarioNotificacaoRepository;
     private Usuario usuarioLogado;
     
-    public ConfirmacaoLimpezaSistemaPresenter(Usuario usuarioLogado, UsuarioRepository repository){
+    public ConfirmacaoLimpezaSistemaPresenter(Usuario usuarioLogado, UsuarioRepository usuarioRepository, 
+            NotificacaoRepository notificacaoRepository, UsuarioNotificacaoRepository usuarioNotificacaoRepository){
         this.usuarioLogado = usuarioLogado;
-        this.repository = repository;
+        this.usuarioRepository = usuarioRepository;
+        this.notificacaoRepository = notificacaoRepository;
+        this.usuarioNotificacaoRepository = usuarioNotificacaoRepository;
         view = new ConfirmacaoLimpezaSistemaView();
         
         configurarView();
@@ -46,7 +53,9 @@ public class ConfirmacaoLimpezaSistemaPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    repository.limparSistema();
+                    usuarioRepository.limparSistema();
+                    notificacaoRepository.limparSistema();
+                    usuarioNotificacaoRepository.limparSistema();
                     System.exit(0);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());

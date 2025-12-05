@@ -15,11 +15,10 @@ import java.sql.Statement;
  * @author Luis1
  */
 public class ConexaoBancoService {
-    private final String urlBD;
+    private final String urlBD = "jdbc:sqlite:usuarios.db";
     
     
-    public ConexaoBancoService(String urlBD){
-        this.urlBD = urlBD;
+    public ConexaoBancoService(){
         criarTabelaUsuario();
         criarTabelaNotificacao();
         criarTabelaUsuarioNotificacao();

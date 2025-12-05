@@ -64,7 +64,7 @@ public class UsuarioNotificacaoRepository {
                         String mensagem = rs2.getString("mensagem");
                         LocalDate dataEnvio = rs2.getObject("dataEnvio", LocalDate.class);
                         int idRemetente = rs2.getInt("idRemetente");
-                        Usuario remetente = new UsuarioRepository(new ConexaoBancoService("jdbc:sqlite:usuarios.db")).getUsuario(idRemetente);
+                        Usuario remetente = new UsuarioRepository(new ConexaoBancoService()).getUsuario(idRemetente);
                         
                         Notificacao notificacao = new Notificacao(Optional.of(idNotificacao), titulo, mensagem, remetente, new ArrayList<>(), dataEnvio);
                         notificacoes.add(notificacao);
@@ -114,6 +114,19 @@ public class UsuarioNotificacaoRepository {
 
             conn.close();
         } catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+    }
+    
+    public void limparSistema(){
+        String sql = "DELETE FROM usuariosNotificacoes";
+       
+        conn = conexao.getConexao();
+       
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+        } catch (SQLException ex){
             System.err.println(ex.getMessage());
         }
     }

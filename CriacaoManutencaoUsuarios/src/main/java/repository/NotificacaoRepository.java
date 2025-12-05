@@ -85,5 +85,18 @@ public class NotificacaoRepository {
                 }
             }
         }
-    } 
+    }
+    
+    public void limparSistema(){
+        String sql = "DELETE FROM notificacoes";
+       
+        conn = conexao.getConexao();
+       
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+        } catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+    }
 }
