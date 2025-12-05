@@ -101,6 +101,17 @@ public class PainelAdministradorPresenter {
             }
         });
         
+        view.getBtnLimparSistema().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    new ConfirmacaoLimpezaSistemaPresenter(usuarioLogado, usuarioRepository);
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
+                }
+            }
+        });
+        
         view.setVisible(true);
     }
 }

@@ -333,9 +333,26 @@ public List<Usuario> getTodosNaoAutorizados(){
     String sql = "DELETE FROM usuarios WHERE id = ?";
     conn = conexao.getConexao();
     
-    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    try {
+        PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, usuarioId);
         pstmt.executeUpdate();
+        
+    } catch (SQLException ex){
+            System.err.println(ex.getMessage());
         }
-    } 
+    }
+   
+   public void limparSistema(){
+        String sql = "DELETE FROM usuarios";
+       
+        conn = conexao.getConexao();
+       
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+        } catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+    }  
 }

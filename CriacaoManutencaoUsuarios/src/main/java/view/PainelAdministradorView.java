@@ -62,7 +62,7 @@ public class PainelAdministradorView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnManterUsuarios)
                     .addComponent(btnAlterarSenha)
@@ -73,12 +73,12 @@ public class PainelAdministradorView extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btnLimparSistema)
                         .addComponent(btnVisualizarNotificacoes)))
-                .addGap(17, 17, 17))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnManterUsuarios)
                     .addComponent(btnAutorizarNovoUsuario))
@@ -90,7 +90,7 @@ public class PainelAdministradorView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimparSistema)
                     .addComponent(btnAlterarSenha))
-                .addGap(14, 14, 14))
+                .addGap(30, 30, 30))
         );
 
         pack();
