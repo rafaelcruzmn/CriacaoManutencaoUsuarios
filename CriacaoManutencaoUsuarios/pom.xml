@@ -24,6 +24,13 @@
                 <artifactId>validadorsenha</artifactId>
                 <version>master-SNAPSHOT</version>
             </dependency>
+            
+            <dependency>
+                <groupId>com.github.rafaelcruzmn</groupId>
+                <artifactId>LogsJava</artifactId>
+                <version>v1.0.2</version>
+            </dependency>
+            
         </dependencies>
         <repositories>
             <repository>

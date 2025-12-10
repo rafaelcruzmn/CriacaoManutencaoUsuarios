@@ -8,7 +8,7 @@ package presenter;
  *
  * @author Rafael
  */
-
+import pss.LogService;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.swing.JTable;
@@ -22,11 +22,11 @@ import view.AutorizarNovoUsuarioView;
 
 
 public class AutorizarNovoUsuarioPresenter{
-    AutorizarNovoUsuarioView view;
-    UsuarioRepository repository;
-    Usuario usuarioLogado;
-    List<Usuario> usuarios;
-    JTable tabelaUsuarios;
+    private AutorizarNovoUsuarioView view;
+    private UsuarioRepository repository;
+    private Usuario usuarioLogado;
+    private List<Usuario> usuarios;
+    private JTable tabelaUsuarios;
     
     AutorizarNovoUsuarioPresenter(Usuario usuarioLogado, UsuarioRepository repository){
         this.repository = repository;
@@ -90,11 +90,13 @@ private void confirmarAlteracoes() throws Exception {
         
         if (autorizar) {
             repository.autorizarUsuario(usuarioId);
+            LogService.logOperacaoSucesso("CADASTRO_USUARIO_AUTORIZADO",usuario.getNome(),usuarioLogado.getNomeDeUsuario());
             System.out.println("Usuário autorizado: " + usuario.getNome());
             alteracaoRealizada = true;
             
         } else if (recusar) {
             repository.recusarUsuario(usuarioId);
+            LogService.logOperacaoFalha("CADASTRO_USUARIO_RECUSADO",usuario.getNome(),usuarioLogado.getNomeDeUsuario(),"Cadastro Recusado");
             System.out.println("Usuário recusado e excluído: " + usuario.getNome());
             alteracaoRealizada = true;
         }

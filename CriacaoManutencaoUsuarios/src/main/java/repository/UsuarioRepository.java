@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Optional;
 import service.ConexaoBancoService;
+import pss.LogService;
 /**
  *
  * @author Luis1
@@ -160,9 +161,9 @@ public class UsuarioRepository {
                 }
             }
         } catch (SQLException ex){
+            LogService.logOperacaoFalha("LOGIN_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario(),"Falha no Login");
             System.err.println(ex.getMessage());
         }
-        
         return usuario;
     }
     
@@ -315,6 +316,7 @@ public List<Usuario> getTodosNaoAutorizados(){
             }
             conn.close();
         } catch (SQLException ex){
+            LogService.logOperacaoFalha("LOGIN_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario(),"Falha no Login");
             System.err.println(ex.getMessage());
         } 
         return usuario;

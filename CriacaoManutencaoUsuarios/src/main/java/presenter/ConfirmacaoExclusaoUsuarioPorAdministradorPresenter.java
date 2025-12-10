@@ -4,6 +4,7 @@
  */
 package presenter;
 
+import pss.LogService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -19,10 +20,12 @@ public class ConfirmacaoExclusaoUsuarioPorAdministradorPresenter {
     private Usuario usuarioSelecionado;
     private UsuarioRepository repository;
     private ConfirmacaoExclusaoUsuarioPorAdministradorView view;
+    private Usuario usuarioLogado;
     
-    public ConfirmacaoExclusaoUsuarioPorAdministradorPresenter(Usuario usuarioSelecionado, UsuarioRepository repository){
+    public ConfirmacaoExclusaoUsuarioPorAdministradorPresenter(Usuario usuarioLogado, Usuario usuarioSelecionado, UsuarioRepository repository){
         this.usuarioSelecionado = usuarioSelecionado;
         this.repository = repository;
+        this.usuarioLogado = usuarioLogado;
         view = new ConfirmacaoExclusaoUsuarioPorAdministradorView();
         
         configurarView();
@@ -46,10 +49,12 @@ public class ConfirmacaoExclusaoUsuarioPorAdministradorPresenter {
         view.getBtnConfirmar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                try {
+                try {            
+                    LogService.logOperacaoSucesso("EXCLUSAO_USUARIO_POR_ADMINISTRADOR",usuarioSelecionado.getNome(),usuarioLogado.getNomeDeUsuario());
                     repository.excluir(usuarioSelecionado);
                     voltar();
                 } catch (Exception ex){
+                    LogService.logOperacaoFalha("EXCLUSAO_USUARIO_POR_ADMINISTRADOR",usuarioSelecionado.getNome(),usuarioLogado.getNomeDeUsuario(),"Erro na exclusao do usuario");
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }
             }

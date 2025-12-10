@@ -4,6 +4,7 @@
  */
 package presenter;
 
+import pss.LogService;
 import com.pss.senha.validacao.ValidadorSenha;
 import enumerator.TipoUsuario;
 import java.awt.event.ActionEvent;
@@ -22,15 +23,17 @@ import view.CadastroPorAdministradorView;
  */
 public class CadastroPorAdministradorPresenter {
     private Usuario usuario;
+    private Usuario usuarioLogado;
     private UsuarioRepository repository;
     private CadastroPorAdministradorView view;
     private ValidadorSenha validadorSenha;
     
-    public CadastroPorAdministradorPresenter(UsuarioRepository repository){
+    public CadastroPorAdministradorPresenter(Usuario usuarioLogado, UsuarioRepository repository){
         if (repository == null){
             throw new RuntimeException("Repository inválida!");
         }
         
+        this.usuarioLogado = usuarioLogado;
         this.repository = repository;
         this.view = new CadastroPorAdministradorView();
         this.validadorSenha = new ValidadorSenha();
@@ -87,12 +90,14 @@ public class CadastroPorAdministradorPresenter {
         String mensagem = "";
         
         if (violacoesSenha.isEmpty()){
+            LogService.logOperacaoSucesso("CADASTRO_USUARIO_POR_ADMINISTRADOR",usuario.getNome(),usuarioLogado.getNomeDeUsuario());
             repository.inserirUsuario(usuario);
             limparTela();
         } else{
             for (String violacao: violacoesSenha){
                 mensagem += violacao+"\n";
             }
+            LogService.logOperacaoFalha("CADASTRO_USUARIO_POR_ADMINISTRADOR",usuario.getNome(),usuarioLogado.getNomeDeUsuario(),"Violacoes na senha");
             JOptionPane.showMessageDialog(view, mensagem);
         }
     }

@@ -4,6 +4,7 @@
  */
 package presenter;
 
+import pss.LogService;
 import enumerator.TipoUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +20,7 @@ import view.AutenticacaoUsuarioView;
  */
 public class AutenticacaoUsuarioPresenter {
     AutenticacaoUsuarioView view;
-    //String nomeDeUsuario;
+    String nomeDeUsuario;
     //String senha;
     UsuarioRepository repository;
     
@@ -27,7 +28,7 @@ public class AutenticacaoUsuarioPresenter {
         if (repository == null){
             throw new RuntimeException("Repository inválida!\n");
         }
-        
+
         this.repository = repository;
         this.view = new AutenticacaoUsuarioView();
         configuraView();   
@@ -53,6 +54,7 @@ public class AutenticacaoUsuarioPresenter {
                 try{
                     autenticarUsuario();
                 } catch(Exception ex){
+                    LogService.logOperacaoFalha("LOGIN_USUARIO",nomeDeUsuario = view.getTxtNomeDeUsuario().getText(),nomeDeUsuario = view.getTxtNomeDeUsuario().getText(),"Falha no Login");
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }
             }
@@ -69,18 +71,25 @@ public class AutenticacaoUsuarioPresenter {
         
 
         if (usuario != null){
-            
             view.dispose();
             tipo = usuario.getTipo();
+        }
+        else{
+            LogService.logOperacaoFalha("LOGIN_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario(),"Falha no Login");
         }
         
         if (tipo != null){
             if (tipo.getValor() == 2){
                 new PainelUsuarioComumPresenter(usuario, repository);
+                LogService.logOperacaoSucesso("LOGIN_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario());
             }
             if (tipo.getValor() == 0 || tipo.getValor() == 1){
                 new PainelAdministradorPresenter(usuario, repository);
+                LogService.logOperacaoSucesso("LOGIN_ADM",usuario.getNome(),usuario.getNomeDeUsuario());
             }
+        }
+        else{
+            LogService.logOperacaoFalha("LOGIN_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario(),"Falha no Login");
         }
     }
     

@@ -35,7 +35,7 @@ public class ManterUsuariosPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    new CadastroPorAdministradorPresenter(repository);
+                    new CadastroPorAdministradorPresenter(usuarioLogado, repository);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }

@@ -12,6 +12,7 @@ import repository.NotificacaoRepository;
 import repository.UsuarioNotificacaoRepository;
 import repository.UsuarioRepository;
 import view.ConfirmacaoLimpezaSistemaView;
+import pss.LogService;
 
 /**
  *
@@ -53,11 +54,13 @@ public class ConfirmacaoLimpezaSistemaPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
+                    LogService.logOperacaoSucesso("EXCLUSAO_DO_SISTEMA_ADMINISTRADOR",usuarioLogado.getNome(),usuarioLogado.getNomeDeUsuario());
                     usuarioRepository.limparSistema();
                     notificacaoRepository.limparSistema();
                     usuarioNotificacaoRepository.limparSistema();
                     System.exit(0);
                 } catch (Exception ex){
+                    LogService.logOperacaoFalha("EXCLUSAO_DO_SISTEMA_ADMINISTRADOR",usuarioLogado.getNome(),usuarioLogado.getNomeDeUsuario(),"Erro na exclusao do sistema");
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }
             }

@@ -4,6 +4,7 @@
  */
 package presenter;
 
+import pss.LogService;
 import com.pss.senha.validacao.ValidadorSenha;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,8 +25,6 @@ public class AlterarSenhaPorUsuarioPresenter{
     private Usuario usuarioLogado;
     private AlterarSenhaUsuarioView view;
     private UsuarioRepository repository;
-    private ValidadorSenha validadorSenha;
-
     
     public AlterarSenhaPorUsuarioPresenter(Usuario usuarioLogado, UsuarioRepository repository){
     this.usuarioLogado = usuarioLogado;
@@ -82,16 +81,19 @@ public class AlterarSenhaPorUsuarioPresenter{
         for (String erro : erros) {
             sb.append("• ").append(erro).append("\n");
         }
+        LogService.logOperacaoFalha("ALTERACAO_SENHA",usuarioLogado.getNome(),usuarioLogado.getNomeDeUsuario(),"Senha invalida");
         JOptionPane.showMessageDialog(view, sb.toString());
         return;
     }
 
     if(senhaAtual.equals(senhaDB) && confirmarNovaSenha.equals(senhaNova)){
+        LogService.logOperacaoSucesso("ALTERACAO_SENHA",usuarioLogado.getNome(),usuarioLogado.getNomeDeUsuario());
         repository.alterarSenha(usuarioLogado, senhaNova);
         JOptionPane.showMessageDialog(view, "Senha alterada com sucesso!"); 
         voltar();
     }else{
-         JOptionPane.showMessageDialog(view, "Problema com as senhas!");
+        LogService.logOperacaoFalha("ALTERACAO_SENHA",usuarioLogado.getNome(),usuarioLogado.getNomeDeUsuario(),"Senha invalida");
+        JOptionPane.showMessageDialog(view, "Problema com as senhas!");
     }      
   }
 }

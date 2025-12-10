@@ -15,6 +15,7 @@ import view.AutoCadastroView;
 import com.pss.senha.validacao.ValidadorSenha;
 import java.util.List;
 import java.util.Optional;
+import pss.LogService;
 
 /**
  *
@@ -82,12 +83,14 @@ public class AutoCadastroPresenter {
         String mensagem = "";
         
         if (violacoesSenha.isEmpty()){
+            LogService.logOperacaoSucesso("AUTO_CADASTRO_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario());
             repository.inserirUsuario(usuario);
             limparTela();
         } else{
             for (String violacao: violacoesSenha){
                 mensagem += violacao+"\n";
             }
+            LogService.logOperacaoFalha("AUTO_CADASTRO_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario(),"Violacoes na senha");
             JOptionPane.showMessageDialog(view, mensagem);
         }
     }

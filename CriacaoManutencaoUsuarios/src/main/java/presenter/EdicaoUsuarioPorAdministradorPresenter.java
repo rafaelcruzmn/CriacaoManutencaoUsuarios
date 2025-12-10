@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
+import pss.LogService;
 import repository.UsuarioRepository;
 import view.EdicaoUsuarioPorAdministradorView;
 
@@ -74,6 +75,7 @@ public class EdicaoUsuarioPorAdministradorPresenter {
                 try {
                     salvar();
                 } catch (Exception ex){
+                    LogService.logOperacaoFalha("EDICAO_TIPO_FEITO_POR_ADMINISTRADOR",usuarioSelecionado.getNome(),usuarioLogado.getNomeDeUsuario(),"Erro na edicao do usuario");
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }
             }
@@ -87,7 +89,9 @@ public class EdicaoUsuarioPorAdministradorPresenter {
         
         if("USUARIO".equals(view.getBgTipo().getSelection().getActionCommand())){
             novoTipo = TipoUsuario.USUARIOCOMUM;
+            LogService.logOperacaoSucesso("EDICAO_TIPO_FEITO_POR_ADMINISTRADOR_ADM -> USUARIO_COMUM",usuarioSelecionado.getNome(),usuarioLogado.getNomeDeUsuario());
         } else{
+            LogService.logOperacaoSucesso("EDICAO_TIPO_FEITO_POR_ADMINISTRADOR_USUARIO_COMUM -> ADM",usuarioSelecionado.getNome(),usuarioLogado.getNomeDeUsuario());
             novoTipo = TipoUsuario.ADMINSEC;
         }
         
