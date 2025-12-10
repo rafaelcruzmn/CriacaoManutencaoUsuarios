@@ -12,6 +12,7 @@ import java.util.Optional;
 import javax.swing.JOptionPane;
 import model.Notificacao;
 import model.Usuario;
+import pss.LogService;
 import repository.NotificacaoRepository;
 import repository.UsuarioNotificacaoRepository;
 import service.ConexaoBancoService;
@@ -71,9 +72,20 @@ public class EnviarNotificacaoPresenter {
         String titulo = view.getTxtTitulo().getText();
         String mensagem = view.getTxtAreaMensagem().getText();
         
+        try{
         this.notificacao = new Notificacao(Optional.empty(), titulo, mensagem, usuarioLogado, usuariosNotificados, LocalDate.now());
+        for (Usuario usuarioDestino : usuariosNotificados){
+            LogService.logOperacaoSucesso("ENVIO_NOTIFICACAO",usuarioDestino.getNome(),usuarioLogado.getNomeDeUsuario());
+        }     
         
         notificacaoRepository.inserirNotificacao(notificacao);
         view.dispose();
     }
+     catch(Exception ex){
+         for (Usuario usuarioDestino : usuariosNotificados) {
+            LogService.logOperacaoFalha("ENVIO_NOTIFICACAO",usuarioDestino.getNome(),usuarioLogado.getNomeDeUsuario(),"Falha ao enviar notificação: ");
+        }
+        throw new RuntimeException("Erro ao enviar notificação");
+    }
+  }
 }

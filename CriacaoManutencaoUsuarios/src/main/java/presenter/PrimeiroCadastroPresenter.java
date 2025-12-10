@@ -13,6 +13,7 @@ import enumerator.TipoUsuario;
 import java.util.List;
 import java.util.Optional;
 import model.Usuario;
+import pss.LogService;
 import repository.UsuarioRepository;
 import view.PrimeiroCadastroView;
 
@@ -67,6 +68,7 @@ public class PrimeiroCadastroPresenter {
         String mensagem = "";
         
         if (violacoesSenha.isEmpty()){
+            LogService.logOperacaoSucesso("PRIMEIRO_CADASTRO_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario());
             repository.inserirUsuario(usuario);
             view.dispose();
             new AutenticacaoUsuarioPresenter(repository);
@@ -76,6 +78,7 @@ public class PrimeiroCadastroPresenter {
                 mensagem += violacao+"\n";
                 limparTela();
             }
+            LogService.logOperacaoFalha("PRIMEIRO_CADASTRO_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario(),"Violacoes na senha");
             JOptionPane.showMessageDialog(view, mensagem);
         }
     }

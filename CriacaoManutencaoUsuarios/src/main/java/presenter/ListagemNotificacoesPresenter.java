@@ -11,6 +11,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import model.Notificacao;
 import model.Usuario;
+import pss.LogService;
 import repository.UsuarioNotificacaoRepository;
 import tableModel.NotificacoesDoUsuarioTableModel;
 import view.ListagemNotificacoesView;
@@ -69,6 +70,7 @@ public class ListagemNotificacoesPresenter {
     }
     
     private void lerNotificacao(int idUsuario, int idNotificacao){
+        LogService.logOperacaoSucesso("LEITURA_NOTIFICAO",usuarioLogado.getNome(),usuarioLogado.getNomeDeUsuario());
         usuarioNotificacaoRepository.lerNotificacao(idUsuario, idNotificacao);
     }
 }
