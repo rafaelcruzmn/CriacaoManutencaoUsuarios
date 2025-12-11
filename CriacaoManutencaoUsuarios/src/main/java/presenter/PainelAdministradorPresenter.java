@@ -113,6 +113,16 @@ public class PainelAdministradorPresenter {
                 }
             }
         });
+        view.getBtnConfiguracao().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    ConfigurarLogPresenter p = new ConfigurarLogPresenter();
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
+                }
+            }
+        });
         
         view.setVisible(true);
     }

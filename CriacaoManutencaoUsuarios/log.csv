@@ -18,3 +18,6 @@
 "ENVIO_NOTIFICACAO: teste1, (10/12/2025, 16:33:21, admin01)"
 "LOGIN_ADM: teste1, (10/12/2025, 16:33:37, teste1)"
 "LEITURA_NOTIFICAO: teste1, (10/12/2025, 16:33:57, teste1)"
+"LOGIN_ADM: admin01, (10/12/2025, 23:55:00, admin01)"
+"LOGIN_ADM: admin01, (10/12/2025, 23:56:49, admin01)"
+"ALTERACAO_SENHA: admin01, (10/12/2025, 23:57:07, admin01)"

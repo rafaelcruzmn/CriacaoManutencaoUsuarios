@@ -36,6 +36,7 @@ public class PainelAdministradorView extends javax.swing.JFrame {
         btnVisualizarNotificacoes = new javax.swing.JButton();
         btnLimparSistema = new javax.swing.JButton();
         btnEnviarNotificacao = new javax.swing.JButton();
+        btnConfiguracao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Painel de Administrador");
@@ -57,6 +58,8 @@ public class PainelAdministradorView extends javax.swing.JFrame {
 
         btnEnviarNotificacao.setText("Enviar Notificação");
 
+        btnConfiguracao.setText("jButton1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,6 +77,10 @@ public class PainelAdministradorView extends javax.swing.JFrame {
                         .addComponent(btnLimparSistema)
                         .addComponent(btnVisualizarNotificacoes)))
                 .addGap(18, 18, 18))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(132, 132, 132)
+                .addComponent(btnConfiguracao)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,7 +93,9 @@ public class PainelAdministradorView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVisualizarNotificacoes)
                     .addComponent(btnEnviarNotificacao))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(btnConfiguracao)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimparSistema)
                     .addComponent(btnAlterarSenha))
@@ -140,6 +149,10 @@ public class PainelAdministradorView extends javax.swing.JFrame {
     public JButton getBtnAlterarSenha() {
         return btnAlterarSenha;
     }
+    
+    public JButton getBtnConfiguracao() {
+        return btnConfiguracao;
+    }
 
     public JButton getBtnLimparSistema() {
         return btnLimparSistema;
@@ -151,6 +164,7 @@ public class PainelAdministradorView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarSenha;
     private javax.swing.JButton btnAutorizarNovoUsuario;
+    private javax.swing.JButton btnConfiguracao;
     private javax.swing.JButton btnEnviarNotificacao;
     private javax.swing.JButton btnLimparSistema;
     private javax.swing.JButton btnManterUsuarios;
