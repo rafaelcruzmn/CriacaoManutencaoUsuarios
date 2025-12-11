@@ -16,6 +16,7 @@ import model.Usuario;
 import pss.LogService;
 import repository.UsuarioRepository;
 import view.PrimeiroCadastroView;
+import repository.LogRepository;
 
 /**
  *
@@ -26,13 +27,15 @@ public class PrimeiroCadastroPresenter {
     private Usuario usuario;
     private UsuarioRepository repository;
     private ValidadorSenha validadorSenha;
+    private LogRepository logRepository;
     
-    public PrimeiroCadastroPresenter(UsuarioRepository repository){
+    public PrimeiroCadastroPresenter(UsuarioRepository repository, LogRepository logRepository){
         if (repository == null){
             throw new RuntimeException("Repository inválida!");
         }
         
         this.repository = repository;
+        this.logRepository = logRepository;
         this.view = new PrimeiroCadastroView();
         this.validadorSenha = new ValidadorSenha();
         configuraView();
@@ -71,7 +74,7 @@ public class PrimeiroCadastroPresenter {
             LogService.logOperacaoSucesso("PRIMEIRO_CADASTRO_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario());
             repository.inserirUsuario(usuario);
             view.dispose();
-            new AutenticacaoUsuarioPresenter(repository);
+            new AutenticacaoUsuarioPresenter(repository,logRepository);
 
         } else{
             for (String violacao: violacoesSenha){

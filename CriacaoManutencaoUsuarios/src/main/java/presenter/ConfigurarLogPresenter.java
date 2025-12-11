@@ -9,59 +9,104 @@ package presenter;
  * @author Rafael
  */
 
-
-import javax.swing.JOptionPane;
 import pss.LogConfiguracao;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import repository.LogRepository;
 import view.ConfigurarLogView;
 
-
 public class ConfigurarLogPresenter {
+
+    private ConfigurarLogView view;
+    private final LogRepository repository;
+
+    public ConfigurarLogPresenter(LogRepository repository) {
+        
+        this.view = new ConfigurarLogView(); 
+        this.repository = repository;
+        this.carregarConfiguracaoAtual();
+        configurarView();
+    }
     
-    private final ConfigurarLogView view;
-
-    public ConfigurarLogPresenter() {
-        this.view = new ConfigurarLogView();
-
-        configurarListeners();
-        carregarConfiguracao();
-
-        this.view.setVisible(true);
+    public ConfigurarLogPresenter(LogRepository repository,String x) {
+        this.repository = repository;
+        this.carregarConfiguracaoIni();
     }
+    
 
-    private void configurarListeners() {
-        view.getBtnSalvar().addActionListener(e -> salvar());
+    private void configurarView(){
+        view.setVisible(false);
+        
+        view.getBtnVoltar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    voltar();
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
+                }
+            }
+        });
+        view.getBtnSalvar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    salvarConfiguracao();
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
+                }
+            }
+        });
+        
+        view.setVisible(true);
     }
-
-    private void carregarConfiguracao() {
-        String tipo = LogConfiguracao.getTipoLog();
-
-        if (tipo == null || tipo.isBlank()) {
-            LogConfiguracao.setTipoLog("csv");
-            tipo = "csv";
-        }
-
-        if (tipo.equalsIgnoreCase("csv")) {
-            view.getRadCSV().setSelected(true);
+ 
+    private void carregarConfiguracaoIni() {
+        
+        int tipoAtual = repository.getTipoLog();
+        if (tipoAtual == LogRepository.TIPO_JSON){
+            LogConfiguracao.setTipoLog(repository.getTipoLog());
         } else {
+            LogConfiguracao.setTipoLog(repository.getTipoLog());
+        }      
+        System.out.println("Configuração de log carregada: " + tipoAtual);
+    }
+    
+    private void carregarConfiguracaoAtual() {
+        int tipoAtual = repository.getTipoLog();
+        
+        if (tipoAtual == LogRepository.TIPO_JSON){
+            LogConfiguracao.setTipoLog(repository.getTipoLog());
             view.getRadJSON().setSelected(true);
-        }
+        } else {
+            LogConfiguracao.setTipoLog(repository.getTipoLog());
+            view.getRadCSV().setSelected(true);
+        }      
+        System.out.println("Configuração de log carregada: " + tipoAtual);
     }
 
-    private void salvar() {
+    private void salvarConfiguracao() {
+        int novoTipo;
+        
         if (view.getRadCSV().isSelected()) {
-            LogConfiguracao.setTipoLog("csv");
+            novoTipo = LogRepository.TIPO_CSV;
+            LogConfiguracao.setTipoLog(novoTipo);
         } else if (view.getRadJSON().isSelected()) {
-            LogConfiguracao.setTipoLog("json");
+            novoTipo = LogRepository.TIPO_JSON;
+            LogConfiguracao.setTipoLog(novoTipo);
         } else {
-            JOptionPane.showMessageDialog(view, "Selecione um formato.");
+            JOptionPane.showMessageDialog(view, "Selecione o formato de log (CSV ou JSON).","Erro de Seleção", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
+        repository.alterarTipoLog(novoTipo);
 
-        JOptionPane.showMessageDialog(view, "Configuração salva com sucesso!");
-        view.dispose();
+        String formato = (novoTipo == LogRepository.TIPO_CSV) ? "CSV" : "JSON";
+        JOptionPane.showMessageDialog(view, "Configuração de Log salva com sucesso! Formato: " + formato,"Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public ConfigurarLogView getView() {
-        return view;
+    private void voltar(){
+        view.dispose();
     }
 }

@@ -28,7 +28,7 @@
             <dependency>
                 <groupId>com.github.rafaelcruzmn</groupId>
                 <artifactId>LogsJava</artifactId>
-                <version>v1.0.2</version>
+                <version>v1.0.5</version>
             </dependency>
             
         </dependencies>

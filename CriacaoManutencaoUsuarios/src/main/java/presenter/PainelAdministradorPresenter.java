@@ -13,6 +13,7 @@ import repository.UsuarioNotificacaoRepository;
 import repository.UsuarioRepository;
 import service.ConexaoBancoService;
 import view.PainelAdministradorView;
+import repository.LogRepository;
 
 /**
  *
@@ -21,9 +22,10 @@ import view.PainelAdministradorView;
 public class PainelAdministradorPresenter {
     private Usuario usuarioLogado;
     private UsuarioRepository usuarioRepository;
+    private LogRepository logRepository;
     private PainelAdministradorView view;
     
-    public PainelAdministradorPresenter(Usuario usuarioLogado, UsuarioRepository usuarioRepository){
+    public PainelAdministradorPresenter(Usuario usuarioLogado, UsuarioRepository usuarioRepository, LogRepository logRepository){
         if (usuarioRepository == null){
             throw new RuntimeException("Repository inválida!\n");
         }
@@ -32,8 +34,13 @@ public class PainelAdministradorPresenter {
             throw new RuntimeException("Usuário inválido!\n");
         }
         
+        if (logRepository == null){
+            throw new RuntimeException("Repository inválida!\n");
+        }
+        
         this.usuarioLogado = usuarioLogado;
         this.usuarioRepository = usuarioRepository;
+        this.logRepository = logRepository;
         view = new PainelAdministradorView();
         configurarView();
     }
@@ -117,7 +124,7 @@ public class PainelAdministradorPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    ConfigurarLogPresenter p = new ConfigurarLogPresenter();
+                    new ConfigurarLogPresenter(logRepository);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }

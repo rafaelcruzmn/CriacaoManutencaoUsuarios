@@ -1,2 +1,18 @@
-{"log":"ALTERACAO_SENHA: admin01, (10/12/2025, 23:55:21, admin01)"}
-{"log":"LOGIN_ADM: admin01, (10/12/2025, 23:56:14, admin01)"}
+{"log":"LOGIN_ADM: admin01, (11/12/2025, 02:42:52, admin01)"}
+{"log":"ENVIO_NOTIFICACAO: admin01, (11/12/2025, 02:42:59, admin01)"}
+{"log":"ENVIO_NOTIFICACAO: teste1, (11/12/2025, 02:42:59, admin01)"}
+{"log":"LOGIN_ADM: admin01, (11/12/2025, 03:00:48, admin01)"}
+{"log":"Ocorreu a falha \"Falha no Login\" ao realizar a operação LOGIN_USUARIO para o usuário admin01, (11/12/2025, 03:16:27, admin01)."}
+{"log":"LOGIN_ADM: admin01, (11/12/2025, 03:16:40, admin01)"}
+{"log":"LOGIN_ADM: admin01, (11/12/2025, 03:17:24, admin01)"}
+{"log":"ENVIO_NOTIFICACAO: teste1, (11/12/2025, 03:17:35, admin01)"}
+{"log":"ENVIO_NOTIFICACAO: teste200, (11/12/2025, 03:17:35, admin01)"}
+{"log":"LOGIN_ADM: admin01, (11/12/2025, 03:26:45, admin01)"}
+{"log":"LOGIN_ADM: admin01, (11/12/2025, 03:34:40, admin01)"}
+{"log":"LOGIN_ADM: admin01, (11/12/2025, 03:48:08, admin01)"}
+{"log":"LOGIN_ADM: admin01, (11/12/2025, 03:48:29, admin01)"}
+{"log":"LOGIN_ADM: admin01, (11/12/2025, 03:49:14, admin01)"}
+{"log":"Ocorreu a falha \"Falha no Login\" ao realizar a operação LOGIN_USUARIO para o usuário admin, (11/12/2025, 03:49:34, admin)."}
+{"log":"Ocorreu a falha \"Falha no Login\" ao realizar a operação LOGIN_USUARIO para o usuário admin, (11/12/2025, 03:49:37, admin)."}
+{"log":"Ocorreu a falha \"Falha no Login\" ao realizar a operação LOGIN_USUARIO para o usuário admin01, (11/12/2025, 03:49:42, admin01)."}
+{"log":"LOGIN_ADM: admin01, (11/12/2025, 03:49:46, admin01)"}

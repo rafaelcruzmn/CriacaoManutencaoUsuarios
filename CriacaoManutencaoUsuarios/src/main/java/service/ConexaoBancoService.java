@@ -22,6 +22,7 @@ public class ConexaoBancoService {
         criarTabelaUsuario();
         criarTabelaNotificacao();
         criarTabelaUsuarioNotificacao();
+        criarConfiguracaoLog();
     }
 
     public Connection getConexao(){
@@ -34,6 +35,24 @@ public class ConexaoBancoService {
         
         return conn;
     }  
+    
+    private void criarConfiguracaoLog(){
+        String sql = "CREATE TABLE IF NOT EXISTS ConfigLog ("
+                        + "id INTEGER PRIMARY KEY, "
+                        + "tipo INTEGER NOT NULL, "
+                        + ");";
+        
+        try (Connection conn = DriverManager.getConnection(urlBD)){
+            
+            if (conn != null) {           
+                Statement stmt = conn.createStatement();
+                stmt.execute(sql);
+            }
+            
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }  
+   }
     
     private void criarTabelaUsuario(){
         String sql = "CREATE TABLE IF NOT EXISTS usuarios ("

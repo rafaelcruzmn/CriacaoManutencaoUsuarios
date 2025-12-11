@@ -77,6 +77,11 @@ public class EdicaoUsuarioPorAdministradorView extends javax.swing.JFrame {
         bgTipo.add(rdTipoUsuario);
         rdTipoUsuario.setText("Usuário");
         rdTipoUsuario.setActionCommand("USUARIO");
+        rdTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdTipoUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,6 +160,10 @@ public class EdicaoUsuarioPorAdministradorView extends javax.swing.JFrame {
     private void rdTipoAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTipoAdminActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdTipoAdminActionPerformed
+
+    private void rdTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTipoUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdTipoUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

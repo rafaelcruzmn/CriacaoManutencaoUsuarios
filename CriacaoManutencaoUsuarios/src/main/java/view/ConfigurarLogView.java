@@ -18,11 +18,6 @@ public class ConfigurarLogView extends javax.swing.JFrame {
      * Creates new form ConfigurarLogView
      */
     public ConfigurarLogView() {
-        
-        ButtonGroup group = new ButtonGroup();
-        group.add(radCSV);
-        group.add(radJSON);
-        
         initComponents();
     }
 
@@ -35,6 +30,7 @@ public class ConfigurarLogView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bgTipo = new javax.swing.ButtonGroup();
         radCSV = new javax.swing.JRadioButton();
         radJSON = new javax.swing.JRadioButton();
         btnVoltar = new javax.swing.JButton();
@@ -42,9 +38,21 @@ public class ConfigurarLogView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        bgTipo.add(radCSV);
         radCSV.setText("CSV");
+        radCSV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radCSVActionPerformed(evt);
+            }
+        });
 
+        bgTipo.add(radJSON);
         radJSON.setText("JSON");
+        radJSON.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radJSONActionPerformed(evt);
+            }
+        });
 
         btnVoltar.setText("Voltar");
 
@@ -83,6 +91,14 @@ public class ConfigurarLogView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void radCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radCSVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radCSVActionPerformed
+
+    private void radJSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radJSONActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radJSONActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,6 +152,7 @@ public class ConfigurarLogView extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgTipo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JRadioButton radCSV;

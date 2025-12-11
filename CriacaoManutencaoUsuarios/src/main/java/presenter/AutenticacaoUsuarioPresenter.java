@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import model.Usuario;
 import repository.UsuarioRepository;
 import view.AutenticacaoUsuarioView;
+import repository.LogRepository;
 
 /**
  *
@@ -23,13 +24,15 @@ public class AutenticacaoUsuarioPresenter {
     String nomeDeUsuario;
     //String senha;
     UsuarioRepository repository;
+    private LogRepository logRepository;
     
-    public AutenticacaoUsuarioPresenter(UsuarioRepository repository) {
+    public AutenticacaoUsuarioPresenter(UsuarioRepository repository, LogRepository logRepository) {
         if (repository == null){
             throw new RuntimeException("Repository inválida!\n");
         }
 
         this.repository = repository;
+        this.logRepository = logRepository;
         this.view = new AutenticacaoUsuarioView();
         configuraView();   
     }
@@ -84,7 +87,7 @@ public class AutenticacaoUsuarioPresenter {
                 LogService.logOperacaoSucesso("LOGIN_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario());
             }
             if (tipo.getValor() == 0 || tipo.getValor() == 1){
-                new PainelAdministradorPresenter(usuario, repository);
+                new PainelAdministradorPresenter(usuario, repository, logRepository);
                 LogService.logOperacaoSucesso("LOGIN_ADM",usuario.getNome(),usuario.getNomeDeUsuario());
             }
         }
