@@ -8,7 +8,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import model.Notificacao;
 import model.Usuario;
-import repository.NotificacaoRepository;
+import repository.NotificacaoRepositorySQLite;
 import repository.UsuarioNotificacaoRepository;
 
 /**
@@ -19,7 +19,7 @@ public class NotificacoesDoUsuarioTableModel extends AbstractTableModel{
     List<Notificacao> notificacoes;
     private String[] colunas = {"Título", "Remetente", "Data de Envio", "Lida?"};
     private int idUsuario;
-    private NotificacaoRepository notificacaoRepository;
+    private NotificacaoRepositorySQLite notificacaoRepository;
     private UsuarioNotificacaoRepository usuarioNotificacaoRepository;
     
  

@@ -16,7 +16,7 @@ import model.Usuario;
 import pss.LogService;
 import repository.UsuarioRepository;
 import view.PrimeiroCadastroView;
-import repository.LogRepository;
+import repository.LogRepositorySQLite;
 
 /**
  *
@@ -27,9 +27,9 @@ public class PrimeiroCadastroPresenter {
     private Usuario usuario;
     private UsuarioRepository repository;
     private ValidadorSenha validadorSenha;
-    private LogRepository logRepository;
+    private LogRepositorySQLite logRepository;
     
-    public PrimeiroCadastroPresenter(UsuarioRepository repository, LogRepository logRepository){
+    public PrimeiroCadastroPresenter(UsuarioRepository repository, LogRepositorySQLite logRepository){
         if (repository == null){
             throw new RuntimeException("Repository inválida!");
         }

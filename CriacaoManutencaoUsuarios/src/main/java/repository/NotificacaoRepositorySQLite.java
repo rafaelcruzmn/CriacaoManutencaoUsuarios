@@ -11,20 +11,21 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import model.Notificacao;
 import model.Usuario;
-import service.ConexaoBancoService;
+import service.ConexaoBancoServiceSingleton;
 
 /**
  *
  * @author Luis1
  */
-public class NotificacaoRepository {
-    private ConexaoBancoService conexao;
+public class NotificacaoRepositorySQLite implements INotificacaoRepository{
+    private ConexaoBancoServiceSingleton conexao;
     private Connection conn;
     
-    public NotificacaoRepository(ConexaoBancoService conexao){
-        this.conexao = conexao;
+    public NotificacaoRepositorySQLite(){
+        this.conexao = ConexaoBancoServiceSingleton.getInstancia();
     }
     
+    @Override
     public void inserirNotificacao(Notificacao notificacao){
         if (notificacao == null){
             throw new RuntimeException("Notificação inválida.\n");
@@ -87,6 +88,7 @@ public class NotificacaoRepository {
         }
     }
     
+    @Override
     public void limparSistema(){
         String sql = "DELETE FROM notificacoes";
        

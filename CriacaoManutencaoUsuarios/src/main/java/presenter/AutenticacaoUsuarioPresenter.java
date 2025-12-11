@@ -8,12 +8,11 @@ import pss.LogService;
 import enumerator.TipoUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Optional;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import repository.UsuarioRepository;
 import view.AutenticacaoUsuarioView;
-import repository.LogRepository;
+import repository.LogRepositorySQLite;
 
 /**
  *
@@ -24,9 +23,9 @@ public class AutenticacaoUsuarioPresenter {
     String nomeDeUsuario;
     //String senha;
     UsuarioRepository repository;
-    private LogRepository logRepository;
+    private LogRepositorySQLite logRepository;
     
-    public AutenticacaoUsuarioPresenter(UsuarioRepository repository, LogRepository logRepository) {
+    public AutenticacaoUsuarioPresenter(UsuarioRepository repository, LogRepositorySQLite logRepository) {
         if (repository == null){
             throw new RuntimeException("Repository inválida!\n");
         }
@@ -78,7 +77,7 @@ public class AutenticacaoUsuarioPresenter {
             tipo = usuario.getTipo();
         }
         else{
-            LogService.logOperacaoFalha("LOGIN_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario(),"Falha no Login");
+            LogService.logOperacaoFalha("LOGIN_USUARIO",view.getTxtNomeDeUsuario().getText(),"","Falha no Login");
         }
         
         if (tipo != null){
@@ -90,9 +89,6 @@ public class AutenticacaoUsuarioPresenter {
                 new PainelAdministradorPresenter(usuario, repository, logRepository);
                 LogService.logOperacaoSucesso("LOGIN_ADM",usuario.getNome(),usuario.getNomeDeUsuario());
             }
-        }
-        else{
-            LogService.logOperacaoFalha("LOGIN_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario(),"Falha no Login");
         }
     }
     

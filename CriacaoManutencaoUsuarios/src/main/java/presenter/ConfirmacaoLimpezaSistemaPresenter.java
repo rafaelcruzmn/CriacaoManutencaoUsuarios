@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
-import repository.NotificacaoRepository;
+import repository.NotificacaoRepositorySQLite;
 import repository.UsuarioNotificacaoRepository;
 import repository.UsuarioRepository;
 import view.ConfirmacaoLimpezaSistemaView;
@@ -21,12 +21,12 @@ import pss.LogService;
 public class ConfirmacaoLimpezaSistemaPresenter {
     private ConfirmacaoLimpezaSistemaView view;
     private UsuarioRepository usuarioRepository;
-    private NotificacaoRepository notificacaoRepository;
+    private NotificacaoRepositorySQLite notificacaoRepository;
     private UsuarioNotificacaoRepository usuarioNotificacaoRepository;
     private Usuario usuarioLogado;
     
     public ConfirmacaoLimpezaSistemaPresenter(Usuario usuarioLogado, UsuarioRepository usuarioRepository, 
-            NotificacaoRepository notificacaoRepository, UsuarioNotificacaoRepository usuarioNotificacaoRepository){
+            NotificacaoRepositorySQLite notificacaoRepository, UsuarioNotificacaoRepository usuarioNotificacaoRepository){
         this.usuarioLogado = usuarioLogado;
         this.usuarioRepository = usuarioRepository;
         this.notificacaoRepository = notificacaoRepository;

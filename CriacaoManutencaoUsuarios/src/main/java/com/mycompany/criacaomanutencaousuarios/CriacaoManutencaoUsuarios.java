@@ -8,8 +8,7 @@ import presenter.AutenticacaoUsuarioPresenter;
 import presenter.ConfigurarLogPresenter;
 import repository.UsuarioRepository;
 import presenter.PrimeiroCadastroPresenter;
-import service.ConexaoBancoService;
-import repository.LogRepository;
+import repository.LogRepositorySQLite;
 /**
  *
  * @author Rafael
@@ -17,15 +16,14 @@ import repository.LogRepository;
 public class CriacaoManutencaoUsuarios {
 
     public static void main(String[] args) {
-        ConexaoBancoService conexao = new ConexaoBancoService();
-        UsuarioRepository repository = new UsuarioRepository(conexao);
-        LogRepository logRepository = new LogRepository(conexao);
+        UsuarioRepository usuarioRepository = new UsuarioRepository();
+        LogRepositorySQLite logRepository = new LogRepositorySQLite();
         ConfigurarLogPresenter x = new ConfigurarLogPresenter(logRepository,"");
         
-        if (repository.getTamanho() == 0){
-            new PrimeiroCadastroPresenter(repository,logRepository);
+        if (usuarioRepository.getTamanho() == 0){
+            new PrimeiroCadastroPresenter(usuarioRepository,logRepository);
         } else {
-            new AutenticacaoUsuarioPresenter(repository,logRepository);
+            new AutenticacaoUsuarioPresenter(usuarioRepository,logRepository);
         }         
     }
 }

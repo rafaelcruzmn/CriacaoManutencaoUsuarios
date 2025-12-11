@@ -14,20 +14,21 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Optional;
-import service.ConexaoBancoService;
 import pss.LogService;
+import service.ConexaoBancoServiceSingleton;
 /**
  *
  * @author Luis1
  */
-public class UsuarioRepository {
-    private ConexaoBancoService conexao;
+public class UsuarioRepository implements IUsuarioRepository{
+    private ConexaoBancoServiceSingleton conexao;
     private Connection conn;
     
-    public UsuarioRepository(ConexaoBancoService conexao){
-        this.conexao = conexao;
+    public UsuarioRepository( ){
+        this.conexao = ConexaoBancoServiceSingleton.getInstancia();
     }
     
+    @Override
     public void inserirUsuario(Usuario usuario){
         if (usuario == null){
             throw new RuntimeException("Usuário inválido.\n");
@@ -59,6 +60,7 @@ public class UsuarioRepository {
         }
     } 
     
+    @Override
     public void alterarTipoUsuario(Usuario usuario, TipoUsuario novoTipo){
         
         if (usuario == null){
@@ -80,7 +82,8 @@ public class UsuarioRepository {
         }
     }
     
-        public void alterarSenha(Usuario usuario, String novaSenha){
+    @Override
+    public void alterarSenha(Usuario usuario, String novaSenha){
         
         if (novaSenha == null){
             throw new RuntimeException("Senha inválida.\n");
@@ -101,6 +104,7 @@ public class UsuarioRepository {
         }
     }
     
+    @Override
     public void excluir(Usuario usuario){
         String sql = "DELETE FROM usuarios WHERE id=?";
         
@@ -116,6 +120,7 @@ public class UsuarioRepository {
         }
     }
     
+    @Override
     public String getSenha(int id){
         String sql = "SELECT senha FROM usuarios WHERE id=?";
         
@@ -136,6 +141,7 @@ public class UsuarioRepository {
         return senha;
     }
     
+    @Override
     public Usuario getUsuario(int id){
         String sql = "SELECT * FROM usuarios WHERE id=?";
         
@@ -167,6 +173,7 @@ public class UsuarioRepository {
         return usuario;
     }
     
+    @Override
     public TipoUsuario getTipo(int id){
         String sql = "SELECT tipo FROM usuarios WHERE id=?";
         
@@ -186,6 +193,7 @@ public class UsuarioRepository {
         return TipoUsuario.values()[tipo];
     }
 
+    @Override
     public LocalDate getDataCadastro(int id){
         String sql = "SELECT dataCadastro FROM usuarios WHERE id=?";
         
@@ -206,7 +214,8 @@ public class UsuarioRepository {
         return dataCadastro;
     }
 
-   public int getTamanho(){
+    @Override
+    public int getTamanho(){
         String sql = "SELECT COUNT(*) FROM usuarios";
         
         int tamanho = 0;
@@ -224,7 +233,8 @@ public class UsuarioRepository {
         return tamanho;
     }
    
-   public List<Usuario> getTodosAutorizados(){
+    @Override
+    public List<Usuario> getTodosAutorizados(){
        String sql = "SELECT * FROM usuarios WHERE autorizado=?";
        
        List<Usuario> usuarios = new ArrayList<>();
@@ -257,7 +267,8 @@ public class UsuarioRepository {
         return usuarios;
    }
    
-public List<Usuario> getTodosNaoAutorizados(){
+    @Override
+    public List<Usuario> getTodosNaoAutorizados(){
        String sql = "SELECT * FROM usuarios WHERE autorizado=?";
        
        List<Usuario> usuarios = new ArrayList<>();
@@ -289,7 +300,8 @@ public List<Usuario> getTodosNaoAutorizados(){
         return usuarios;
    }
    
-   public Usuario autenticarUsuario(String nomeDeUsuario, String senha){
+    @Override
+    public Usuario autenticarUsuario(String nomeDeUsuario, String senha){
         String sql = "SELECT * FROM usuarios WHERE nomeDeUsuario=? AND senha=? AND autorizado=?";
         
         Usuario usuario = null;
@@ -316,36 +328,39 @@ public List<Usuario> getTodosNaoAutorizados(){
             }
             conn.close();
         } catch (SQLException ex){
-            LogService.logOperacaoFalha("LOGIN_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario(),"Falha no Login");
             System.err.println(ex.getMessage());
         } 
         return usuario;
     }
    
-   public void autorizarUsuario(int usuarioId) throws SQLException {
-    String sql = "UPDATE usuarios SET autorizado = 1 WHERE id = ?";
-    conn = conexao.getConexao();
-    
-    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        pstmt.setInt(1, usuarioId);
-        pstmt.executeUpdate();
-        }
+    @Override
+    public void autorizarUsuario(int usuarioId) throws SQLException {
+        String sql = "UPDATE usuarios SET autorizado = 1 WHERE id = ?";
+        conn = conexao.getConexao();
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, usuarioId);
+            pstmt.executeUpdate();
+            }
     }
-   public void recusarUsuario(int usuarioId) throws SQLException {
-    String sql = "DELETE FROM usuarios WHERE id = ?";
-    conn = conexao.getConexao();
     
-    try {
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setInt(1, usuarioId);
-        pstmt.executeUpdate();
-        
-    } catch (SQLException ex){
-            System.err.println(ex.getMessage());
+    @Override
+    public void recusarUsuario(int usuarioId) throws SQLException {
+        String sql = "DELETE FROM usuarios WHERE id = ?";
+        conn = conexao.getConexao();
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, usuarioId);
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex){
+                System.err.println(ex.getMessage());
         }
     }
    
-   public void limparSistema(){
+    @Override
+    public void limparSistema(){
         String sql = "DELETE FROM usuarios";
        
         conn = conexao.getConexao();

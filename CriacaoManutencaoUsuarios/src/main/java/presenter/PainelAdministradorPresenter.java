@@ -8,12 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
-import repository.NotificacaoRepository;
+import repository.NotificacaoRepositorySQLite;
 import repository.UsuarioNotificacaoRepository;
 import repository.UsuarioRepository;
-import service.ConexaoBancoService;
 import view.PainelAdministradorView;
-import repository.LogRepository;
+import repository.LogRepositorySQLite;
 
 /**
  *
@@ -22,10 +21,10 @@ import repository.LogRepository;
 public class PainelAdministradorPresenter {
     private Usuario usuarioLogado;
     private UsuarioRepository usuarioRepository;
-    private LogRepository logRepository;
+    private LogRepositorySQLite logRepository;
     private PainelAdministradorView view;
     
-    public PainelAdministradorPresenter(Usuario usuarioLogado, UsuarioRepository usuarioRepository, LogRepository logRepository){
+    public PainelAdministradorPresenter(Usuario usuarioLogado, UsuarioRepository usuarioRepository, LogRepositorySQLite logRepository){
         if (usuarioRepository == null){
             throw new RuntimeException("Repository inválida!\n");
         }
@@ -100,7 +99,7 @@ public class PainelAdministradorPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    UsuarioNotificacaoRepository usuarioNotificacaoRepository = new UsuarioNotificacaoRepository(new ConexaoBancoService());
+                    UsuarioNotificacaoRepository usuarioNotificacaoRepository = new UsuarioNotificacaoRepository();
                     
                     new ListagemNotificacoesPresenter(usuarioLogado, usuarioNotificacaoRepository.getNotificacoes(usuarioLogado.getId()), usuarioNotificacaoRepository);
                 } catch (Exception ex){
@@ -113,8 +112,8 @@ public class PainelAdministradorPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    new ConfirmacaoLimpezaSistemaPresenter(usuarioLogado, usuarioRepository, new NotificacaoRepository(new ConexaoBancoService()), 
-                            new UsuarioNotificacaoRepository(new ConexaoBancoService()));
+                    new ConfirmacaoLimpezaSistemaPresenter(usuarioLogado, usuarioRepository, new NotificacaoRepositorySQLite(), 
+                            new UsuarioNotificacaoRepository());
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }

@@ -13,15 +13,15 @@ import pss.LogConfiguracao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import repository.LogRepository;
+import repository.LogRepositorySQLite;
 import view.ConfigurarLogView;
 
 public class ConfigurarLogPresenter {
 
     private ConfigurarLogView view;
-    private final LogRepository repository;
+    private final LogRepositorySQLite repository;
 
-    public ConfigurarLogPresenter(LogRepository repository) {
+    public ConfigurarLogPresenter(LogRepositorySQLite repository) {
         
         this.view = new ConfigurarLogView(); 
         this.repository = repository;
@@ -29,7 +29,7 @@ public class ConfigurarLogPresenter {
         configurarView();
     }
     
-    public ConfigurarLogPresenter(LogRepository repository,String x) {
+    public ConfigurarLogPresenter(LogRepositorySQLite repository,String x) {
         this.repository = repository;
         this.carregarConfiguracaoIni();
     }
@@ -65,7 +65,7 @@ public class ConfigurarLogPresenter {
     private void carregarConfiguracaoIni() {
         
         int tipoAtual = repository.getTipoLog();
-        if (tipoAtual == LogRepository.TIPO_JSON){
+        if (tipoAtual == LogRepositorySQLite.TIPO_JSON){
             LogConfiguracao.setTipoLog(repository.getTipoLog());
         } else {
             LogConfiguracao.setTipoLog(repository.getTipoLog());
@@ -76,7 +76,7 @@ public class ConfigurarLogPresenter {
     private void carregarConfiguracaoAtual() {
         int tipoAtual = repository.getTipoLog();
         
-        if (tipoAtual == LogRepository.TIPO_JSON){
+        if (tipoAtual == LogRepositorySQLite.TIPO_JSON){
             LogConfiguracao.setTipoLog(repository.getTipoLog());
             view.getRadJSON().setSelected(true);
         } else {
@@ -90,10 +90,10 @@ public class ConfigurarLogPresenter {
         int novoTipo;
         
         if (view.getRadCSV().isSelected()) {
-            novoTipo = LogRepository.TIPO_CSV;
+            novoTipo = LogRepositorySQLite.TIPO_CSV;
             LogConfiguracao.setTipoLog(novoTipo);
         } else if (view.getRadJSON().isSelected()) {
-            novoTipo = LogRepository.TIPO_JSON;
+            novoTipo = LogRepositorySQLite.TIPO_JSON;
             LogConfiguracao.setTipoLog(novoTipo);
         } else {
             JOptionPane.showMessageDialog(view, "Selecione o formato de log (CSV ou JSON).","Erro de Seleção", JOptionPane.WARNING_MESSAGE);
@@ -102,7 +102,7 @@ public class ConfigurarLogPresenter {
         
         repository.alterarTipoLog(novoTipo);
 
-        String formato = (novoTipo == LogRepository.TIPO_CSV) ? "CSV" : "JSON";
+        String formato = (novoTipo == LogRepositorySQLite.TIPO_CSV) ? "CSV" : "JSON";
         JOptionPane.showMessageDialog(view, "Configuração de Log salva com sucesso! Formato: " + formato,"Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 

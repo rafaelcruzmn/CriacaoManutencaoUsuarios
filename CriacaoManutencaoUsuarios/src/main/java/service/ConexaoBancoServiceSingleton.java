@@ -7,6 +7,7 @@ package service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -14,15 +15,24 @@ import java.sql.Statement;
  *
  * @author Luis1
  */
-public class ConexaoBancoService {
+public class ConexaoBancoServiceSingleton {
+    private static ConexaoBancoServiceSingleton instancia = null;
     private final String urlBD = "jdbc:sqlite:usuarios.db";
     
     
-    public ConexaoBancoService(){
+    private ConexaoBancoServiceSingleton(){
         criarTabelaUsuario();
         criarTabelaNotificacao();
         criarTabelaUsuarioNotificacao();
-        criarConfiguracaoLog();
+        criarTabelaConfigLog();
+    }
+    
+    public static ConexaoBancoServiceSingleton getInstancia(){
+        if (instancia == null){
+            instancia = new ConexaoBancoServiceSingleton();
+        }
+        
+        return instancia;
     }
 
     public Connection getConexao(){
@@ -35,24 +45,6 @@ public class ConexaoBancoService {
         
         return conn;
     }  
-    
-    private void criarConfiguracaoLog(){
-        String sql = "CREATE TABLE IF NOT EXISTS ConfigLog ("
-                        + "id INTEGER PRIMARY KEY, "
-                        + "tipo INTEGER NOT NULL, "
-                        + ");";
-        
-        try (Connection conn = DriverManager.getConnection(urlBD)){
-            
-            if (conn != null) {           
-                Statement stmt = conn.createStatement();
-                stmt.execute(sql);
-            }
-            
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }  
-   }
     
     private void criarTabelaUsuario(){
         String sql = "CREATE TABLE IF NOT EXISTS usuarios ("
@@ -121,5 +113,28 @@ public class ConexaoBancoService {
         } 
     }
     
-    
+    private void criarTabelaConfigLog() {
+        String sqlCriacao = "CREATE TABLE IF NOT EXISTS ConfigLog ("
+                          + "id INTEGER PRIMARY KEY, "
+                          + "tipo INTEGER NOT NULL" 
+                          + ");";
+        
+        String sqlVerifica = "SELECT COUNT(*) FROM configLog";
+        String sqlInsert = "INSERT INTO ConfigLog (tipo) VALUES (0)";
+
+        try (Connection conn = DriverManager.getConnection(urlBD)) {
+            Statement stmt = conn.createStatement();
+            stmt.execute(sqlCriacao);
+            
+            try (ResultSet rs = stmt.executeQuery(sqlVerifica)) {
+                if (rs.next() && rs.getInt(1) == 0) {
+                    
+                    stmt.executeUpdate(sqlInsert);
+                    System.out.println("Configuração de log inicial (tipo=0) inserida no SQLite.");
+                }
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro ao inicializar a configuração de log: " + ex.getMessage());
+        }  
+    }
 }

@@ -14,20 +14,21 @@ import java.util.List;
 import java.util.Optional;
 import model.Notificacao;
 import model.Usuario;
-import service.ConexaoBancoService;
+import service.ConexaoBancoServiceSingleton;
 
 /**
  *
  * @author Luis1
  */
-public class UsuarioNotificacaoRepository {
-    private ConexaoBancoService conexao;
+public class UsuarioNotificacaoRepository implements IUsuarioNotificacaoRepository{
+    private ConexaoBancoServiceSingleton conexao;
     private Connection conn;
     
-    public UsuarioNotificacaoRepository(ConexaoBancoService conexao){
-        this.conexao = conexao;
+    public UsuarioNotificacaoRepository(){
+        this.conexao = ConexaoBancoServiceSingleton.getInstancia();
     }
     
+    @Override
     public List<Notificacao> getNotificacoes(int id){
         String sql = "SELECT * FROM usuariosNotificacoes WHERE idUsuario=?";
         String sql2 = "SELECT * FROM notificacoes WHERE id=?";
@@ -64,7 +65,7 @@ public class UsuarioNotificacaoRepository {
                         String mensagem = rs2.getString("mensagem");
                         LocalDate dataEnvio = rs2.getObject("dataEnvio", LocalDate.class);
                         int idRemetente = rs2.getInt("idRemetente");
-                        Usuario remetente = new UsuarioRepository(new ConexaoBancoService()).getUsuario(idRemetente);
+                        Usuario remetente = new UsuarioRepository().getUsuario(idRemetente);
                         
                         Notificacao notificacao = new Notificacao(Optional.of(idNotificacao), titulo, mensagem, remetente, new ArrayList<>(), dataEnvio);
                         notificacoes.add(notificacao);
@@ -79,6 +80,7 @@ public class UsuarioNotificacaoRepository {
         return notificacoes;
     }
     
+    @Override
     public boolean getLida(int idUsuario, int idNotificacao){
         String sql = "SELECT * FROM usuariosNotificacoes WHERE idUsuario=? AND idNotificacao=?";
         boolean lida = false;
@@ -99,6 +101,7 @@ public class UsuarioNotificacaoRepository {
         return lida;
     }
     
+    @Override
     public void lerNotificacao(int idUsuario, int idNotificacao){
         String sql = "UPDATE usuariosNotificacoes SET lida=? "
                 + "WHERE idUsuario=? AND idNotificacao=?";
@@ -118,6 +121,7 @@ public class UsuarioNotificacaoRepository {
         }
     }
     
+    @Override
     public void limparSistema(){
         String sql = "DELETE FROM usuariosNotificacoes";
        

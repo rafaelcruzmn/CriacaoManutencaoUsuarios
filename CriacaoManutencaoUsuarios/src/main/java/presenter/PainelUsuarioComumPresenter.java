@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import model.Usuario;
 import repository.UsuarioNotificacaoRepository;
 import repository.UsuarioRepository;
-import service.ConexaoBancoService;
+import service.ConexaoBancoServiceSingleton;
 import view.PainelUsuarioComumView;
 
 /**
@@ -56,7 +56,7 @@ public class PainelUsuarioComumPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    UsuarioNotificacaoRepository usuarioNotificacaoRepository = new UsuarioNotificacaoRepository(new ConexaoBancoService());
+                    UsuarioNotificacaoRepository usuarioNotificacaoRepository = new UsuarioNotificacaoRepository();
                     
                     new ListagemNotificacoesPresenter(usuarioLogado, usuarioNotificacaoRepository.getNotificacoes(usuarioLogado.getId()), usuarioNotificacaoRepository);
                 } catch (Exception ex){
