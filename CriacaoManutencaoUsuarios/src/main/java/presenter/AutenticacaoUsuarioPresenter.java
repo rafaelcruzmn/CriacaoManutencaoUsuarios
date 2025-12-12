@@ -68,7 +68,7 @@ public class AutenticacaoUsuarioPresenter {
     }
     
     private void autenticarUsuario(){
-        String nomeDeUsuario = view.getTxtNomeDeUsuario().getText();
+        String nomeDeUsuario = view.getTxtNomeDeUsuario().getText().toLowerCase();
         String senha = view.getTxtSenha().getText();
         
         Usuario usuario = repository.autenticarUsuario(nomeDeUsuario, senha);

@@ -61,7 +61,7 @@ public class PrimeiroCadastroPresenter {
     
     private void cadastrar(){
         String nome = view.getTxtNome().getText();
-        String nomeDeUsuario = view.getTxtNomeDeUsuario().getText();
+        String nomeDeUsuario = view.getTxtNomeDeUsuario().getText().toLowerCase();
         String senha = view.getTxtSenha().getText();
         TipoUsuario tipo = TipoUsuario.ADMININI;
         boolean autorizado = true;
