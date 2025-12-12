@@ -5,6 +5,7 @@
 package view;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
@@ -32,6 +33,12 @@ public class PainelUsuarioComumView extends javax.swing.JFrame {
 
         btnVisualizarNotificacoes = new javax.swing.JButton();
         btnAlterarSenha = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        lblBemVindo = new javax.swing.JLabel();
+        lblNome = new javax.swing.JLabel();
+        lblTipo = new javax.swing.JLabel();
+        lblNotificacoes = new javax.swing.JLabel();
+        btnNotificacoesPendentes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Painel de Usuário");
@@ -45,27 +52,63 @@ public class PainelUsuarioComumView extends javax.swing.JFrame {
 
         btnAlterarSenha.setText("Alterar Senha");
 
+        lblBemVindo.setText("Bem Vindo!");
+
+        lblNome.setText("jLabel1");
+
+        lblTipo.setText("Você é um usuario comum");
+
+        lblNotificacoes.setText("Notificações Pendentes:");
+
+        btnNotificacoesPendentes.setText("jButton1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(149, 149, 149)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVisualizarNotificacoes)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAlterarSenha)
-                        .addGap(27, 27, 27)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblTipo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblBemVindo)
+                        .addGap(152, 152, 152)
+                        .addComponent(lblNotificacoes))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(btnNotificacoesPendentes))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnVisualizarNotificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAlterarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
+                .addGap(70, 70, 70)
                 .addComponent(btnVisualizarNotificacoes)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addComponent(btnAlterarSenha)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBemVindo)
+                    .addComponent(lblNotificacoes))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNome)
+                    .addComponent(btnNotificacoesPendentes))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTipo)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -107,10 +150,28 @@ public class PainelUsuarioComumView extends javax.swing.JFrame {
     public JButton getBtnVisualizarNotificacoes() {
         return btnVisualizarNotificacoes;
     }
-
+    public JLabel getNome() {
+        return lblNome;
+    }
+    public void setNome(String novoNome){
+        lblNome.setText(novoNome);
+    }
+    public JButton getBtnNotificacoes(){
+        return btnNotificacoesPendentes;
+    }
+    public void setNotificacoes(String notificacoes){
+        btnNotificacoesPendentes.setText(notificacoes);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarSenha;
+    private javax.swing.JButton btnNotificacoesPendentes;
     private javax.swing.JButton btnVisualizarNotificacoes;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblBemVindo;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblNotificacoes;
+    private javax.swing.JLabel lblTipo;
     // End of variables declaration//GEN-END:variables
 }

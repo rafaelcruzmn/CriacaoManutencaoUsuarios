@@ -85,7 +85,7 @@ public class AutenticacaoUsuarioPresenter {
         
         if (tipo != null){
             if (tipo.getValor() == 2){
-                new PainelUsuarioComumPresenter(usuario, repository);
+                new PainelUsuarioComumPresenter(usuario, repository, notificaRepository);
                 LogService.logOperacaoSucesso("LOGIN_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario());
             }
             if (tipo.getValor() == 0 || tipo.getValor() == 1){
