@@ -14,7 +14,7 @@ import model.Notificacao;
 import model.Usuario;
 import pss.LogService;
 import repository.NotificacaoRepositorySQLite;
-import repository.UsuarioNotificacaoRepository;
+import repository.UsuarioNotificacaoRepositorySQLite;
 import view.EnviarNotificacaoView;
 
 /**
@@ -26,7 +26,7 @@ public class EnviarNotificacaoPresenter {
     private List<Usuario> usuariosNotificados;
     private Notificacao notificacao;
     private NotificacaoRepositorySQLite notificacaoRepository;
-    private UsuarioNotificacaoRepository usuarioNotificacaoRepository;
+    private UsuarioNotificacaoRepositorySQLite usuarioNotificacaoRepository;
     private EnviarNotificacaoView view;
     
     public EnviarNotificacaoPresenter(Usuario usuarioLogado, List<Usuario> usuariosNotificados){
@@ -34,7 +34,7 @@ public class EnviarNotificacaoPresenter {
         this.usuariosNotificados = usuariosNotificados;
         this.view = new EnviarNotificacaoView();
         this.notificacaoRepository = new NotificacaoRepositorySQLite();
-        this.usuarioNotificacaoRepository = new UsuarioNotificacaoRepository();
+        this.usuarioNotificacaoRepository = new UsuarioNotificacaoRepositorySQLite();
         
         configurarView();
     }

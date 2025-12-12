@@ -13,6 +13,8 @@ import model.Notificacao;
  */
 public interface IUsuarioNotificacaoRepository {
     public List<Notificacao> getNotificacoes(int id);
+    public List<Notificacao> getNotificacoesNaoLidas(int id);
+    public String getQuantidadeNaoLidas(int idUsuario);
     public boolean getLida(int idUsuario, int idNotificacao);
     public void lerNotificacao(int idUsuario, int idNotificacao);
     public void limparSistema();

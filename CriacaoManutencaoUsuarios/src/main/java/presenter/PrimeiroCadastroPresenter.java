@@ -14,9 +14,10 @@ import java.util.List;
 import java.util.Optional;
 import model.Usuario;
 import pss.LogService;
-import repository.UsuarioRepository;
+import repository.UsuarioRepositorySQLite;
 import view.PrimeiroCadastroView;
 import repository.LogRepositorySQLite;
+import repository.UsuarioNotificacaoRepositorySQLite;
 
 /**
  *
@@ -25,11 +26,12 @@ import repository.LogRepositorySQLite;
 public class PrimeiroCadastroPresenter {
     private PrimeiroCadastroView view;
     private Usuario usuario;
-    private UsuarioRepository repository;
+    private UsuarioRepositorySQLite repository;
     private ValidadorSenha validadorSenha;
     private LogRepositorySQLite logRepository;
+    private UsuarioNotificacaoRepositorySQLite notificaRepository;
     
-    public PrimeiroCadastroPresenter(UsuarioRepository repository, LogRepositorySQLite logRepository){
+    public PrimeiroCadastroPresenter(UsuarioRepositorySQLite repository, LogRepositorySQLite logRepository, UsuarioNotificacaoRepositorySQLite notificaRepository){
         if (repository == null){
             throw new RuntimeException("Repository inválida!");
         }
@@ -38,6 +40,7 @@ public class PrimeiroCadastroPresenter {
         this.logRepository = logRepository;
         this.view = new PrimeiroCadastroView();
         this.validadorSenha = new ValidadorSenha();
+        this.notificaRepository = notificaRepository;
         configuraView();
     }
     
@@ -74,7 +77,7 @@ public class PrimeiroCadastroPresenter {
             LogService.logOperacaoSucesso("PRIMEIRO_CADASTRO_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario());
             repository.inserirUsuario(usuario);
             view.dispose();
-            new AutenticacaoUsuarioPresenter(repository,logRepository);
+            new AutenticacaoUsuarioPresenter(repository,logRepository,notificaRepository);
 
         } else{
             for (String violacao: violacoesSenha){

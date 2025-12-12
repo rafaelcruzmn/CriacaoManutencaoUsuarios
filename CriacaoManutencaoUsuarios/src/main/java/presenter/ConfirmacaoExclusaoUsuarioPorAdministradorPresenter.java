@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
-import repository.UsuarioRepository;
+import repository.UsuarioRepositorySQLite;
 import view.ConfirmacaoExclusaoUsuarioPorAdministradorView;
 
 /**
@@ -18,11 +18,11 @@ import view.ConfirmacaoExclusaoUsuarioPorAdministradorView;
  */
 public class ConfirmacaoExclusaoUsuarioPorAdministradorPresenter {
     private Usuario usuarioSelecionado;
-    private UsuarioRepository repository;
+    private UsuarioRepositorySQLite repository;
     private ConfirmacaoExclusaoUsuarioPorAdministradorView view;
     private Usuario usuarioLogado;
     
-    public ConfirmacaoExclusaoUsuarioPorAdministradorPresenter(Usuario usuarioLogado, Usuario usuarioSelecionado, UsuarioRepository repository){
+    public ConfirmacaoExclusaoUsuarioPorAdministradorPresenter(Usuario usuarioLogado, Usuario usuarioSelecionado, UsuarioRepositorySQLite repository){
         this.usuarioSelecionado = usuarioSelecionado;
         this.repository = repository;
         this.usuarioLogado = usuarioLogado;

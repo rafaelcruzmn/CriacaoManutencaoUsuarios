@@ -20,11 +20,11 @@ import service.ConexaoBancoServiceSingleton;
  *
  * @author Luis1
  */
-public class UsuarioRepository implements IUsuarioRepository{
+public class UsuarioRepositorySQLite implements IUsuarioRepository{
     private ConexaoBancoServiceSingleton conexao;
     private Connection conn;
     
-    public UsuarioRepository( ){
+    public UsuarioRepositorySQLite( ){
         this.conexao = ConexaoBancoServiceSingleton.getInstancia();
     }
     

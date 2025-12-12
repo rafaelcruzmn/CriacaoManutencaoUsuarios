@@ -13,7 +13,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import model.Usuario;
-import repository.UsuarioRepository;
+import repository.UsuarioRepositorySQLite;
 import tableModel.UsuariosCadastradosTableModel;
 import view.ListagemUsuariosCadastradosView;
 
@@ -23,13 +23,13 @@ import view.ListagemUsuariosCadastradosView;
  */
 public class ListagemUsuariosCadastradosPresenter {
     ListagemUsuariosCadastradosView view;
-    UsuarioRepository repository;
+    UsuarioRepositorySQLite repository;
     Usuario usuarioLogado;
     List<Usuario> usuarios;
     ListSelectionModel selectionModel;
     JTable tabelaUsuarios;
     
-    ListagemUsuariosCadastradosPresenter(Usuario usuarioLogado, List<Usuario> usuarios, UsuarioRepository repository){
+    ListagemUsuariosCadastradosPresenter(Usuario usuarioLogado, List<Usuario> usuarios, UsuarioRepositorySQLite repository){
         this.repository = repository;
         this.usuarioLogado = usuarioLogado;
         this.usuarios = usuarios;

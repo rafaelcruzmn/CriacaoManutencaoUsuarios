@@ -9,7 +9,7 @@ import javax.swing.table.AbstractTableModel;
 import model.Notificacao;
 import model.Usuario;
 import repository.NotificacaoRepositorySQLite;
-import repository.UsuarioNotificacaoRepository;
+import repository.UsuarioNotificacaoRepositorySQLite;
 
 /**
  *
@@ -20,10 +20,10 @@ public class NotificacoesDoUsuarioTableModel extends AbstractTableModel{
     private String[] colunas = {"Título", "Remetente", "Data de Envio", "Lida?"};
     private int idUsuario;
     private NotificacaoRepositorySQLite notificacaoRepository;
-    private UsuarioNotificacaoRepository usuarioNotificacaoRepository;
+    private UsuarioNotificacaoRepositorySQLite usuarioNotificacaoRepository;
     
  
-    public NotificacoesDoUsuarioTableModel(int idUsuario, List<Notificacao> notificacoes, UsuarioNotificacaoRepository usuarioNotificacaoRepository){
+    public NotificacoesDoUsuarioTableModel(int idUsuario, List<Notificacao> notificacoes, UsuarioNotificacaoRepositorySQLite usuarioNotificacaoRepository){
         this.idUsuario = idUsuario;
         this.notificacoes = notificacoes;
         this.usuarioNotificacaoRepository = usuarioNotificacaoRepository;

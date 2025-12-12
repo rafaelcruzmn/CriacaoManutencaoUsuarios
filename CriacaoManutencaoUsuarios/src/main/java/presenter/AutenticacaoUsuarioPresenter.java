@@ -10,9 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
-import repository.UsuarioRepository;
+import repository.UsuarioRepositorySQLite;
 import view.AutenticacaoUsuarioView;
 import repository.LogRepositorySQLite;
+import repository.UsuarioNotificacaoRepositorySQLite;
 
 /**
  *
@@ -22,16 +23,18 @@ public class AutenticacaoUsuarioPresenter {
     AutenticacaoUsuarioView view;
     String nomeDeUsuario;
     //String senha;
-    UsuarioRepository repository;
+    UsuarioRepositorySQLite repository;
     private LogRepositorySQLite logRepository;
+    private UsuarioNotificacaoRepositorySQLite notificaRepository;
     
-    public AutenticacaoUsuarioPresenter(UsuarioRepository repository, LogRepositorySQLite logRepository) {
+    public AutenticacaoUsuarioPresenter(UsuarioRepositorySQLite repository, LogRepositorySQLite logRepository, UsuarioNotificacaoRepositorySQLite notificaRepository) {
         if (repository == null){
             throw new RuntimeException("Repository inválida!\n");
         }
 
         this.repository = repository;
         this.logRepository = logRepository;
+        this.notificaRepository = notificaRepository;
         this.view = new AutenticacaoUsuarioView();
         configuraView();   
     }
@@ -86,7 +89,7 @@ public class AutenticacaoUsuarioPresenter {
                 LogService.logOperacaoSucesso("LOGIN_USUARIO",usuario.getNome(),usuario.getNomeDeUsuario());
             }
             if (tipo.getValor() == 0 || tipo.getValor() == 1){
-                new PainelAdministradorPresenter(usuario, repository, logRepository);
+                new PainelAdministradorPresenter(usuario, repository, logRepository, notificaRepository);
                 LogService.logOperacaoSucesso("LOGIN_ADM",usuario.getNome(),usuario.getNomeDeUsuario());
             }
         }

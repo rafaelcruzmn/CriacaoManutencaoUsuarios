@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import pss.LogService;
-import repository.UsuarioRepository;
+import repository.UsuarioRepositorySQLite;
 import view.EdicaoUsuarioPorAdministradorView;
 
 /**
@@ -20,10 +20,10 @@ import view.EdicaoUsuarioPorAdministradorView;
 public class EdicaoUsuarioPorAdministradorPresenter {
     private Usuario usuarioLogado;
     private Usuario usuarioSelecionado;
-    private UsuarioRepository repository;
+    private UsuarioRepositorySQLite repository;
     private EdicaoUsuarioPorAdministradorView view;
     
-    public EdicaoUsuarioPorAdministradorPresenter(Usuario usuarioLogado, Usuario usuarioSelecionado, UsuarioRepository repository){
+    public EdicaoUsuarioPorAdministradorPresenter(Usuario usuarioLogado, Usuario usuarioSelecionado, UsuarioRepositorySQLite repository){
         this.usuarioLogado = usuarioLogado;
         this.usuarioSelecionado = usuarioSelecionado;
         this.repository = repository;

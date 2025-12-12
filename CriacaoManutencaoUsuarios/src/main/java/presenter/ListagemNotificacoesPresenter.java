@@ -12,7 +12,7 @@ import javax.swing.event.ListSelectionListener;
 import model.Notificacao;
 import model.Usuario;
 import pss.LogService;
-import repository.UsuarioNotificacaoRepository;
+import repository.UsuarioNotificacaoRepositorySQLite;
 import tableModel.NotificacoesDoUsuarioTableModel;
 import view.ListagemNotificacoesView;
 
@@ -22,13 +22,13 @@ import view.ListagemNotificacoesView;
  */
 public class ListagemNotificacoesPresenter {
     private Usuario usuarioLogado;
-    private UsuarioNotificacaoRepository usuarioNotificacaoRepository;
+    private UsuarioNotificacaoRepositorySQLite usuarioNotificacaoRepository;
     private List<Notificacao> notificacoes;
     private ListagemNotificacoesView view;
     ListSelectionModel selectionModel;
     private JTable tabelaNotificacoes;
     
-    public ListagemNotificacoesPresenter(Usuario usuarioLogado, List<Notificacao> notificacoes, UsuarioNotificacaoRepository usuarioNotificacaoRepository){
+    public ListagemNotificacoesPresenter(Usuario usuarioLogado, List<Notificacao> notificacoes, UsuarioNotificacaoRepositorySQLite usuarioNotificacaoRepository){
         this.usuarioLogado = usuarioLogado;
         this.notificacoes = notificacoes;
         this.usuarioNotificacaoRepository = usuarioNotificacaoRepository;

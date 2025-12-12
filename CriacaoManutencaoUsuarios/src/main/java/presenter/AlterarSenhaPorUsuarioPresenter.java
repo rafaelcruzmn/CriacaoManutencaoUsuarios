@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
-import repository.UsuarioRepository;
+import repository.UsuarioRepositorySQLite;
 
 
 import model.Usuario;
@@ -24,9 +24,9 @@ public class AlterarSenhaPorUsuarioPresenter{
     
     private Usuario usuarioLogado;
     private AlterarSenhaUsuarioView view;
-    private UsuarioRepository repository;
+    private UsuarioRepositorySQLite repository;
     
-    public AlterarSenhaPorUsuarioPresenter(Usuario usuarioLogado, UsuarioRepository repository){
+    public AlterarSenhaPorUsuarioPresenter(Usuario usuarioLogado, UsuarioRepositorySQLite repository){
     this.usuarioLogado = usuarioLogado;
     this.repository = repository;
     this.view = new AlterarSenhaUsuarioView();

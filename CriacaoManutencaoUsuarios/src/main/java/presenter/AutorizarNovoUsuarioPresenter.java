@@ -16,19 +16,19 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import model.Usuario;
-import repository.UsuarioRepository;
+import repository.UsuarioRepositorySQLite;
 import tableModel.AutorizarUsuarioTableModel;
 import view.AutorizarNovoUsuarioView;
 
 
 public class AutorizarNovoUsuarioPresenter{
     private AutorizarNovoUsuarioView view;
-    private UsuarioRepository repository;
+    private UsuarioRepositorySQLite repository;
     private Usuario usuarioLogado;
     private List<Usuario> usuarios;
     private JTable tabelaUsuarios;
     
-    AutorizarNovoUsuarioPresenter(Usuario usuarioLogado, UsuarioRepository repository){
+    AutorizarNovoUsuarioPresenter(Usuario usuarioLogado, UsuarioRepositorySQLite repository){
         this.repository = repository;
         this.usuarioLogado = usuarioLogado;
         this.usuarios = repository.getTodosNaoAutorizados();

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.swing.JOptionPane;
 import model.Usuario;
-import repository.UsuarioRepository;
+import repository.UsuarioRepositorySQLite;
 import view.CadastroPorAdministradorView;
 
 /**
@@ -24,11 +24,11 @@ import view.CadastroPorAdministradorView;
 public class CadastroPorAdministradorPresenter {
     private Usuario usuario;
     private Usuario usuarioLogado;
-    private UsuarioRepository repository;
+    private UsuarioRepositorySQLite repository;
     private CadastroPorAdministradorView view;
     private ValidadorSenha validadorSenha;
     
-    public CadastroPorAdministradorPresenter(Usuario usuarioLogado, UsuarioRepository repository){
+    public CadastroPorAdministradorPresenter(Usuario usuarioLogado, UsuarioRepositorySQLite repository){
         if (repository == null){
             throw new RuntimeException("Repository inválida!");
         }

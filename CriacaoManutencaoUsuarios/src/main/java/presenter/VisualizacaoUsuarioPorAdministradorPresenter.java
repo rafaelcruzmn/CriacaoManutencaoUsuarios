@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import model.Usuario;
-import repository.UsuarioRepository;
+import repository.UsuarioRepositorySQLite;
 import view.VisualizacaoUsuarioPorAdministradorView;
 
 /**
@@ -18,12 +18,12 @@ import view.VisualizacaoUsuarioPorAdministradorView;
  * @author Luis1
  */
 public class VisualizacaoUsuarioPorAdministradorPresenter {
-    private UsuarioRepository repository;
+    private UsuarioRepositorySQLite repository;
     private Usuario usuarioLogado;
     private Usuario usuarioSelecionado;
     private VisualizacaoUsuarioPorAdministradorView view;
     
-    public VisualizacaoUsuarioPorAdministradorPresenter(Usuario usuarioLogado, Usuario usuarioSelecionado, UsuarioRepository repository){
+    public VisualizacaoUsuarioPorAdministradorPresenter(Usuario usuarioLogado, Usuario usuarioSelecionado, UsuarioRepositorySQLite repository){
         this.repository = repository;
         this.usuarioLogado = usuarioLogado;
         this.usuarioSelecionado = usuarioSelecionado;

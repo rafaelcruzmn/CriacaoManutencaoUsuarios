@@ -9,8 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
-import repository.UsuarioNotificacaoRepository;
-import repository.UsuarioRepository;
+import repository.UsuarioNotificacaoRepositorySQLite;
+import repository.UsuarioRepositorySQLite;
 import service.ConexaoBancoServiceSingleton;
 import view.PainelUsuarioComumView;
 
@@ -20,10 +20,10 @@ import view.PainelUsuarioComumView;
  */
 public class PainelUsuarioComumPresenter {
     Usuario usuarioLogado;
-    UsuarioRepository repository;
+    UsuarioRepositorySQLite repository;
     PainelUsuarioComumView view;
     
-    public PainelUsuarioComumPresenter(Usuario usuarioLogado, UsuarioRepository repository){
+    public PainelUsuarioComumPresenter(Usuario usuarioLogado, UsuarioRepositorySQLite repository){
         if (repository == null){
             throw new RuntimeException("Repository inválida!\n");
         }
@@ -56,7 +56,7 @@ public class PainelUsuarioComumPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    UsuarioNotificacaoRepository usuarioNotificacaoRepository = new UsuarioNotificacaoRepository();
+                    UsuarioNotificacaoRepositorySQLite usuarioNotificacaoRepository = new UsuarioNotificacaoRepositorySQLite();
                     
                     new ListagemNotificacoesPresenter(usuarioLogado, usuarioNotificacaoRepository.getNotificacoes(usuarioLogado.getId()), usuarioNotificacaoRepository);
                 } catch (Exception ex){

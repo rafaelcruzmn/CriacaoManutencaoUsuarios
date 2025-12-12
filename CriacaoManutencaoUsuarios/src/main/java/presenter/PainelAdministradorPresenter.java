@@ -9,8 +9,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import repository.NotificacaoRepositorySQLite;
-import repository.UsuarioNotificacaoRepository;
-import repository.UsuarioRepository;
+import repository.UsuarioNotificacaoRepositorySQLite;
+import repository.UsuarioRepositorySQLite;
 import view.PainelAdministradorView;
 import repository.LogRepositorySQLite;
 
@@ -20,11 +20,12 @@ import repository.LogRepositorySQLite;
  */
 public class PainelAdministradorPresenter {
     private Usuario usuarioLogado;
-    private UsuarioRepository usuarioRepository;
+    private UsuarioRepositorySQLite usuarioRepository;
     private LogRepositorySQLite logRepository;
+    private UsuarioNotificacaoRepositorySQLite notificaRepository;
     private PainelAdministradorView view;
     
-    public PainelAdministradorPresenter(Usuario usuarioLogado, UsuarioRepository usuarioRepository, LogRepositorySQLite logRepository){
+    public PainelAdministradorPresenter(Usuario usuarioLogado, UsuarioRepositorySQLite usuarioRepository, LogRepositorySQLite logRepository, UsuarioNotificacaoRepositorySQLite notificaRepository){
         if (usuarioRepository == null){
             throw new RuntimeException("Repository inválida!\n");
         }
@@ -36,14 +37,21 @@ public class PainelAdministradorPresenter {
         if (logRepository == null){
             throw new RuntimeException("Repository inválida!\n");
         }
-        
+
         this.usuarioLogado = usuarioLogado;
         this.usuarioRepository = usuarioRepository;
         this.logRepository = logRepository;
+        this.notificaRepository = notificaRepository;
         view = new PainelAdministradorView();
+        rodape();
         configurarView();
     }
-    
+    private void rodape(){
+        view.setNome(usuarioLogado.getNome());
+        String qtd = notificaRepository.getQuantidadeNaoLidas(usuarioLogado.getId());
+        view.setNotificacoes(qtd);
+        //view.setTipo(usuarioLogado.getTipo());
+    }
     private void configurarView(){
         view.setVisible(false);
         
@@ -99,7 +107,7 @@ public class PainelAdministradorPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    UsuarioNotificacaoRepository usuarioNotificacaoRepository = new UsuarioNotificacaoRepository();
+                    UsuarioNotificacaoRepositorySQLite usuarioNotificacaoRepository = new UsuarioNotificacaoRepositorySQLite();
                     
                     new ListagemNotificacoesPresenter(usuarioLogado, usuarioNotificacaoRepository.getNotificacoes(usuarioLogado.getId()), usuarioNotificacaoRepository);
                 } catch (Exception ex){
@@ -113,7 +121,7 @@ public class PainelAdministradorPresenter {
             public void actionPerformed(ActionEvent e){
                 try {
                     new ConfirmacaoLimpezaSistemaPresenter(usuarioLogado, usuarioRepository, new NotificacaoRepositorySQLite(), 
-                            new UsuarioNotificacaoRepository());
+                            new UsuarioNotificacaoRepositorySQLite());
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }

@@ -35,6 +35,7 @@ public class ConfigurarLogView extends javax.swing.JFrame {
         radJSON = new javax.swing.JRadioButton();
         btnVoltar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
+        lblCabecalho = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configurar Log");
@@ -59,35 +60,45 @@ public class ConfigurarLogView extends javax.swing.JFrame {
 
         btnSalvar.setText("Salvar");
 
+        lblCabecalho.setText("Escolha o tipo de arquivo LOG:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(radCSV)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(radJSON)
-                .addGap(61, 61, 61))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
-                .addComponent(btnVoltar)
-                .addGap(36, 36, 36)
-                .addComponent(btnSalvar)
-                .addGap(50, 50, 50))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(lblCabecalho))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(radCSV)
+                            .addComponent(btnVoltar))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(radJSON))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(btnSalvar)))))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addGap(32, 32, 32)
+                .addComponent(lblCabecalho)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radJSON)
-                    .addComponent(radCSV))
-                .addGap(54, 54, 54)
+                    .addComponent(radCSV)
+                    .addComponent(radJSON))
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVoltar)
-                    .addComponent(btnSalvar))
-                .addContainerGap(54, Short.MAX_VALUE))
+                    .addComponent(btnSalvar)
+                    .addComponent(btnVoltar))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -156,6 +167,7 @@ public class ConfigurarLogView extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bgTipo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JLabel lblCabecalho;
     private javax.swing.JRadioButton radCSV;
     private javax.swing.JRadioButton radJSON;
     // End of variables declaration//GEN-END:variables

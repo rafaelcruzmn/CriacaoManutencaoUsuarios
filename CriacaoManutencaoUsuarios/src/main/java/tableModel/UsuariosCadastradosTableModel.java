@@ -7,7 +7,7 @@ package tableModel;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import model.Usuario;
-import repository.UsuarioRepository;
+import repository.UsuarioRepositorySQLite;
 
 /**
  *

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import enumerator.TipoUsuario;
 import model.Usuario;
-import repository.UsuarioRepository;
+import repository.UsuarioRepositorySQLite;
 import view.AutoCadastroView;
 import com.pss.senha.validacao.ValidadorSenha;
 import java.util.List;
@@ -24,10 +24,10 @@ import pss.LogService;
 public class AutoCadastroPresenter {
     private AutoCadastroView view;
     private Usuario usuario;
-    private UsuarioRepository repository;
+    private UsuarioRepositorySQLite repository;
     private ValidadorSenha validadorSenha;
     
-    public AutoCadastroPresenter(UsuarioRepository repository){
+    public AutoCadastroPresenter(UsuarioRepositorySQLite repository){
         if (repository == null){
             throw new RuntimeException("Repository inválida!");
         }
