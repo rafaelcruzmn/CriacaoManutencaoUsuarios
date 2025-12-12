@@ -10,24 +10,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
-import repository.UsuarioRepositorySQLite;
+import repository.ILogRepository;
+import repository.IUsuarioNotificacaoRepository;
+import repository.IUsuarioRepository;
 import view.AutenticacaoUsuarioView;
-import repository.LogRepositorySQLite;
-import repository.UsuarioNotificacaoRepositorySQLite;
 
 /**
  *
  * @author Luis1
  */
 public class AutenticacaoUsuarioPresenter {
-    AutenticacaoUsuarioView view;
-    String nomeDeUsuario;
-    //String senha;
-    UsuarioRepositorySQLite repository;
-    private LogRepositorySQLite logRepository;
-    private UsuarioNotificacaoRepositorySQLite notificaRepository;
+    private AutenticacaoUsuarioView view;
+    private String nomeDeUsuario;
+    private IUsuarioRepository repository;
+    private ILogRepository logRepository;
+    private IUsuarioNotificacaoRepository notificaRepository;
     
-    public AutenticacaoUsuarioPresenter(UsuarioRepositorySQLite repository, LogRepositorySQLite logRepository, UsuarioNotificacaoRepositorySQLite notificaRepository) {
+    public AutenticacaoUsuarioPresenter(IUsuarioRepository repository, ILogRepository logRepository, IUsuarioNotificacaoRepository notificaRepository) {
         if (repository == null){
             throw new RuntimeException("Repository inválida!\n");
         }

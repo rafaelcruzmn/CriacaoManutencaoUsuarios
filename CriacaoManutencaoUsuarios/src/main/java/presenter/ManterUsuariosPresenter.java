@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
-import repository.UsuarioRepositorySQLite;
+import repository.IUsuarioRepository;
 import view.ManterUsuariosView;
 
 /**
@@ -18,9 +18,9 @@ import view.ManterUsuariosView;
 public class ManterUsuariosPresenter {
     private Usuario usuarioLogado;
     private ManterUsuariosView view;
-    private UsuarioRepositorySQLite repository;
+    private IUsuarioRepository repository;
     
-    public ManterUsuariosPresenter(Usuario usuarioLogado, UsuarioRepositorySQLite repository){
+    public ManterUsuariosPresenter(Usuario usuarioLogado, IUsuarioRepository repository){
         this.repository = repository;
         this.usuarioLogado = usuarioLogado;
         this.view = new ManterUsuariosView();

@@ -14,7 +14,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import model.Usuario;
-import repository.UsuarioRepositorySQLite;
+import repository.IUsuarioRepository;
 import tableModel.EnvioNotificacaoTableModel;
 import view.ListagemUsuariosParaEnvioDeNotificacaoView;
 
@@ -23,13 +23,13 @@ import view.ListagemUsuariosParaEnvioDeNotificacaoView;
  * @author Luis1
  */
 public class ListagemUsuariosParaEnvioDeNotificacaoPresenter {
-    ListagemUsuariosParaEnvioDeNotificacaoView view;
-    UsuarioRepositorySQLite repository;
-    Usuario usuarioLogado;
-    List<Usuario> usuarios;
-    JTable tabelaUsuarios;
+    private ListagemUsuariosParaEnvioDeNotificacaoView view;
+    private IUsuarioRepository repository;
+    private Usuario usuarioLogado;
+    private List<Usuario> usuarios;
+    private JTable tabelaUsuarios;
     
-    public ListagemUsuariosParaEnvioDeNotificacaoPresenter(Usuario usuarioLogado, List<Usuario> usuarios, UsuarioRepositorySQLite repository){
+    public ListagemUsuariosParaEnvioDeNotificacaoPresenter(Usuario usuarioLogado, List<Usuario> usuarios, IUsuarioRepository repository){
         this.view = new ListagemUsuariosParaEnvioDeNotificacaoView();
         this.repository = repository;
         this.usuarioLogado = usuarioLogado;

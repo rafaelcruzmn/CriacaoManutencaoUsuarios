@@ -7,10 +7,9 @@ package presenter;
 import enumerator.TipoUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import model.Usuario;
-import repository.UsuarioRepositorySQLite;
+import repository.IUsuarioRepository;
 import view.VisualizacaoUsuarioPorAdministradorView;
 
 /**
@@ -18,12 +17,12 @@ import view.VisualizacaoUsuarioPorAdministradorView;
  * @author Luis1
  */
 public class VisualizacaoUsuarioPorAdministradorPresenter {
-    private UsuarioRepositorySQLite repository;
+    private IUsuarioRepository repository;
     private Usuario usuarioLogado;
     private Usuario usuarioSelecionado;
     private VisualizacaoUsuarioPorAdministradorView view;
     
-    public VisualizacaoUsuarioPorAdministradorPresenter(Usuario usuarioLogado, Usuario usuarioSelecionado, UsuarioRepositorySQLite repository){
+    public VisualizacaoUsuarioPorAdministradorPresenter(Usuario usuarioLogado, Usuario usuarioSelecionado, IUsuarioRepository repository){
         this.repository = repository;
         this.usuarioLogado = usuarioLogado;
         this.usuarioSelecionado = usuarioSelecionado;

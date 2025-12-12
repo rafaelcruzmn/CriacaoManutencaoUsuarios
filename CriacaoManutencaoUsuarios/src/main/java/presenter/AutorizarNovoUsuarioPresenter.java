@@ -14,21 +14,20 @@ import java.util.List;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
 import model.Usuario;
-import repository.UsuarioRepositorySQLite;
+import repository.IUsuarioRepository;
 import tableModel.AutorizarUsuarioTableModel;
 import view.AutorizarNovoUsuarioView;
 
 
 public class AutorizarNovoUsuarioPresenter{
     private AutorizarNovoUsuarioView view;
-    private UsuarioRepositorySQLite repository;
+    private IUsuarioRepository repository;
     private Usuario usuarioLogado;
     private List<Usuario> usuarios;
     private JTable tabelaUsuarios;
     
-    AutorizarNovoUsuarioPresenter(Usuario usuarioLogado, UsuarioRepositorySQLite repository){
+    AutorizarNovoUsuarioPresenter(Usuario usuarioLogado, IUsuarioRepository repository){
         this.repository = repository;
         this.usuarioLogado = usuarioLogado;
         this.usuarios = repository.getTodosNaoAutorizados();

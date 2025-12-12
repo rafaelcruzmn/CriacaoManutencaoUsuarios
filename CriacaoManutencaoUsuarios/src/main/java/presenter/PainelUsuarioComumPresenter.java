@@ -4,14 +4,13 @@
  */
 package presenter;
 
-import enumerator.TipoUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
+import repository.IUsuarioNotificacaoRepository;
+import repository.IUsuarioRepository;
 import repository.UsuarioNotificacaoRepositorySQLite;
-import repository.UsuarioRepositorySQLite;
-import service.ConexaoBancoServiceSingleton;
 import view.PainelUsuarioComumView;
 
 /**
@@ -19,12 +18,12 @@ import view.PainelUsuarioComumView;
  * @author Luis1
  */
 public class PainelUsuarioComumPresenter {
-    Usuario usuarioLogado;
-    UsuarioRepositorySQLite repository;
-    PainelUsuarioComumView view;
-    private UsuarioNotificacaoRepositorySQLite notificaRepository;
+    private Usuario usuarioLogado;
+    private IUsuarioRepository repository;
+    private PainelUsuarioComumView view;
+    private IUsuarioNotificacaoRepository notificaRepository;
     
-    public PainelUsuarioComumPresenter(Usuario usuarioLogado, UsuarioRepositorySQLite repository, UsuarioNotificacaoRepositorySQLite notificaRepository){
+    public PainelUsuarioComumPresenter(Usuario usuarioLogado, IUsuarioRepository repository, IUsuarioNotificacaoRepository notificaRepository){
         if (repository == null){
             throw new RuntimeException("Repository inválida!\n");
         }
@@ -66,7 +65,7 @@ public class PainelUsuarioComumPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    UsuarioNotificacaoRepositorySQLite usuarioNotificacaoRepository = new UsuarioNotificacaoRepositorySQLite();
+                    IUsuarioNotificacaoRepository usuarioNotificacaoRepository = new UsuarioNotificacaoRepositorySQLite();
                     
                     new ListagemNotificacoesPresenter(usuarioLogado, usuarioNotificacaoRepository.getNotificacoes(usuarioLogado.getId()), usuarioNotificacaoRepository);
                 } catch (Exception ex){
@@ -85,7 +84,7 @@ public class PainelUsuarioComumPresenter {
                         rodape();
                     }
                     else{
-                        UsuarioNotificacaoRepositorySQLite usuarioNotificacaoRepository = new UsuarioNotificacaoRepositorySQLite();
+                        IUsuarioNotificacaoRepository usuarioNotificacaoRepository = new UsuarioNotificacaoRepositorySQLite();
                         new ListagemNotificacoesPresenter(usuarioLogado, usuarioNotificacaoRepository.getNotificacoesNaoLidas(usuarioLogado.getId()), usuarioNotificacaoRepository);
                         rodape();
                     }

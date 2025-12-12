@@ -14,11 +14,10 @@ import java.util.List;
 import java.util.Optional;
 import model.Usuario;
 import pss.LogService;
-import repository.UsuarioRepositorySQLite;
+import repository.ILogRepository;
+import repository.IUsuarioNotificacaoRepository;
+import repository.IUsuarioRepository;
 import view.PrimeiroCadastroView;
-import repository.LogRepositorySQLite;
-import repository.UsuarioNotificacaoRepositorySQLite;
-
 /**
  *
  * @author Luis1
@@ -26,12 +25,12 @@ import repository.UsuarioNotificacaoRepositorySQLite;
 public class PrimeiroCadastroPresenter {
     private PrimeiroCadastroView view;
     private Usuario usuario;
-    private UsuarioRepositorySQLite repository;
+    private IUsuarioRepository repository;
     private ValidadorSenha validadorSenha;
-    private LogRepositorySQLite logRepository;
-    private UsuarioNotificacaoRepositorySQLite notificaRepository;
+    private ILogRepository logRepository;
+    private IUsuarioNotificacaoRepository notificaRepository;
     
-    public PrimeiroCadastroPresenter(UsuarioRepositorySQLite repository, LogRepositorySQLite logRepository, UsuarioNotificacaoRepositorySQLite notificaRepository){
+    public PrimeiroCadastroPresenter(IUsuarioRepository repository, ILogRepository logRepository, IUsuarioNotificacaoRepository notificaRepository){
         if (repository == null){
             throw new RuntimeException("Repository inválida!");
         }

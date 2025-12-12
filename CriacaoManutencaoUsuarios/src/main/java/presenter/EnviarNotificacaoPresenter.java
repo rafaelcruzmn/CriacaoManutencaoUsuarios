@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import model.Notificacao;
 import model.Usuario;
 import pss.LogService;
+import repository.INotificacaoRepository;
+import repository.IUsuarioNotificacaoRepository;
 import repository.NotificacaoRepositorySQLite;
 import repository.UsuarioNotificacaoRepositorySQLite;
 import view.EnviarNotificacaoView;
@@ -25,8 +27,8 @@ public class EnviarNotificacaoPresenter {
     private Usuario usuarioLogado;
     private List<Usuario> usuariosNotificados;
     private Notificacao notificacao;
-    private NotificacaoRepositorySQLite notificacaoRepository;
-    private UsuarioNotificacaoRepositorySQLite usuarioNotificacaoRepository;
+    private INotificacaoRepository notificacaoRepository;
+    private IUsuarioNotificacaoRepository usuarioNotificacaoRepository;
     private EnviarNotificacaoView view;
     
     public EnviarNotificacaoPresenter(Usuario usuarioLogado, List<Usuario> usuariosNotificados){

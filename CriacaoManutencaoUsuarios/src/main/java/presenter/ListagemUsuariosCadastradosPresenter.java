@@ -4,16 +4,13 @@
  */
 package presenter;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import model.Usuario;
-import repository.UsuarioRepositorySQLite;
+import repository.IUsuarioRepository;
 import tableModel.UsuariosCadastradosTableModel;
 import view.ListagemUsuariosCadastradosView;
 
@@ -22,14 +19,14 @@ import view.ListagemUsuariosCadastradosView;
  * @author Luis1
  */
 public class ListagemUsuariosCadastradosPresenter {
-    ListagemUsuariosCadastradosView view;
-    UsuarioRepositorySQLite repository;
-    Usuario usuarioLogado;
-    List<Usuario> usuarios;
-    ListSelectionModel selectionModel;
-    JTable tabelaUsuarios;
+    private ListagemUsuariosCadastradosView view;
+    private IUsuarioRepository repository;
+    private Usuario usuarioLogado;
+    private List<Usuario> usuarios;
+    private ListSelectionModel selectionModel;
+    private JTable tabelaUsuarios;
     
-    ListagemUsuariosCadastradosPresenter(Usuario usuarioLogado, List<Usuario> usuarios, UsuarioRepositorySQLite repository){
+    ListagemUsuariosCadastradosPresenter(Usuario usuarioLogado, List<Usuario> usuarios, IUsuarioRepository repository){
         this.repository = repository;
         this.usuarioLogado = usuarioLogado;
         this.usuarios = usuarios;
