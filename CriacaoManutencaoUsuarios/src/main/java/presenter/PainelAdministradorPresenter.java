@@ -138,6 +138,26 @@ public class PainelAdministradorPresenter {
             }
         });
         
+        view.getBtnNotificacoes().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    String qtd = notificaRepository.getQuantidadeNaoLidas(usuarioLogado.getId());
+                    if(qtd.equals("0")){
+                        JOptionPane.showMessageDialog(view, "Não há notificações pendentes!");
+                        rodape();
+                    }
+                    else{
+                        UsuarioNotificacaoRepositorySQLite usuarioNotificacaoRepository = new UsuarioNotificacaoRepositorySQLite();
+                        new ListagemNotificacoesPresenter(usuarioLogado, usuarioNotificacaoRepository.getNotificacoesNaoLidas(usuarioLogado.getId()), usuarioNotificacaoRepository);
+                        rodape();
+                    }
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
+                }
+            }
+        });
+        
         view.setVisible(true);
     }
 }

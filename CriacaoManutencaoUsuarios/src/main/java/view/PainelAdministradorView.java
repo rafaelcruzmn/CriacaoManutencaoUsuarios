@@ -215,7 +215,7 @@ public class PainelAdministradorView extends javax.swing.JFrame {
     public void setNome(String novoNome){
         lblNome.setText(novoNome);
     }
-    public JButton getNotificacoes(){
+    public JButton getBtnNotificacoes(){
         return btnNotificacoes;
     }
     public void setNotificacoes(String notificacoes){
