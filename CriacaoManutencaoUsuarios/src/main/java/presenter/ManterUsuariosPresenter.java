@@ -23,6 +23,18 @@ public class ManterUsuariosPresenter {
     private IUsuarioNotificacaoRepository usuarioNotificacaoRepository;
     
     public ManterUsuariosPresenter(Usuario usuarioLogado, IUsuarioRepository usuarioRepository, IUsuarioNotificacaoRepository usuarioNotificacaoRepository){
+        if(usuarioLogado == null){
+            throw new RuntimeException("usuarioLogado inválido.");
+        }
+        
+        if(usuarioRepository == null){
+            throw new RuntimeException("usuarioRepository inválida.");
+        }
+        
+        if(usuarioNotificacaoRepository == null){
+            throw new RuntimeException("usuarioNotificacaoRepository inválida.");
+        }
+        
         this.usuarioNotificacaoRepository = usuarioNotificacaoRepository;
         this.usuarioRepository = usuarioRepository;
         this.usuarioLogado = usuarioLogado;

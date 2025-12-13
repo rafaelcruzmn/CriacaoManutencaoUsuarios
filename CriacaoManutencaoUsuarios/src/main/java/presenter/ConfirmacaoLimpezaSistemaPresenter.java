@@ -27,6 +27,22 @@ public class ConfirmacaoLimpezaSistemaPresenter {
     
     public ConfirmacaoLimpezaSistemaPresenter(Usuario usuarioLogado, IUsuarioRepository usuarioRepository, 
             INotificacaoRepository notificacaoRepository, IUsuarioNotificacaoRepository usuarioNotificacaoRepository){
+        if(usuarioLogado == null){
+            throw new RuntimeException("usuarioLogado inválido.");
+        }
+        
+        if(usuarioRepository == null){
+            throw new RuntimeException("usuarioRepository inválida.");
+        }
+        
+        if(notificacaoRepository == null){
+            throw new RuntimeException("notificacaoRepository inválida.");
+        }
+        
+        if(usuarioNotificacaoRepository == null){
+            throw new RuntimeException("usuarioNotificacaoRepository inválida.");
+        }
+        
         this.usuarioLogado = usuarioLogado;
         this.usuarioRepository = usuarioRepository;
         this.notificacaoRepository = notificacaoRepository;

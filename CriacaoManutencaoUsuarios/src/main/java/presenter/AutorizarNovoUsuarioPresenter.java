@@ -28,6 +28,14 @@ public class AutorizarNovoUsuarioPresenter{
     private JTable tabelaUsuarios;
     
     AutorizarNovoUsuarioPresenter(Usuario usuarioLogado, IUsuarioRepository repository){
+        if(usuarioLogado == null){
+            throw new RuntimeException("Usuário inválido.");
+        }
+        
+        if(repository == null){
+            throw new RuntimeException("Repository inválida.");
+        }
+        
         this.repository = repository;
         this.usuarioLogado = usuarioLogado;
         this.usuarios = repository.getTodosNaoAutorizados();

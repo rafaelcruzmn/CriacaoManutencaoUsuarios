@@ -32,6 +32,22 @@ public class ListagemUsuariosCadastradosPresenter {
     ListagemUsuariosCadastradosPresenter(Usuario usuarioLogado, List<Usuario> usuarios, IUsuarioRepository usuarioRepository, 
             IUsuarioNotificacaoRepository usuarioNotificacaoRepository){
         
+        if(usuarioLogado == null){
+            throw new RuntimeException("usuarioLogado inválido.");
+        }
+        
+        if(usuarios == null){
+            throw new RuntimeException("usuarios inválidos.");
+        }
+        
+        if(usuarioRepository == null){
+            throw new RuntimeException("usuarioRepository inválida.");
+        }
+        
+        if(usuarioNotificacaoRepository == null){
+            throw new RuntimeException("usuarioNotificacaoRepository inválida.");
+        }
+        
         this.usuarioRepository = usuarioRepository;
         this.usuarioLogado = usuarioLogado;
         this.usuarios = usuarios;

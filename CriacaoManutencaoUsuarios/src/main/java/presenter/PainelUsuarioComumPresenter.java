@@ -32,6 +32,10 @@ public class PainelUsuarioComumPresenter {
             throw new RuntimeException("Usuário inválido!\n");
         }
         
+        if(notificaRepository == null){
+            throw new RuntimeException("notificaRepository inválida.");
+        }
+        
         this.usuarioLogado = usuarioLogado;
         this.repository = repository;
         this.notificaRepository = notificaRepository;

@@ -22,6 +22,9 @@ public class ConfigurarLogPresenter {
     private final ILogRepository repository;
 
     public ConfigurarLogPresenter(ILogRepository repository) {
+        if(repository == null){
+            throw new RuntimeException("Repository inválida.");
+        }
         
         this.view = new ConfigurarLogView(); 
         this.repository = repository;

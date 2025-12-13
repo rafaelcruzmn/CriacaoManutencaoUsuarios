@@ -25,11 +25,19 @@ public class AlterarSenhaPorUsuarioPresenter{
     private IUsuarioRepository repository;
     
     public AlterarSenhaPorUsuarioPresenter(Usuario usuarioLogado, IUsuarioRepository repository){
-    this.usuarioLogado = usuarioLogado;
-    this.repository = repository;
-    this.view = new AlterarSenhaUsuarioView();
+        if(usuarioLogado == null){
+            throw new RuntimeException("Usuário Inválido.");
+        }
+        
+        if(repository == null){
+            throw new RuntimeException("Repository inválida.");
+        }
+        
+        this.usuarioLogado = usuarioLogado;
+        this.repository = repository;
+        this.view = new AlterarSenhaUsuarioView();
     
-    configurarView();
+        configurarView();
     }
     
     private void configurarView(){

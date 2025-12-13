@@ -29,6 +29,10 @@ public class CadastroPorAdministradorPresenter {
     private ValidadorSenha validadorSenha;
     
     public CadastroPorAdministradorPresenter(Usuario usuarioLogado, IUsuarioRepository repository){
+        if (usuarioLogado == null){
+            throw new RuntimeException("usuario inválido!");
+        }
+        
         if (repository == null){
             throw new RuntimeException("Repository inválida!");
         }

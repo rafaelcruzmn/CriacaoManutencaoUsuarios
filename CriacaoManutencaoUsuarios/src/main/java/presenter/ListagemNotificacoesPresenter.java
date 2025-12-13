@@ -29,6 +29,18 @@ public class ListagemNotificacoesPresenter {
     private JTable tabelaNotificacoes;
     
     public ListagemNotificacoesPresenter(Usuario usuarioLogado, List<Notificacao> notificacoes, IUsuarioNotificacaoRepository usuarioNotificacaoRepository){
+        if(usuarioLogado == null){
+            throw new RuntimeException("usuarioLogado inválido.");
+        }
+        
+        if(notificacoes == null){
+            throw new RuntimeException("notificacoes inválidas.");
+        }
+        
+        if(usuarioNotificacaoRepository == null){
+            throw new RuntimeException("usuarioNotificacaoRepository inválida.");
+        }
+        
         this.usuarioLogado = usuarioLogado;
         this.notificacoes = notificacoes;
         this.usuarioNotificacaoRepository = usuarioNotificacaoRepository;

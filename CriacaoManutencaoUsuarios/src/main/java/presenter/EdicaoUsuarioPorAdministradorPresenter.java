@@ -24,6 +24,18 @@ public class EdicaoUsuarioPorAdministradorPresenter {
     private EdicaoUsuarioPorAdministradorView view;
     
     public EdicaoUsuarioPorAdministradorPresenter(Usuario usuarioLogado, Usuario usuarioSelecionado, IUsuarioRepository repository){
+        if(usuarioLogado == null){
+            throw new RuntimeException("usuarioLogado inválido.");
+        }
+        
+        if(usuarioSelecionado == null){
+            throw new RuntimeException("usuarioSelecionado inválido.");
+        }
+        
+        if(repository == null){
+            throw new RuntimeException("repository inválida.");
+        }
+        
         this.usuarioLogado = usuarioLogado;
         this.usuarioSelecionado = usuarioSelecionado;
         this.repository = repository;

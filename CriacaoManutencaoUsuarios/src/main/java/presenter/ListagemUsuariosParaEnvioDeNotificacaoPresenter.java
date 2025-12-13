@@ -29,7 +29,20 @@ public class ListagemUsuariosParaEnvioDeNotificacaoPresenter {
     private List<Usuario> usuarios;
     private JTable tabelaUsuarios;
     
-    public ListagemUsuariosParaEnvioDeNotificacaoPresenter(Usuario usuarioLogado, List<Usuario> usuarios, IUsuarioRepository repository){
+    public ListagemUsuariosParaEnvioDeNotificacaoPresenter(Usuario usuarioLogado, List<Usuario> usuarios, 
+            IUsuarioRepository repository){
+        if(usuarioLogado == null){
+            throw new RuntimeException("usuarioLogado inválido.");
+        }
+        
+        if(usuarios == null){
+            throw new RuntimeException("usuarios inválidos.");
+        }
+        
+        if(repository == null){
+            throw new RuntimeException("repository inválida");
+        }
+        
         this.view = new ListagemUsuariosParaEnvioDeNotificacaoView();
         this.repository = repository;
         this.usuarioLogado = usuarioLogado;

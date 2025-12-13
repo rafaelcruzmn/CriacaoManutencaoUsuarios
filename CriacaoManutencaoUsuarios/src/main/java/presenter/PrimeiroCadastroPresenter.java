@@ -35,6 +35,14 @@ public class PrimeiroCadastroPresenter {
             throw new RuntimeException("Repository inválida!");
         }
         
+        if(logRepository == null){
+            throw new RuntimeException("logRepository inválida.");
+        }
+        
+        if(notificaRepository == null){
+            throw new RuntimeException("notificaRepository inválida.");
+        }
+        
         this.repository = repository;
         this.logRepository = logRepository;
         this.view = new PrimeiroCadastroView();

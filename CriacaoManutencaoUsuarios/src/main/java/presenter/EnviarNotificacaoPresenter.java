@@ -32,6 +32,14 @@ public class EnviarNotificacaoPresenter {
     private EnviarNotificacaoView view;
     
     public EnviarNotificacaoPresenter(Usuario usuarioLogado, List<Usuario> usuariosNotificados){
+        if(usuarioLogado == null){
+            throw new RuntimeException("usuarioLogado inválido.");
+        }
+        
+        if(usuariosNotificados == null){
+            throw new RuntimeException("usuariosNotificados inválidos.");
+        }
+        
         this.usuarioLogado = usuarioLogado;
         this.usuariosNotificados = usuariosNotificados;
         this.view = new EnviarNotificacaoView();

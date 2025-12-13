@@ -19,6 +19,10 @@ public class VisualizacaoNotificacaoPresenter {
     private Notificacao notificacao;
     
     public VisualizacaoNotificacaoPresenter(Notificacao notificacao){
+        if(notificacao == null){
+            throw new RuntimeException("notificacao inválida.");
+        }
+        
         this.notificacao = notificacao;
         this.view = new VisualizacaoNotificacaoView();
         

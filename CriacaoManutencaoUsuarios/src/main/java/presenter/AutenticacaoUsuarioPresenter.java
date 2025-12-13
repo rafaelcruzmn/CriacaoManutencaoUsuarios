@@ -28,9 +28,17 @@ public class AutenticacaoUsuarioPresenter {
     
     public AutenticacaoUsuarioPresenter(IUsuarioRepository repository, ILogRepository logRepository, IUsuarioNotificacaoRepository notificaRepository) {
         if (repository == null){
-            throw new RuntimeException("Repository inválida!\n");
+            throw new RuntimeException("Repository usuário inválida!\n");
+        }
+        
+        if(logRepository == null){
+            throw new RuntimeException("Repository log inválida!");
         }
 
+        if(notificaRepository == null){
+            throw new RuntimeException("Repository usuarioNotificacao inválida!");
+        }
+        
         this.repository = repository;
         this.logRepository = logRepository;
         this.notificaRepository = notificaRepository;

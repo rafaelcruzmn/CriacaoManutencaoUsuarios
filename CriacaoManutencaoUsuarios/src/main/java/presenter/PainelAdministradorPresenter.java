@@ -39,6 +39,10 @@ public class PainelAdministradorPresenter {
             throw new RuntimeException("Repository inválida!\n");
         }
 
+        if(usuarioNotificacaoRepository == null){
+            throw new RuntimeException("usuarioNotificacaoRepository inválida.");
+        }
+        
         this.usuarioLogado = usuarioLogado;
         this.usuarioRepository = usuarioRepository;
         this.logRepository = logRepository;
