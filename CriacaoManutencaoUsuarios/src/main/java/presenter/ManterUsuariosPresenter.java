@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
+import repository.IUsuarioNotificacaoRepository;
 import repository.IUsuarioRepository;
 import view.ManterUsuariosView;
 
@@ -18,10 +19,12 @@ import view.ManterUsuariosView;
 public class ManterUsuariosPresenter {
     private Usuario usuarioLogado;
     private ManterUsuariosView view;
-    private IUsuarioRepository repository;
+    private IUsuarioRepository usuarioRepository;
+    private IUsuarioNotificacaoRepository usuarioNotificacaoRepository;
     
-    public ManterUsuariosPresenter(Usuario usuarioLogado, IUsuarioRepository repository){
-        this.repository = repository;
+    public ManterUsuariosPresenter(Usuario usuarioLogado, IUsuarioRepository usuarioRepository, IUsuarioNotificacaoRepository usuarioNotificacaoRepository){
+        this.usuarioNotificacaoRepository = usuarioNotificacaoRepository;
+        this.usuarioRepository = usuarioRepository;
         this.usuarioLogado = usuarioLogado;
         this.view = new ManterUsuariosView();
         
@@ -35,7 +38,7 @@ public class ManterUsuariosPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    new CadastroPorAdministradorPresenter(usuarioLogado, repository);
+                    new CadastroPorAdministradorPresenter(usuarioLogado, usuarioRepository);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }
@@ -46,7 +49,7 @@ public class ManterUsuariosPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    new ListagemUsuariosCadastradosPresenter(usuarioLogado, repository.getTodosAutorizados(), repository);
+                    new ListagemUsuariosCadastradosPresenter(usuarioLogado, usuarioRepository.getTodosAutorizados(), usuarioRepository, usuarioNotificacaoRepository);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }

@@ -23,10 +23,10 @@ public class PainelAdministradorPresenter {
     private Usuario usuarioLogado;
     private IUsuarioRepository usuarioRepository;
     private ILogRepository logRepository;
-    private IUsuarioNotificacaoRepository notificaRepository;
+    private IUsuarioNotificacaoRepository usuarioNotificacaoRepository;
     private PainelAdministradorView view;
     
-    public PainelAdministradorPresenter(Usuario usuarioLogado, IUsuarioRepository usuarioRepository, ILogRepository logRepository, IUsuarioNotificacaoRepository notificaRepository){
+    public PainelAdministradorPresenter(Usuario usuarioLogado, IUsuarioRepository usuarioRepository, ILogRepository logRepository, IUsuarioNotificacaoRepository usuarioNotificacaoRepository){
         if (usuarioRepository == null){
             throw new RuntimeException("Repository inválida!\n");
         }
@@ -42,14 +42,14 @@ public class PainelAdministradorPresenter {
         this.usuarioLogado = usuarioLogado;
         this.usuarioRepository = usuarioRepository;
         this.logRepository = logRepository;
-        this.notificaRepository = notificaRepository;
+        this.usuarioNotificacaoRepository = usuarioNotificacaoRepository;
         view = new PainelAdministradorView();
         rodape();
         configurarView();
     }
     private void rodape(){
         view.setNome(usuarioLogado.getNome());
-        String qtd = notificaRepository.getQuantidadeNaoLidas(usuarioLogado.getId());
+        String qtd = String.valueOf(usuarioNotificacaoRepository.getQuantidadeNaoLidas(usuarioLogado.getId()));
         view.setNotificacoes(qtd);
         //view.setTipo(usuarioLogado.getTipo());
     }
@@ -64,7 +64,7 @@ public class PainelAdministradorPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    new ManterUsuariosPresenter(usuarioLogado, usuarioRepository);
+                    new ManterUsuariosPresenter(usuarioLogado, usuarioRepository, usuarioNotificacaoRepository);
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(view, "Falha: "+ex.getMessage());
                 }
@@ -143,7 +143,7 @@ public class PainelAdministradorPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    String qtd = notificaRepository.getQuantidadeNaoLidas(usuarioLogado.getId());
+                    String qtd = String.valueOf(usuarioNotificacaoRepository.getQuantidadeNaoLidas(usuarioLogado.getId()));
                     if(qtd.equals("0")){
                         JOptionPane.showMessageDialog(view, "Não há notificações pendentes!");
                         rodape();

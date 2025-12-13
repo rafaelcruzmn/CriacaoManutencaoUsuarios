@@ -58,7 +58,7 @@ public class VisualizacaoUsuarioPorAdministradorPresenter {
             view.getBtnEditar().setEnabled(false);
             view.getBtnExcluir().setEnabled(false);
         }
-        if (tipo.getValor() == 1 && usuarioLogado.getTipo().getValor() == 1){
+        if (usuarioLogado.getTipo().getValor() != 0){
             view.getBtnEditar().setEnabled(false);
             view.getBtnExcluir().setEnabled(false);
         }

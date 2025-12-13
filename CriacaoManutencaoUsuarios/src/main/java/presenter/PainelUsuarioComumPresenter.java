@@ -42,7 +42,7 @@ public class PainelUsuarioComumPresenter {
     
     private void rodape(){
         view.setNome(usuarioLogado.getNome());
-        String qtd = notificaRepository.getQuantidadeNaoLidas(usuarioLogado.getId());
+        String qtd = String.valueOf(notificaRepository.getQuantidadeNaoLidas(usuarioLogado.getId()));
         view.setNotificacoes(qtd);
         //view.setTipo(usuarioLogado.getTipo());
     }
@@ -78,7 +78,7 @@ public class PainelUsuarioComumPresenter {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    String qtd = notificaRepository.getQuantidadeNaoLidas(usuarioLogado.getId());
+                    String qtd = String.valueOf(notificaRepository.getQuantidadeNaoLidas(usuarioLogado.getId()));
                     if(qtd.equals("0")){
                         JOptionPane.showMessageDialog(view, "Não há notificações pendentes!");
                         rodape();

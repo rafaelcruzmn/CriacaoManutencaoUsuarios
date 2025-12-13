@@ -131,8 +131,9 @@ public class UsuarioNotificacaoRepositorySQLite implements IUsuarioNotificacaoRe
         
         return notificacoes;
     }
+    
     @Override
-    public String getQuantidadeNaoLidas(int idUsuario){
+    public int getQuantidadeNaoLidas(int idUsuario){
         String sql = "SELECT COUNT(*) AS total FROM usuariosNotificacoes WHERE idusuario=? AND lida=0";
         conn = conexao.getConexao();
         
@@ -142,15 +143,59 @@ public class UsuarioNotificacaoRepositorySQLite implements IUsuarioNotificacaoRe
             try(ResultSet rs = pstmt.executeQuery()){
                 if(rs.next()){
                     int total = rs.getInt("total");
-                    return String.valueOf(total);
+                    return total;
                 }
             }
         }
         catch(SQLException ex){
             System.err.println(ex.getMessage());
         }
-        return "0";
+        return 0;
     }
+    
+    @Override
+    public int getQuantidadeLidas(int idUsuario){
+        String sql = "SELECT COUNT(*) AS total FROM usuariosNotificacoes WHERE idusuario=? AND lida=?";
+        conn = conexao.getConexao();
+        
+        try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1, idUsuario);
+            pstmt.setInt(2, 1);
+            
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    int total = rs.getInt("total");
+                    return total;
+                }
+            }
+        }
+        catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        return 0;
+    }
+    
+    @Override
+    public int getQuantidadeNotificacoes(int idUsuario){
+        String sql = "SELECT COUNT(*) AS total FROM usuariosNotificacoes WHERE idusuario=?";
+        conn = conexao.getConexao();
+        
+        try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1, idUsuario);
+            
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    int total = rs.getInt("total");
+                    return total;
+                }
+            }
+        }
+        catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        return 0;
+    }
+    
     @Override
     public boolean getLida(int idUsuario, int idNotificacao){
         String sql = "SELECT * FROM usuariosNotificacoes WHERE idUsuario=? AND idNotificacao=?";

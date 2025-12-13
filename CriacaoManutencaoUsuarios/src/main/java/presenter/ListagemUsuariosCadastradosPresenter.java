@@ -4,12 +4,14 @@
  */
 package presenter;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import model.Usuario;
+import repository.IUsuarioNotificacaoRepository;
 import repository.IUsuarioRepository;
 import tableModel.UsuariosCadastradosTableModel;
 import view.ListagemUsuariosCadastradosView;
@@ -20,16 +22,20 @@ import view.ListagemUsuariosCadastradosView;
  */
 public class ListagemUsuariosCadastradosPresenter {
     private ListagemUsuariosCadastradosView view;
-    private IUsuarioRepository repository;
+    private IUsuarioRepository usuarioRepository;
+    private IUsuarioNotificacaoRepository usuarioNotificacaoRepository;
     private Usuario usuarioLogado;
     private List<Usuario> usuarios;
     private ListSelectionModel selectionModel;
     private JTable tabelaUsuarios;
     
-    ListagemUsuariosCadastradosPresenter(Usuario usuarioLogado, List<Usuario> usuarios, IUsuarioRepository repository){
-        this.repository = repository;
+    ListagemUsuariosCadastradosPresenter(Usuario usuarioLogado, List<Usuario> usuarios, IUsuarioRepository usuarioRepository, 
+            IUsuarioNotificacaoRepository usuarioNotificacaoRepository){
+        
+        this.usuarioRepository = usuarioRepository;
         this.usuarioLogado = usuarioLogado;
         this.usuarios = usuarios;
+        this.usuarioNotificacaoRepository = usuarioNotificacaoRepository;
         view = new ListagemUsuariosCadastradosView();
         tabelaUsuarios = view.getTblListagemUsuarios();
         this.selectionModel = tabelaUsuarios.getSelectionModel();
@@ -51,7 +57,7 @@ public class ListagemUsuariosCadastradosPresenter {
                     int modelRow = tabelaUsuarios.convertRowIndexToModel(selectedRow);
                     UsuariosCadastradosTableModel model = (UsuariosCadastradosTableModel) tabelaUsuarios.getModel();
                     Usuario usuarioSelecionado = model.getUsuarioAt(modelRow);
-                    new VisualizacaoUsuarioPorAdministradorPresenter(usuarioLogado, usuarioSelecionado, repository);
+                    new VisualizacaoUsuarioPorAdministradorPresenter(usuarioLogado, usuarioSelecionado, usuarioRepository);
                 }
             }
         });
@@ -62,7 +68,15 @@ public class ListagemUsuariosCadastradosPresenter {
         
     
     private void popularTabela(){
-        UsuariosCadastradosTableModel model = new UsuariosCadastradosTableModel(usuarios);
+        List<Integer> totalNotificacoes = new ArrayList<>();
+        List<Integer> notificacoesLidas = new ArrayList<>();
+        
+        for(Usuario usuario: usuarios){
+            totalNotificacoes.add(usuarioNotificacaoRepository.getQuantidadeNotificacoes(usuario.getId()));
+            notificacoesLidas.add(usuarioNotificacaoRepository.getQuantidadeLidas(usuario.getId()));
+        }
+        
+        UsuariosCadastradosTableModel model = new UsuariosCadastradosTableModel(usuarios, totalNotificacoes, notificacoesLidas);
         
         tabelaUsuarios.setModel(model);
     }

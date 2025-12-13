@@ -7,7 +7,6 @@ package tableModel;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import model.Usuario;
-import repository.UsuarioRepositorySQLite;
 
 /**
  *
@@ -16,10 +15,14 @@ import repository.UsuarioRepositorySQLite;
 public class UsuariosCadastradosTableModel extends AbstractTableModel {
 
     private List<Usuario> usuarios;
-    private String[] colunas = {"ID", "Nome", "Usuário", "Tipo", "Data de Cadastro"};
+    private List<Integer> totalNotificacoes;
+    private List<Integer> notificacoesLidas;
+    private String[] colunas = {"ID", "Nome", "Usuário", "Tipo", "Data de Cadastro", "Notificações Lidas", "Total Notificações"};
 
-    public UsuariosCadastradosTableModel(List<Usuario> usuarios) {
+    public UsuariosCadastradosTableModel(List<Usuario> usuarios, List<Integer> totalNotificacoes, List<Integer> notificacoesLidas) {
         this.usuarios = usuarios;
+        this.totalNotificacoes = totalNotificacoes;
+        this.notificacoesLidas = notificacoesLidas;
     }
 
     @Override
@@ -59,6 +62,10 @@ public class UsuariosCadastradosTableModel extends AbstractTableModel {
                 return usuario.getTipo().toString(); 
             case 4:
                 return usuario.getDataCadastro();
+            case 5:
+                return notificacoesLidas.get(rowIndex);
+            case 6:
+                return totalNotificacoes.get(rowIndex);
             default:
                 return null;
         }
