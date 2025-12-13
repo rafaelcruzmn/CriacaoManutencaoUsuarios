@@ -2,7 +2,7 @@
 Atividade avaliativa - Projeto de Sistemas de Software 
 
 Alunos:
-Rafael Cruz M. Nunes
+Rafael Cruz M. Nunes,
 Luis Enrique Santos Prado Vereau
 
 Requisitos não cumpridos:
